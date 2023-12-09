@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
+import { NavigationEnd, RouterOutlet } from '@angular/router';
+import { Observable, Subject, filter, map } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +15,9 @@ export class AppComponent {
   title = 'privacy-site-redesign';
 
   isAdminPage$: Observable<boolean>;
-  constructor(private _router: Router) { }
+  constructor(private _router: Router) {
+    this.isAdminPage$ = new Subject();
+  }
   ngOnInit() {
     this.isAdminPage$ = this._router.events.pipe(
       filter((evt: any) => {
@@ -24,3 +28,4 @@ export class AppComponent {
       }),
     );
   }
+}
