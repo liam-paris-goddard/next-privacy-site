@@ -1,0 +1,185 @@
+@mixin hide-scrollbars() {
+  scrollbar-width: none; // Firefox
+  -ms-overflow-style: none; // IE 10+
+  &::-webkit-scrollbar {
+    display: none; // Chrome/Safari/Webkit
+  }
+}
+
+@mixin word-wrap() {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
+}
+
+@mixin heading-styles() {
+  font-family: $headings-font-family;
+  font-weight: $hereadings-font-weight;
+  line-height: $headings-line-height;
+}
+
+@mixin fade-in-down($class, $distance: -20px) {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY($distance);
+  pointer-events: none;
+  transition: $gsi-default-duration transform linear,
+    $gsi-default-duration opacity linear,
+    $gsi-default-duration visibility linear;
+
+  &.#{$class}--active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+    transform: translateY(0);
+  }
+}
+
+@mixin btn-marker-border() {
+  color: $white;
+  font-family: $headings-font-family;
+  text-transform: uppercase;
+  padding-top: rem(14);
+  padding-bottom: rem(13);
+  font-size: rem(20);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  background-color: transparent;
+  border-color: transparent;
+
+  &:hover,
+  &.hover,
+  &:focus,
+  &.focus,
+  &:disabled,
+  &.disabled,
+  &:not(:disabled):not(.disabled):active,
+  &:not(:disabled):not(.disabled).active,
+  .show > &.dropdown-toggle {
+    color: $white;
+    background-color: transparent;
+    border-color: transparent;
+    opacity: .9;
+  }
+
+  &.btn-primary {
+    color: $white;
+    background-image: url('#{$base-image-path}/button-marker-fill-dark-blue.svg');
+
+    &:hover,
+    &.hover,
+    &:not(:disabled):not(.disabled):active,
+    &:not(:disabled):not(.disabled).active {
+      color: $white;
+    }
+  }
+
+  &.btn-outline-primary {
+    color: $primary;
+    background-image: url('#{$base-image-path}/button-marker-outline-light-blue.svg');
+
+    &:hover,
+    &.hover,
+    &:not(:disabled):not(.disabled):active,
+    &:not(:disabled):not(.disabled).active {
+      color: $primary;
+    }
+  }
+
+  &.btn-secondary {
+    color: $white;
+    background-image: url('#{$base-image-path}/button-marker-fill-red.svg');
+
+    &:hover,
+    &.hover,
+    &:not(:disabled):not(.disabled):active,
+    &:not(:disabled):not(.disabled).active {
+      color: $white;
+    }
+  }
+
+  &.btn-outline-secondary {
+    color: $primary;
+    background-image: url('#{$base-image-path}/button-marker-outline-red.svg');
+
+    &:hover,
+    &.hover,
+    &:not(:disabled):not(.disabled):active,
+    &:not(:disabled):not(.disabled).active {
+      color: $primary;
+    }
+  }
+
+  &.btn-lg {
+    padding: rem(16) rem(30) rem(15) rem(30);
+    font-size: rem(24);
+  }
+}
+
+@mixin bg-marker-border-mask($topOrBottom: top) {
+  mask-repeat: repeat-x;
+  mask-clip: border-box;
+  mask-size: 1000px auto;
+
+  @if $topOrBottom == top {
+    margin-top: -8px;
+    mask-image: url('#{$base-image-path}/marker-border-top.svg');
+    mask-position: top left;
+  } @else {
+    margin-bottom: -8px;
+    mask-image: url('#{$base-image-path}/marker-border-bottom.svg');
+    mask-position: bottom left;
+  }
+}
+
+// Use on pseudo element ::before or ::after
+// inside a relatively positioned element
+// See tabs and header component for examples
+@mixin active-nav-caret($color: $gsi-red-pepper, $offset: 13px) {
+  content: '';
+  position: absolute;
+  bottom: -$offset;
+  left: calc(50% - 9px);
+  display: block;
+  width: 18px;
+  height: 8px;
+  background-color: $color;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+
+// Use pseudo element as spacer for in-page
+// hash links so page header doesn't overlap
+// see https://css-tricks.com/hash-tag-links-padding/
+@mixin hash-link-spacer() {
+  $gsi-hash-link-padding: 20px;
+  $gsi-hash-link-spacer-sm: $gsi-header-height-sm + $gsi-hash-link-padding;
+  $gsi-hash-link-spacer-lg: $gsi-header-height-lg + $gsi-hash-link-padding;
+  $gsi-hash-link-spacer-fixed-nav: $gsi-hash-link-spacer-lg + $gsi-fixed-nav-height-lg;
+
+  &::before {
+    content: '';
+    display: block;
+    margin-top: -$gsi-hash-link-spacer-sm;
+    height: $gsi-hash-link-spacer-sm;
+    visibility: hidden;
+    pointer-events: none;
+
+    @include media-breakpoint-up(lg) {
+      margin-top: -$gsi-hash-link-spacer-lg;
+      height: $gsi-hash-link-spacer-lg;
+
+      .gsi-fixed-nav-visible & {
+        margin-top: -$gsi-hash-link-spacer-fixed-nav;
+        height: $gsi-hash-link-spacer-fixed-nav;
+      }
+    }
+  }
+}
+
+@mixin heading-styles() {
+  font-family: $headings-font-family;
+  font-weight: $headings-font-weight;
+  line-height: $headings-line-height;
+}

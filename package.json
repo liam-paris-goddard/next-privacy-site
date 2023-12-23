@@ -9,18 +9,19 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@goddardsystems/react-component-library": "^0.0.0-beta.10",
+    "fs": "^0.0.1-security",
     "gray-matter": "^4.0.3",
     "next": "14.0.4",
-    "react": "^18",
-    "react-dom": "^18",
-    "react-markdown": "^6.0.3"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-markdown": "^9.0.1",
+    "sass": "^1.69.5",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "eslint": "^8",
-    "eslint-config-next": "14.0.4",
-    "typescript": "^5"
+    "@types/node": "20.10.5",
+    "@types/uuid": "^9.0.7",
+    "typescript": "5.3.3"
   }
 }

@@ -1,0 +1,108 @@
+@mixin heading-1 {
+  @include primary-bold;
+
+  text-transform: uppercase;
+  color: var(--color-brand);
+  font-size: 2.5rem;
+  line-height: 1.05;
+  margin: 1rem 0;
+}
+
+@mixin heading-2 {
+  @include primary-bold;
+
+  color: var(--color-brand);
+  font-size: 1.875rem;
+  line-height: 1.07;
+  margin: 1rem 0;
+}
+
+@mixin heading-3 {
+  @include primary-bold;
+
+  color: var(--color-brand);
+  font-size: 1.5rem;
+  line-height: 1.1;
+  margin: 1rem 0;
+}
+
+@mixin heading-4 {
+  @include primary-bold;
+
+  color: var(--color-brand);
+  font-size: 1.25rem;
+  line-height: 1.05;
+  margin: 1rem 0;
+}
+
+@mixin heading-5 {
+  @include primary-bold;
+
+  color: var(--color-brand);
+  font-size: 1rem;
+  line-height: 1.1;
+  margin: 1rem 0;
+  border-bottom: solid 3px var(--color-gray-3);
+}
+
+@mixin heading-6 {
+  @include primary-bold;
+
+  color: var(--color-gray-3);
+  font-size: 1rem;
+  line-height: 1.1;
+  margin: 1rem 0;
+  font-style: italic;
+  border-bottom: solid 1px var(--color-gray-3);
+}
+
+@mixin body {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-brand);
+
+  @include secondary-normal;
+}
+
+@mixin link {
+  @include secondary-normal;
+
+  color: var(--color-active); text-decoration: none;
+
+  &:visited {
+    color: var(--color-decorative-d); filter: brightness(50%);
+  }
+
+  &:active, &:hover {
+    text-decoration: underline; filter: brightness(50%);
+  }
+
+
+}
+
+
+
+@mixin primary-bold {
+  font-family: var(--ramona), sans-serif;
+  font-weight: bold;
+}
+
+@mixin primary-normal {
+  font-family: var(--ramona), sans-serif;
+  font-weight: normal;
+}
+
+@mixin secondary-bold {
+  font-family: var(--noto-sans), sans-serif;
+  font-weight: bold;
+}
+
+@mixin secondary-semi-bold {
+  font-family: var(--noto-sans), sans-serif;
+  font-weight: var(--semi-bold-weight);
+}
+
+@mixin secondary-normal {
+  font-family: var(--noto-sans), sans-serif;
+  font-weight: normal;
+}

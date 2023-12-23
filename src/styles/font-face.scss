@@ -1,0 +1,59 @@
+@font-face {
+	font-family: Ramona;
+	src: url('./assets/fonts/ramona-bold-webfont.woff2') format('woff2'),
+		url('./assets/fonts/ramona-bold-webfont.woff') format('woff'),
+		url('./assets/fonts/ramona-bold.ttf');
+	font-weight: bold;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: Ramona;
+	src: url('./assets/fonts/ramona-light-webfont.woff2') format('woff2'),
+		url('./assets/fonts/ramona-light-webfont.woff') format('woff'),
+		url('./assets/fonts/ramona-light.ttf');
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: NotoSans;
+	src: url('./assets/fonts/NotoSans-Regular.ttf');
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: NotoSans;
+	src: url('./assets/fonts/NotoSans-Bold.ttf');
+	font-weight: bold;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: NotoSans;
+	src: url('./assets/fonts/NotoSans-Italic.ttf');
+	font-weight: normal;
+	font-style: italic;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: NotoSans;
+	src: url('./assets/fonts/NotoSans-BoldItalic.ttf');
+	font-weight: bold;
+	font-style: italic;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: NotoSans;
+	src: url('./assets/fonts/NotoSans-SemiBold.ttf');
+	font-weight: 600;
+	font-style: normal;
+	font-display: swap;
+}

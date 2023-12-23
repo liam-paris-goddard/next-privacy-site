@@ -2,15 +2,12 @@ import Image from 'next/image'
 import styles from '../app/page.module.css'
 import fs from 'fs'
 import matter from 'gray-matter'
-import { Accordion } from '../components/Accordion/Accordion'
-import '../index.scss'
+import ReactMarkdown from 'react-markdown'
 
-export default function Home({ sections }: { sections: any[] }) {
-
+export default function Home({ termsContent }: any) {
     return (
         <main className={styles.main}>
-            <Accordion defaultOpen sectionList={sections} />
-            <h1>index baby</h1>
+            <h1> terms baby</h1>
             <div className={styles.description}>
                 <p>
                     Get started by editing&nbsp;
@@ -96,31 +93,24 @@ export default function Home({ sections }: { sections: any[] }) {
                         Instantly deploy your Next.js site to a shareable URL with Vercel.
                     </p>
                 </a>
+
+                <div>
+                    <ReactMarkdown>{termsContent}</ReactMarkdown>
+                </div>
             </div>
-        </main >
+        </main>
     )
 }
 
 export async function getStaticProps() {
     // List of files in blgos folder
-    const filesInHomePage = fs.readdirSync('./content/home-page')
+    const termsFile = fs.readFileSync('./content/terms-and-conditions.md', 'utf8')
 
-    // Get the front matter and slug (the filename without .md) of all files
-    const sections = filesInHomePage.map(filename => {
-        const file = fs.readFileSync(`./content/home-page/${filename}`, 'utf8')
-        const matterData = matter(file)
-
-        return {
-            heading: matterData.data.heading,
-            order: matterData.data.order,
-            children: matterData.content,
-            headingLevel: null
-        }
-    }).sort((a, b) => a.order - b.order).map(({ heading, children, order }) => ({ heading, children }))
+    const termsContent = matter(termsFile).content
 
     return {
         props: {
-            sections
+            termsContent
         }
     }
 
