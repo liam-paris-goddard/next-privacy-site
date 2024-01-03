@@ -46,13 +46,11 @@ export const Accordion: React.FC<AccordionProps> = ({ headingLevel = 3, toggle =
     useEffect(() => {
         if (sectionList.length > 0) {
             const x = formatAccordionSections(sectionList);
-            console.warn(x);
             setFormattedSectionList(x);
         }
     }, [])
 
     useEffect(() => {
-        console.warn(formattedSectionList)
     }, [formattedSectionList])
 
 
