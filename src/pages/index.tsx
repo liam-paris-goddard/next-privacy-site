@@ -4,11 +4,69 @@ import fs from 'fs'
 import matter from 'gray-matter'
 import { Accordion } from '../components/Accordion/Accordion'
 import '../index.scss'
+import Select from '../components/Select/select'
+import { D365, School } from '../utils/D365';
+import rrfOptions from '../../public/rrfOptions.json'
+import { RightsRequestForm } from '@/components/RightsRequestForm/RightsRequestForm'
+import { formatSchoolList } from '@/utils/formatUtils'
+import { FormattedFormOption } from '@/components/RightsRequestForm/RightsRequestFormTypes'
+import { format } from 'path'
 
-export default function Home({ sections }: { sections: any[] }) {
 
+const formatLandingSections = (landingMarkDown: string[]) => landingMarkDown.map(filename => {
+    const file = fs.readFileSync(`./content/home-page/${filename}`, 'utf8')
+    const matterData = matter(file)
+
+    return {
+        heading: matterData.data.heading,
+        order: matterData.data.order,
+        children: matterData.content,
+        headingLevel: null
+    }
+}).sort((a, b) => a.order - b.order).map(({ heading, children, order }) => ({ heading, children }))
+
+export default function Home({ sections, formOptions, }: { sections: any[], formOptions: FormattedFormOption[] }) {
     return (
         <main className={styles.main}>
+            {formOptions && (
+                <p>
+                    {JSON.stringify(formOptions)}
+                </p>
+            )}
+            <Select
+                helperText={"helper text"}
+                label={"label"}
+                required
+                name="testOption"
+                placeholder={"test"}
+                optionList={[{
+                    label: 'test group',
+                    type: 'optionGroup',
+                    options: [{
+                        value: 'test1',
+                        label: 'test1',
+                        selected: true,
+                        type: 'option'
+                    }, {
+                        value: 'test2',
+                        label: 'test2',
+                        type: 'option'
+                    }, {
+                        value: 'test3',
+                        label: 'test3',
+                        type: 'option'
+                    }]
+                }, {
+                    value: 'test4',
+                    label: 'test4',
+                    type: 'option'
+                }, {
+                    value: 'test5',
+                    label: 'test5',
+                    type: 'option'
+                },]}>
+
+            </Select>
             <Accordion defaultOpen sectionList={sections} />
             <h1>index baby</h1>
             <div className={styles.description}>
@@ -97,31 +155,41 @@ export default function Home({ sections }: { sections: any[] }) {
                     </p>
                 </a>
             </div>
+
+            <RightsRequestForm formOptions={formOptions}></RightsRequestForm>
         </main >
     )
 }
 
 export async function getStaticProps() {
+
+    const d365 = new D365(
+        process.env.D365_AUTH_URL,
+        process.env.D365_CLIENT_ID,
+        process.env.D365_CLIENT_SECRET,
+        process.env.D365_BASE_URL
+    );
+
+    await d365.init();
+
+    // Call the getSchools method
+    const schoolList = await d365.getSchools(rrfOptions.AvailableState)
+        .catch(error => {
+            // Handle any errors
+            console.error(error);
+        });
+
     // List of files in blgos folder
     const filesInHomePage = fs.readdirSync('./content/home-page')
 
-    // Get the front matter and slug (the filename without .md) of all files
-    const sections = filesInHomePage.map(filename => {
-        const file = fs.readFileSync(`./content/home-page/${filename}`, 'utf8')
-        const matterData = matter(file)
-
-        return {
-            heading: matterData.data.heading,
-            order: matterData.data.order,
-            children: matterData.content,
-            headingLevel: null
-        }
-    }).sort((a, b) => a.order - b.order).map(({ heading, children, order }) => ({ heading, children }))
-
+    let formOptions = [] as FormattedFormOption[]
+    if (schoolList) {
+        formOptions = formatSchoolList(schoolList)
+    }
     return {
         props: {
-            sections
+            sections: formatLandingSections(filesInHomePage),
+            formOptions
         }
     }
-
 }

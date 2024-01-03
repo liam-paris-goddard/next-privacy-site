@@ -1,0 +1,98 @@
+.gsl-select {
+    display: flex;
+    flex-direction: column;
+    font-family: var(--noto-sans), sans-serif;
+    color: var(--color-brand);
+  
+    &.gsl-select--invalid {
+      color: var(--color-alert);
+    }
+  
+    &.gsl-select--disabled {
+      color: var(--color-gray-3);
+    }
+  }
+  
+  .gsl-select--label {
+    margin-bottom: .5rem;
+    font-weight: bold;
+  
+    &.gsl-select--label-hide {
+      display: none;
+    }
+  
+    gsl-icon-warning {
+      svg {
+        width: 1rem;
+        height: 1rem;
+        margin-right: .25rem;
+      }
+    }
+  }
+  
+  .gsl-select--input {
+    cursor:pointer;
+    width: auto;
+    font-size: 1rem;
+    line-height: 1;
+    border-radius: 0.8rem;
+    height: 2.125rem;
+    background: var(--down-arrow-svg-select) no-repeat right white;
+    appearance: none;
+    background-position-x: 95%;
+    border: 0.0625rem solid var(--color-gray-3);
+    display: inline-block;
+    padding: .5rem;
+    padding-right: 2rem;
+    background-position-y: 70%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 12.5rem;
+    color: var(--color-gray-5);
+  
+    .gsl-select--invalid & {
+      border-color: var(--color-alert);
+      background: var(--down-arrow-svg-select-invalid) no-repeat right white;
+      background-position-x: 95%;
+      background-position-y: 70%;
+    }
+  
+    &:has(option:checked:not([value])),
+    &:has(option:checked:not([value=""])) {
+      color: var(--color-brand);
+    }
+  
+    &:focus {
+      outline: var(--focus-outline);
+    }
+  
+    &:disabled {
+      border-color: var(--color-gray-3);
+      color: var(--color-gray-3);
+      background: var(--down-arrow-svg-select-disabled) no-repeat right white;
+      background-position-x: 95%;
+      background-position-y: 70%;
+    }
+  
+  }
+  
+  .gsl-select--required {
+    color: var(--color-alert);
+  }
+  
+  .gsl-select--helper-text {
+    display: flex;
+    align-items: center;
+    margin-top: .5rem;
+    font-size: .75rem;
+    svg {
+      transform: scale(.5);
+      padding-top: .25rem;
+    }
+  
+    &.gsl-select--invalid-text {
+      color: var(--color-alert);
+    }
+  }
+  
