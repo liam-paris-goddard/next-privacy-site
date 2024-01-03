@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@goddardsystems/react-component-library": "^0.0.0-beta.10",
+    "axios": "^1.6.3",
     "fs": "^0.0.1-security",
     "gray-matter": "^4.0.3",
     "next": "14.0.4",
