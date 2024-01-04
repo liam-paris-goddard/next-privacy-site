@@ -10,8 +10,6 @@ import rrfOptions from '../../public/rrfOptions.json'
 import { RightsRequestForm } from '@/components/RightsRequestForm/RightsRequestForm'
 import { formatSchoolList } from '@/utils/formatUtils'
 import { FormattedFormOption } from '@/components/RightsRequestForm/RightsRequestFormTypes'
-import { format } from 'path'
-
 
 const formatLandingSections = (landingMarkDown: string[]) => landingMarkDown.map(filename => {
     const file = fs.readFileSync(`./content/home-page/${filename}`, 'utf8')
@@ -25,49 +23,11 @@ const formatLandingSections = (landingMarkDown: string[]) => landingMarkDown.map
     }
 }).sort((a, b) => a.order - b.order).map(({ heading, children, order }) => ({ heading, children }))
 
-export default function Home({ sections, formOptions, }: { sections: any[], formOptions: FormattedFormOption[] }) {
+export default function Home({ sections, formOptions, formCopy,
+    staticFormOptions }: { sections: any[], formOptions: FormattedFormOption[], formCopy: { heading: string, body: string }, staticFormOptions: { [key: string]: string[] } }) {
     return (
         <main className={styles.main}>
-            {formOptions && (
-                <p>
-                    {JSON.stringify(formOptions)}
-                </p>
-            )}
-            <Select
-                helperText={"helper text"}
-                label={"label"}
-                required
-                name="testOption"
-                placeholder={"test"}
-                optionList={[{
-                    label: 'test group',
-                    type: 'optionGroup',
-                    options: [{
-                        value: 'test1',
-                        label: 'test1',
-                        selected: true,
-                        type: 'option'
-                    }, {
-                        value: 'test2',
-                        label: 'test2',
-                        type: 'option'
-                    }, {
-                        value: 'test3',
-                        label: 'test3',
-                        type: 'option'
-                    }]
-                }, {
-                    value: 'test4',
-                    label: 'test4',
-                    type: 'option'
-                }, {
-                    value: 'test5',
-                    label: 'test5',
-                    type: 'option'
-                },]}>
-
-            </Select>
-            <Accordion defaultOpen sectionList={sections} />
+            {/*<Accordion defaultOpen sectionList={sections} />*/}
             <h1>index baby</h1>
             <div className={styles.description}>
                 <p>
@@ -156,7 +116,7 @@ export default function Home({ sections, formOptions, }: { sections: any[], form
                 </a>
             </div>
 
-            <RightsRequestForm formOptions={formOptions}></RightsRequestForm>
+            <RightsRequestForm staticFormOptions={staticFormOptions} formCopy={formCopy} formOptions={formOptions}></RightsRequestForm>
         </main >
     )
 }
@@ -181,15 +141,25 @@ export async function getStaticProps() {
 
     // List of files in blgos folder
     const filesInHomePage = fs.readdirSync('./content/home-page')
+    const formCopyFile = fs.readFileSync('./content/rights-request-form.md', 'utf8')
 
+    const formCopyMatterData = matter(formCopyFile)
+
+    //TODO: put form copy into mark down page and pass to rrform component
     let formOptions = [] as FormattedFormOption[]
     if (schoolList) {
         formOptions = formatSchoolList(schoolList)
     }
+    const staticFormOptions = {
+        relationshipList: rrfOptions.Relationships,
+        stateList: rrfOptions.StatesAndTerritories,
+    }
     return {
         props: {
             sections: formatLandingSections(filesInHomePage),
-            formOptions
+            formCopy: { heading: formCopyMatterData.data.heading, body: formCopyMatterData.content },
+            formOptions,
+            staticFormOptions
         }
     }
 }

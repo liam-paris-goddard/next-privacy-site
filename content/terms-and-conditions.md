@@ -1,5 +1,5 @@
 ---
-title: "Terms and Conditions" 
+heading: "Terms and Conditions" 
 ---
 
 Please read the following Terms and Conditions (the “Terms”) carefully before using any website of Goddard Franchisor, LLC (“GFL”, “our” or “we”), including, but not limited to, goddarschool.com and goddardschoolfranchise.com, as well as any online features, services and/or programs offered by GFL and/or its affiliates, including but not limited to Goddard Systems, LLC, the manager of The Goddard School ® franchise system where these Terms are posted (collectively, the “Website”).
