@@ -24,10 +24,11 @@ const formatLandingSections = (landingMarkDown: string[]) => landingMarkDown.map
 }).sort((a, b) => a.order - b.order).map(({ heading, children, order }) => ({ heading, children }))
 
 export default function Home({ sections, formOptions, formCopy,
-    staticFormOptions }: { sections: any[], formOptions: FormattedFormOption[], formCopy: { heading: string, body: string }, staticFormOptions: { [key: string]: string[] } }) {
+    staticFormOptions }: { sections: any[], formOptions: FormattedFormOption[], formCopy: { heading: string, body: string }, staticFormOptions: { relationshipList: string[], stateList: { [key: string]: string } } }) {
     return (
-        <main className={styles.main}>
+        <main className={styles.main}>{/*}
             {/*<Accordion defaultOpen sectionList={sections} />*/}
+            {/*}
             <h1>index baby</h1>
             <div className={styles.description}>
                 <p>
@@ -115,7 +116,7 @@ export default function Home({ sections, formOptions, formCopy,
                     </p>
                 </a>
             </div>
-
+*/}
             <RightsRequestForm staticFormOptions={staticFormOptions} formCopy={formCopy} formOptions={formOptions}></RightsRequestForm>
         </main >
     )

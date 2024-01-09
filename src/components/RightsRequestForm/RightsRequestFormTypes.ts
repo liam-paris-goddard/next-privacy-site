@@ -43,15 +43,15 @@ export interface RRFormInput {
 }
 
 export interface SNowTicketPerson {
-    firstName?: string;
-    lastName?: string;
-    phone?: string;
-    email?: string;
-    addressLine1?: string;
+    firstName: string;
+    lastName: string;
+    phone: string;
+    email: string;
+    addressLine1: string;
     addressLine2?: string;
-    city?: string;
-    state?: string;
-    zip?: string;
+    city: string;
+    state: string;
+    zip: string;
 }
 
 export interface SNowTicketRequest {

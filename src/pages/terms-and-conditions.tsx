@@ -4,7 +4,7 @@ import fs from 'fs'
 import matter from 'gray-matter'
 import ReactMarkdown from 'react-markdown'
 
-export default function Home({ termsContent }: any) {
+export default function TermsAndConditions({ termsContent }: any) {
     return (
         <main className={styles.main}>
             <h1> terms baby</h1>

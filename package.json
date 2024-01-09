@@ -11,6 +11,7 @@
   "dependencies": {
     "@goddardsystems/react-component-library": "^0.0.0-beta.10",
     "axios": "^1.6.3",
+    "formik": "^2.4.5",
     "fs": "^0.0.1-security",
     "gray-matter": "^4.0.3",
     "next": "14.0.4",
@@ -18,7 +19,8 @@
     "react-dom": "^18.2.0",
     "react-markdown": "^9.0.1",
     "sass": "^1.69.5",
-    "uuid": "^9.0.1"
+    "uuid": "^9.0.1",
+    "yup": "^1.3.3"
   },
   "devDependencies": {
     "@types/node": "20.10.5",
