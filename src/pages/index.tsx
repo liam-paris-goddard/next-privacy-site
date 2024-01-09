@@ -142,7 +142,7 @@ export async function getStaticProps() {
 
     // List of files in blgos folder
     const filesInHomePage = fs.readdirSync('./content/home-page')
-    const formCopyFile = fs.readFileSync('./content/rights-request-form.md', 'utf8')
+    const formCopyFile = fs.readFileSync('./content/rights-request-form/rights-request-form.md', 'utf8')
 
     const formCopyMatterData = matter(formCopyFile)
 

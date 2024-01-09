@@ -8,7 +8,7 @@ publish_mode: editorial_workflow # For Drafts
 
 collections:
   - name: "sections" # Used in routes, e.g., /admin/collections/blog
-    label: "Section" # Used in the UI
+    label: "Home Page Section" # Used in the UI
     folder: "content/home-page" # The path to the folder where the documents are stored
     create: true # Allow users to create new documents in this collection
     slug: "{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
@@ -17,3 +17,17 @@ collections:
       - { label: "Order", name: "order", widget: "number" }
       - { label: "Body", name: "body", widget: "markdown" }
       - { label: "Open on Load", name: "defaultOpen", widget: "boolean" }
+  - name: "termsAndConditionsContent" # Used in routes, e.g., /admin/collections/blog
+    label: "Terms And Conditions Content" # Used in the UI
+    folder: "content/terms-and-conditions" # The path to the folder where the documents are stored
+    create: false # Allow users to create new documents in this collection
+    slug: "{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
+    fields: # The fields for each document, usually in front matter
+      - { label: "Body", name: "body", widget: "markdown" }
+  - name: "formCopy" # Used in routes, e.g., /admin/collections/blog
+    label: "Rights Request Form Content" # Used in the UI
+    folder: "content/rights-request-form" # The path to the folder where the documents are stored
+    create: false # Allow users to create new documents in this collection
+    slug: "{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
+    fields: # The fields for each document, usually in front matter
+      - { label: "Body", name: "body", widget: "markdown" }

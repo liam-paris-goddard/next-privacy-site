@@ -104,7 +104,7 @@ export default function TermsAndConditions({ termsContent }: any) {
 
 export async function getStaticProps() {
     // List of files in blgos folder
-    const termsFile = fs.readFileSync('./content/terms-and-conditions.md', 'utf8')
+    const termsFile = fs.readFileSync('./content/terms-and-conditions/terms-and-conditions.md', 'utf8')
 
     const termsContent = matter(termsFile).content
 
