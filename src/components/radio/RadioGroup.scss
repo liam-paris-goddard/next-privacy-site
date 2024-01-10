@@ -1,0 +1,74 @@
+:host {
+    margin-top: .75rem;
+  }
+  
+  .gsl-radio-group {
+    display: inline-flex;
+    flex-direction: column;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    color: var(--color-brand);
+  }
+  
+  .gsl-radio-group-container {
+    display: flex;
+    flex-direction: column;
+  
+    &.inline-position {
+      flex-direction: row;
+    }
+  }
+  
+  .gsl-radio-group-helper-text {
+    color: var(--color-info);
+    font-size: .75rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    line-height: 1.4;
+    gap: .25rem;
+    margin-bottom: .5rem;
+  
+    gsl-icon-info,
+    gsl-icon-warning {
+      svg {
+        width: .75rem;
+        height: .75rem;
+      }
+    }
+  }
+  
+  .gsl-radio-group-helper-text-error {
+    color: var(--color-alert);
+    font-size: .75rem;
+    font-weight: bold
+  }
+  
+  .gsl-radio-group-title {
+    margin: 0;
+    padding: 0;
+    margin-bottom: .25rem;
+  }
+  
+  .gsl-radio-group-title-label {
+    font-size: 1rem;
+    line-height: 1.4;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gsl-icon-warning {
+      svg {
+        width: 1rem;
+        height: 1rem;
+        margin-right: .25rem;
+      }
+    }
+  }
+  
+  ::slotted(*) {
+    margin-top: .75rem;
+  }
+  
+  
+  

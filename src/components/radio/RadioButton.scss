@@ -1,0 +1,111 @@
+.radio-button {
+	transition: all var(--transition-duration)
+		var(--transition-easing-standard);
+	font-size: .75rem;
+	font-weight: bold;
+	line-height: 1.4;
+	color: var(--color-info);
+	display: flex;
+	padding-left: .75rem;
+	position: relative;
+	flex-wrap: wrap;
+	align-items: center;
+	width: fit-content;
+	margin-bottom: .5rem;
+
+	&.radio-button-disabled {
+		cursor: not-allowed;
+		border-color: hsl(0deg 0% 0% / 40%);;
+		color: hsl(0deg 0% 0% / 40%);;
+		background: hsl(0deg 0% 0% / 0%);
+	}
+
+	label {
+		color: black;
+		transition: all var(--transition-duration)
+			var(--transition-easing-standard);
+		font-weight: normal;
+		cursor: pointer;
+		line-height: 1.4;
+		padding-left: .5rem;
+	}
+
+	input {
+		width: 1.25rem;
+		height: 1.25rem;
+		transition: all var(--transition-duration)
+			var(--transition-easing-standard);
+		border-radius: 50%;
+		appearance: none;
+		background-color: transparent;
+		border: .1rem solid var(--color-brand);
+		margin: 0;
+		cursor: pointer;
+
+		&:focus {
+			outline: 2px solid var(--color-active);
+			outline-offset: 2px;
+		}
+
+		&:disabled {
+			box-shadow: 0 0 0 0.06rem
+				hsl(0deg 0% 0% / 14%);
+			border-color: var(--color-gray-2);
+			background-color: var(--color-gray-2);
+		}
+
+		&:disabled ~ label {
+			color: hsl(0deg 0% 0% / 40%);
+		}
+
+		&:checked {
+			border: 0.4rem solid var(--color-brand);
+			background-color: white;
+			box-shadow: 0 0 0 0.06rem
+				var(--color-brand);
+		}
+
+		&:checked:disabled {
+			background-color: var(--color-gray-4);
+			border: calc(
+				0.25 * .75rem
+			);
+			box-shadow: 0 0 0 0.06rem
+				hsl(0deg 0% 0% / 14%);
+		}
+
+		&:checked:disabled ~ label {
+			color: hsl(0deg 0% 0% / 40%);
+			border: 0 0 0 0.06rem
+				hsl(0deg 0% 0% / 14%);
+		}
+
+		&:not(:checked, [disabled]):hover {
+			box-shadow: none;
+			border-color: hsl(0deg 0% 0% / 74.1%);
+			background-color: hsl(0deg 0% 0% / 7%);
+		}
+
+		&:not(:checked, [disabled]):hover ~ label {
+			color: #000;
+		}
+
+		&:not(:checked, [disabled]):active {
+			border-color: hsl(0deg 0% 0% / 71%);
+			background-color: hsl(0deg 0% 0% / 21%);
+		}
+
+		&:not(:checked, [disabled]):active ~ label {
+			color: #000;
+		}
+	}
+
+
+
+
+
+
+
+
+}
+

@@ -9,7 +9,7 @@ import { D365, School } from '../utils/D365';
 import rrfOptions from '../../public/rrfOptions.json'
 import { RightsRequestForm } from '@/components/RightsRequestForm/RightsRequestForm'
 import { formatSchoolList } from '@/utils/formatUtils'
-import { FormattedFormOption } from '@/components/RightsRequestForm/RightsRequestFormTypes'
+import { FormattedFormOption } from '@/components/RightsRequestForm/RightsRequestFormUtils'
 
 const formatLandingSections = (landingMarkDown: string[]) => landingMarkDown.map(filename => {
     const file = fs.readFileSync(`./content/home-page/${filename}`, 'utf8')
@@ -26,8 +26,8 @@ const formatLandingSections = (landingMarkDown: string[]) => landingMarkDown.map
 export default function Home({ sections, formOptions, formCopy,
     staticFormOptions }: { sections: any[], formOptions: FormattedFormOption[], formCopy: { heading: string, body: string }, staticFormOptions: { relationshipList: string[], stateList: { [key: string]: string } } }) {
     return (
-        <main className={styles.main}>{/*}
-            {/*<Accordion defaultOpen sectionList={sections} />*/}
+        <main className={styles.main}>
+            <Accordion defaultOpen sectionList={sections} />
             {/*}
             <h1>index baby</h1>
             <div className={styles.description}>

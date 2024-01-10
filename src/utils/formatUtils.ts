@@ -1,8 +1,9 @@
 import matter from "gray-matter";
 import fs from 'fs'
 import { School } from "./D365";
-import { FormattedActionsOption, FormattedFormOption } from "@/components/RightsRequestForm/RightsRequestFormTypes";
+import { FormattedActionsOption, FormattedFormOption } from "@/components/RightsRequestForm/RightsRequestFormUtils";
 import rrfOptions from '../../public/rrfOptions.json'
+import { v4 as uuidv4 } from 'uuid';
 
 export function formatSchoolList(schoolList: School[]): FormattedFormOption[] {
     return schoolList.reduce((acc: FormattedFormOption[], school) => {
@@ -39,6 +40,11 @@ export function formatSchoolList(schoolList: School[]): FormattedFormOption[] {
         }
         return acc;
     }, [])
+}
+
+
+export function generatUuid() {
+    return uuidv4()
 }
 
 
