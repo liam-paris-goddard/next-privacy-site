@@ -8,7 +8,7 @@ export interface OptionProps {
     label?: string;
     disabled?: boolean;
     selected?: boolean;
-    type: 'option';
+    type: string;
 }
 
 export interface OptionGroupProps {
@@ -27,16 +27,19 @@ export interface SelectProps {
     invalid?: boolean
     selectId?: string
     name: string
-    placeholder?: string
+    placeholder?: string;
+    value?: string | number | boolean;
     optionList: (OptionProps | OptionGroupProps)[]
-
+    onBlurFunction: (e: React.FocusEvent<HTMLSelectElement>) => void;
+    onChangeFunction: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
 
-const Select: React.FC<SelectProps> = ({ selectId = uuidv4(), invalid, disabled, hideLabel, label, required, helperText, placeholder, name, optionList = [] }) => {
-    const [selectedValue, setSelectedValue] = useState('');
+const Select: React.FC<SelectProps> = ({ selectId = uuidv4(), invalid, disabled, hideLabel, label, required, helperText, placeholder, name, optionList = [], onChangeFunction, onBlurFunction, value }) => {
+    const [selectedValue, setSelectedValue] = useState(value);
     const [formattedOptionList, setFormattedOptionList] = useState<(OptionProps | OptionGroupProps)[]>(optionList);
     const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        onChangeFunction(e);
         if (e?.target?.value !== selectedValue) {
             setSelectedValue(e.target.value);
         }
@@ -51,9 +54,11 @@ const Select: React.FC<SelectProps> = ({ selectId = uuidv4(), invalid, disabled,
                 onChange={handleChange}
                 aria-invalid={invalid}
                 id={selectId}
+                value={selectedValue}
                 name={name}
                 disabled={disabled}
-                required={required}>
+                required={required}
+                onBlur={onBlurFunction}>
                 {placeholder && <option value="" disabled selected>{placeholder}</option>}
                 {optionList.length && optionList.map((item: OptionProps | OptionGroupProps) => {
                     if (item.type === "option") {
