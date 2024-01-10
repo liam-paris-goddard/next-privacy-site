@@ -28,7 +28,7 @@ export interface SelectProps {
     selectId?: string
     name: string
     placeholder?: string;
-    value?: string | number | boolean;
+    value?: string;
     optionList: (OptionProps | OptionGroupProps)[]
     onBlurFunction: (e: React.FocusEvent<HTMLSelectElement>) => void;
     onChangeFunction: (e: React.ChangeEvent<HTMLSelectElement>) => void;
