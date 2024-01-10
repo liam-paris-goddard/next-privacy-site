@@ -1,10 +1,11 @@
 import axios from 'axios';
 import React, { use, useEffect, useState } from 'react';
-import { SNowTicketResponse, SNowTicketRequest, FormattedFormOption, FormattedCityOption, FormattedActionsOption, SNowTicketVariables, SNowTicketPerson, FormValues, testSubmit, rightsRequestFormValidationSchema, represenativeInfoSchema } from './RightsRequestFormUtils';
+import { SNowTicketResponse, SNowTicketRequest, FormattedFormOption, FormattedCityOption, FormattedActionsOption, SNowTicketVariables, SNowTicketPerson, FormValues, testSubmit, rightsRequestFormValidationSchema, represenativeInfoSchema, submitRequest } from './RightsRequestFormUtils';
 import ReactMarkdown from 'react-markdown'
 import './RightsRequestForm.scss';
 import { useFormik } from 'formik';
 import RadioGroup from '../radio/RadioGroup'
+import Select, { OptionProps } from '../Select/select';
 
 
 export const RightsRequestForm = ({ formOptions, formCopy, staticFormOptions }: { formOptions: FormattedFormOption[], formCopy: { heading: string, body: string }, staticFormOptions: { relationshipList: string[], stateList: { [key: string]: string } } }) => {
@@ -165,16 +166,48 @@ export const RightsRequestForm = ({ formOptions, formCopy, staticFormOptions }: 
     const generatePersonalInfoForm = (type: 'requestor' | 'representative') => {
         const titleText = type === 'requestor' && formik.values.isRequestFor === 'self' ? "Please enter your information." :
             type === 'requestor' && formik.values.isRequestFor === 'other' ? "Please enter the information for whom you are requesting" : "Please enter your information."
+        const relationshipOptions = [{
+            value: "",
+            label: "Select Your Relationship",
+            disabled: true,
+            selected: true,
+            type: 'option'
+        }, ...staticFormOptions.relationshipList.map((relationship: string) => (
+            {
+                value: relationship,
+                label: relationship,
+                type: 'option'
+            }
+        ))]
+
+
+        const stateOptions = [{
+            value: "",
+            label: "Select a State",
+            disabled: true,
+            selected: true,
+            type: 'option'
+        },
+        ...Object.entries(staticFormOptions.stateList).map(([value, label]) => (
+            {
+                value: value,
+                label: label,
+                disabled: false,
+                selected: false,
+                type: 'option'
+            }
+        ))]
         return <fieldset>
             <h3>{titleText}</h3>
-            {type === 'requestor' && <select name="selectedRelationship" onBlur={formik.handleBlur} value={formik.values.selectedRelationship} onChange={formik.handleChange}>
-                <option value="" disabled>Select Your Relationship</option>
-                {
-                    staticFormOptions.relationshipList.map((relationship: string) => (
-                        <option value={relationship}>{relationship}</option>
-                    ))
-                }
-            </select>}
+            {type === 'requestor' && (
+                <Select
+                    label=""
+                    name="selectedRelationship"
+                    onBlurFunction={formik.handleBlur}
+                    value={formik.values.selectedRelationship}
+                    onChangeFunction={formik.handleChange}
+                    optionList={relationshipOptions} />
+            )}
 
             <input type="text" name={`${type}Info.firstName`} placeholder="firstName" onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values[`${type}Info`]?.firstName || ''} />
             <input type="text" name={`${type}Info.lastName`} placeholder="lastName" onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values[`${type}Info`]?.lastName || ''} />
@@ -183,12 +216,13 @@ export const RightsRequestForm = ({ formOptions, formCopy, staticFormOptions }: 
             <input type="text" name={`${type}Info.addressLine1`} placeholder="addressLine1" onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values[`${type}Info`]?.addressLine1 || ''} />
             <input type="text" name={`${type}Info.addressLine2`} placeholder="addressLine2" onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values[`${type}Info`]?.addressLine2 || ''} />
             <input type="text" name={`${type}Info.city`} placeholder="city" onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values[`${type}Info`]?.city || ''} />
-            <select name={`${type}Info.state`} onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values[`${type}Info`]?.state || ''}>
-                <option value="" disabled>Select a State</option>
-                {Object.entries(staticFormOptions.stateList).map(([value, label]) => (
-                    <option value={value}>{label}</option>
-                ))}
-            </select>
+            <Select
+                label=""
+                name={`${type}Info.state`}
+                value={formik.values[`${type}Info`]?.state || ''}
+                onBlurFunction={formik.handleBlur}
+                onChangeFunction={formik.handleChange}
+                optionList={stateOptions} />
             <input type="text" name={`${type}Info.zip`} placeholder="zip" onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values[`${type}Info`]?.zip || ''} />
         </fieldset>
     }
