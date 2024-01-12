@@ -1,0 +1,105 @@
+:host {
+    display: block;
+  }
+  
+  .gsl-input-label {
+    display: block;
+    color: var(--color-brand);
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .gsl-input {
+    &.gsl-input-error {
+      .gsl-input-field-container {
+        border-color: var(--color-alert);
+        color: var(--color-alert);
+      }
+      .gsl-input-help-text-container {
+        color: var(--color-alert);
+      }
+    }
+  }
+  
+  .gsl-input-help-text-container {
+    color: var(--color-brand);
+    font-size: .75rem;
+    margin-top: 5px;
+    margin-left: 5px;
+  }
+  
+  .gsl-input--required {
+    color: var(--color-alert);
+  }
+  
+  .gsl-input-field {
+    border: none;
+    font-size: .75rem;
+    border-radius: 15px;
+    padding: .5rem;
+    &:focus {
+      outline: none;
+    }
+  
+    &[type=number] {
+      min-width: 5rem;
+    }
+  }
+  
+  .gsl-input--required {
+    display: inline-block;
+    padding-left: 3px;
+  }
+  .gsl-input-password-toggle {
+    background: none;
+    border: none;
+    color: inherit;
+    width: 20px;
+    height: 17px;
+    padding: 0;
+    margin-right: .5rem;
+  
+    gsl-icon-show-password, gsl-icon-hide-password {
+      display: flex;
+    }
+  }
+  
+  .gsl-input-button-container {
+    button {
+      border-radius: 15px;
+      border: none;
+      padding: 0.5rem 2rem;
+      background-color: var(--color-alert);
+      color: var(--color-white);
+      font-weight: bold;
+    }
+  }
+  
+  .gsl-input-field-container {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 15px;
+    color: var(--color-brand);
+    border: 2px solid var(--color-gray-4);
+  
+    &:focus-within {
+      border-color: var(--color-active);
+    }
+  
+    &::placeholder {
+      color: var(--color-gray-4);
+    }
+  
+    &:disabled {
+      border-color: var(--color-gray-3);
+      color: var(--color-gray-3);
+      cursor: not-allowed;
+  
+      &::placeholder {
+        color: var(--color-gray-3);
+      }
+  
+    }
+  }
+  
+  
