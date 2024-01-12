@@ -24,33 +24,33 @@ export interface RRFormError {
 
 export const phoneRegex = /\+?(\d{1,4}?)?[-. (]*(\d{1,3})[-. )]*(\d{1,3})[-. ]*(\d{1,9})/g;
 export const requestorInfoSchema = Yup.object({
-    firstName: Yup.string().required(' request firstName Required'),
-    lastName: Yup.string().required(' request lastName Required'),
-    phone: Yup.string().required(' request phone Required').matches(phoneRegex, ' request Phone number is not valid'),
-    email: Yup.string().required(' request email Required').email(' request Invalid email'),
-    addressLine1: Yup.string().required(' request addressLine1 Required'),
+    firstName: Yup.string().required('This field is required'),
+    lastName: Yup.string().required('This field is required'),
+    phone: Yup.string().required('This field is required').matches(phoneRegex, 'Please enter a valid phone number'),
+    email: Yup.string().required('This field is required').email('Please enter a valid email address'),
+    addressLine1: Yup.string().required('This field is required'),
     addressLine2: Yup.string(),
-    city: Yup.string().required(' request city Required'),
-    state: Yup.string().required(' request state Required'),
-    zip: Yup.string().required(' request zipRequired'),
+    city: Yup.string().required('This field is required'),
+    state: Yup.string().required('This field is required'),
+    zip: Yup.string().required('This field is required'),
 });
 
 export const represenativeInfoSchema = Yup.object({
-    firstName: Yup.string().required('Required'),
-    lastName: Yup.string().required(' rep lastName Required'),
-    phone: Yup.string().required('rep phone Required').matches(phoneRegex, 'rep Phone number is not valid'),
-    email: Yup.string().required('rep email Required').email('rep Invalid email'),
-    addressLine1: Yup.string().required('rep addressLine1 Required'),
+    firstName: Yup.string().required('This field is required'),
+    lastName: Yup.string().required('This field is required'),
+    phone: Yup.string().required('This field is requiredd').matches(phoneRegex, 'Please enter a valid phone number'),
+    email: Yup.string().required('This field is required').email('Please enter a valid email address'),
+    addressLine1: Yup.string().required('This field is required'),
     addressLine2: Yup.string(),
-    city: Yup.string().required('rep city Required'),
-    state: Yup.string().required('rep state Required'),
-    zip: Yup.string().required('rep zipRequired'),
+    city: Yup.string().required('This field is required'),
+    state: Yup.string().required('This field is required'),
+    zip: Yup.string().required('This field is required'),
 });
 
 export const rightsRequestFormValidationSchema = Yup.object({
-    schoolState: Yup.string().required('schoolState Required'),
-    schoolCity: Yup.string().required('schoolCity Required'),
-    schoolMarketingName: Yup.string().required('schoolMarketingName Required'),
+    schoolState: Yup.string().required('Please select an option'),
+    schoolCity: Yup.string().required('Please select an option'),
+    schoolMarketingName: Yup.string().required('Please select an option'),
     selectedActions: Yup.array().of(Yup.string()).min(1, 'At least one action is required'),
     selectedOptions: Yup.array().of(Yup.string()).when('selectedActions', (selectedActions, schema) => {
         const flattenedSelectedActions = [].concat(...selectedActions) as string[];
@@ -58,10 +58,10 @@ export const rightsRequestFormValidationSchema = Yup.object({
     }),
     deletionOption: Yup.string().oneOf(['full', 'partial']).when('selectedActions', (selectedActions, schema) => (selectedActions.includes('Right to Deletion') ? schema.required('an option is required for right to deletion') : schema)),
     partialDeletionDetails: Yup.string(),
-    isRequestFor: Yup.string().oneOf(['self', 'other']).required('is request for required'),
-    selectedRelationship: Yup.string().required('selectedRelationship Required'),
-    requestorInfo: requestorInfoSchema.required('Requestor Info Required'),
-    deliveryType: Yup.string().oneOf(['email', 'mail']).required(' deliveryType Required'),
+    isRequestFor: Yup.string().oneOf(['self', 'other']).required('Please select an option'),
+    selectedRelationship: Yup.string().required('Please select an option'),
+    requestorInfo: requestorInfoSchema.required('Please fill out requestor information'),
+    deliveryType: Yup.string().oneOf(['email', 'mail']).required('Please select an option'),
 });
 
 export interface FormValues {

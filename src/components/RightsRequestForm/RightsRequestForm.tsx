@@ -6,12 +6,17 @@ import './RightsRequestForm.scss';
 import { useFormik } from 'formik';
 import RadioGroup from '../radio/RadioGroup'
 import Select, { OptionProps } from '../Select/select';
+import { Input } from '../Input/input';
 
 
 export const RightsRequestForm = ({ formOptions, formCopy, staticFormOptions }: { formOptions: FormattedFormOption[], formCopy: { heading: string, body: string }, staticFormOptions: { relationshipList: string[], stateList: { [key: string]: string } } }) => {
 
     const [selectedStateData, setSelectedStateData] = useState<FormattedFormOption>({} as FormattedFormOption)
+    const [schoolSelectStateOptions, setSchoolSelectStateOptions] = useState<OptionProps[]>([])
     const [selectedCityData, setSelectedCityData] = useState<FormattedCityOption>({} as FormattedCityOption)
+    const [schoolSelectCityOptions, setSchoolSelectCityOptions] = useState<OptionProps[]>([])
+    const [schoolSelectMarketingNameOptions, setSchoolSelectMarketingNameOptions] = useState<OptionProps[]>([])
+
     const [submitState, setSubmitState] = useState<'unset' | 'success' | 'error'>('unset')
     const [ticketNumber, setTicketNumber] = useState<string>('')
     const [showSchoolSelect, setShowSchoolSelect] = useState<boolean>(false);
@@ -74,6 +79,15 @@ export const RightsRequestForm = ({ formOptions, formCopy, staticFormOptions }: 
             setTicketNumber(ticketNumber)
         },
     });
+
+    useEffect(() => {
+        let tempSchoolStateSelectOptions: OptionProps[] = [{ value: '', label: 'Select your School State', disabled: true, selected: true, type: 'option' }]
+        if (formOptions) {
+            tempSchoolStateSelectOptions = [...tempSchoolStateSelectOptions, ...formOptions.map((option: FormattedFormOption) => ({ value: option.state, label: option.state, type: 'option' }))];
+        }
+        setSchoolSelectStateOptions(tempSchoolStateSelectOptions)
+    }, [])
+
     useEffect(() => {
         if (!ticketNumber) {
             setSubmitState('unset')
@@ -87,15 +101,40 @@ export const RightsRequestForm = ({ formOptions, formCopy, staticFormOptions }: 
 
     useEffect(() => {
         setSelectedStateData(formOptions.find((option: FormattedFormOption) => option.state === formik.values.schoolState) || {} as FormattedFormOption);
-        formik.setFieldValue('schoolCity', '');
-        formik.setFieldValue('schoolMarketingName', '');
     }, [formik.values.schoolState]);
 
     useEffect(() => {
+        let tempSchoolCityOptions: OptionProps[] = [{ value: '', label: 'Select your School City', disabled: true, selected: true, type: 'option' }]
+        if (selectedStateData?.cities) {
+            tempSchoolCityOptions = [...tempSchoolCityOptions, ...selectedStateData.cities.map((city: FormattedCityOption) => ({ value: city.city, label: city.city, type: 'option' }))]
+            if (formik.values.schoolState !== '') {
+                tempSchoolCityOptions = [...tempSchoolCityOptions, { value: 'other', label: 'other', type: 'option' }]
+            }
+        }
+        setSchoolSelectCityOptions(tempSchoolCityOptions)
+        formik.setFieldValue('schoolCity', '');
+    }, [selectedStateData])
+
+    useEffect(() => {
         setSelectedCityData(selectedStateData?.cities?.find((option: FormattedCityOption) => option.city === formik.values.schoolCity) || {} as FormattedCityOption)
-        formik.setFieldValue('schoolMarketingName', '');
+        console.warn(formik.values.schoolCity)
     }, [formik.values.schoolCity]);
 
+    useEffect(() => {
+        let tempSchoolMarketingNameOptions: OptionProps[] = [{ value: '', label: 'Select your School Name', disabled: true, selected: true, type: 'option' }]
+        if (selectedCityData?.marketingNames) {
+            tempSchoolMarketingNameOptions = [...tempSchoolMarketingNameOptions, ...selectedCityData.marketingNames.map((schoolName: string) => ({ value: schoolName, label: schoolName, type: 'option' }))]
+        }
+        if (formik.values.schoolCity !== '') {
+            tempSchoolMarketingNameOptions = [...tempSchoolMarketingNameOptions, { value: 'other', label: 'other', type: 'option' }]
+        }
+
+        setSchoolSelectMarketingNameOptions(tempSchoolMarketingNameOptions)
+        formik.setFieldValue('schoolMarketingName', '');
+    }, [selectedCityData]);
+
+    useEffect(() => {
+    }, [schoolSelectMarketingNameOptions])
 
     useEffect(() => {
         formik.setFieldTouched('selectedActions')
@@ -162,6 +201,15 @@ export const RightsRequestForm = ({ formOptions, formCopy, staticFormOptions }: 
     }
 
 
+    const generateSchoolSelect = () => {
+        return <fieldset>
+            <Select helperText={formik.errors.schoolState && formik.touched.schoolState ? formik.errors.schoolState : ''} invalid={formik.touched.schoolState && !!(formik.errors.schoolState)} label="" name="schoolState" placeholder='Select a State' value={formik.values.schoolState} onChangeFunction={handleSelectChange} onBlurFunction={formik.handleBlur} optionList={schoolSelectStateOptions} />
+            <Select helperText={formik.errors.schoolCity && formik.touched.schoolCity ? formik.errors.schoolCity : ''} invalid={formik.touched.schoolCity && !!(formik.errors.schoolCity)} label="" name="schoolCity" placeholder='Select a City' value={formik.values.schoolCity} onChangeFunction={handleSelectChange} onBlurFunction={formik.handleBlur} optionList={schoolSelectCityOptions} />
+            <Select helperText={formik.errors.schoolMarketingName && formik.touched.schoolMarketingName ? formik.errors.schoolMarketingName : ''} invalid={formik.touched.schoolMarketingName && !!(formik.errors.schoolMarketingName)} label="" name="schoolMarketingName" placeholder='Select a School Name' value={formik.values.schoolMarketingName} onChangeFunction={handleSelectChange} onBlurFunction={formik.handleBlur} optionList={schoolSelectMarketingNameOptions} />
+        </fieldset>
+
+
+    }
 
     const generatePersonalInfoForm = (type: 'requestor' | 'representative') => {
         const titleText = type === 'requestor' && formik.values.isRequestFor === 'self' ? "Please enter your information." :
@@ -179,7 +227,6 @@ export const RightsRequestForm = ({ formOptions, formCopy, staticFormOptions }: 
                 type: 'option'
             }
         ))]
-
 
         const stateOptions = [{
             value: "",
@@ -206,24 +253,43 @@ export const RightsRequestForm = ({ formOptions, formCopy, staticFormOptions }: 
                     onBlurFunction={formik.handleBlur}
                     value={formik.values.selectedRelationship}
                     onChangeFunction={formik.handleChange}
-                    optionList={relationshipOptions} />
+                    optionList={relationshipOptions}
+                    helperText={formik.errors.selectedRelationship && formik.touched.selectedRelationship ? formik.errors.selectedRelationship : ''}
+                    invalid={formik.touched.selectedRelationship && !!(formik.errors.selectedRelationship)}
+                />
             )}
+            <Input helperText={formik.errors[`${type}Info`]?.firstName && formik.touched[`${type}Info`]?.firstName ? formik.errors[`${type}Info`]?.firstName : ''}
+                invalid={formik.touched[`${type}Info`]?.firstName && !!(formik.errors[`${type}Info`]?.firstName)} label="" type="text" name={`${type}Info.firstName`} placeholder="firstName" onBlurFunction={formik.handleBlur} onChangeFunction={formik.handleChange} value={formik.values[`${type}Info`]['firstName'] || ''}></Input>
 
-            <input type="text" name={`${type}Info.firstName`} placeholder="firstName" onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values[`${type}Info`]?.firstName || ''} />
-            <input type="text" name={`${type}Info.lastName`} placeholder="lastName" onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values[`${type}Info`]?.lastName || ''} />
-            <input type="tel" name={`${type}Info.phone`} onChange={formik.handleChange} value={formik.values[`${type}Info`]?.phone || ''} />
-            <input type="email" name={`${type}Info.email`} placeholder="email" onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values[`${type}Info`]?.email || ''} />
-            <input type="text" name={`${type}Info.addressLine1`} placeholder="addressLine1" onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values[`${type}Info`]?.addressLine1 || ''} />
-            <input type="text" name={`${type}Info.addressLine2`} placeholder="addressLine2" onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values[`${type}Info`]?.addressLine2 || ''} />
-            <input type="text" name={`${type}Info.city`} placeholder="city" onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values[`${type}Info`]?.city || ''} />
+            <Input helperText={formik.errors[`${type}Info`]?.lastName && formik.touched[`${type}Info`]?.lastName ? formik.errors[`${type}Info`]?.lastName : ''}
+                invalid={formik.touched[`${type}Info`]?.lastName && !!(formik.errors[`${type}Info`]?.lastName)} label="" type="text" name={`${type}Info.lastName`} placeholder="lastName" onBlurFunction={formik.handleBlur} onChangeFunction={formik.handleChange} value={formik.values[`${type}Info`]['lastName'] || ''}></Input>
+
+            <Input helperText={formik.errors[`${type}Info`]?.phone && formik.touched[`${type}Info`]?.phone ? formik.errors[`${type}Info`]?.phone : ''}
+                invalid={formik.touched[`${type}Info`]?.phone && !!(formik.errors[`${type}Info`]?.phone)} label="" type="tel" name={`${type}Info.phone`} placeholder="phone" onBlurFunction={formik.handleBlur} onChangeFunction={formik.handleChange} value={formik.values[`${type}Info`]['phone'] || ''}></Input>
+
+            <Input helperText={formik.errors[`${type}Info`]?.email && formik.touched[`${type}Info`]?.email ? formik.errors[`${type}Info`]?.email : ''}
+                invalid={formik.touched[`${type}Info`]?.email && !!(formik.errors[`${type}Info`]?.email)} label="" type="email" name={`${type}Info.email`} placeholder="email" onBlurFunction={formik.handleBlur} onChangeFunction={formik.handleChange} value={formik.values[`${type}Info`]['email'] || ''}></Input>
+
+            <Input helperText={formik.errors[`${type}Info`]?.addressLine1 && formik.touched[`${type}Info`]?.addressLine1 ? formik.errors[`${type}Info`]?.addressLine1 : ''}
+                invalid={formik.touched[`${type}Info`]?.addressLine1 && !!(formik.errors[`${type}Info`]?.addressLine1)} label="" type="text" name={`${type}Info.addressLine1`} placeholder="addressLine1" onBlurFunction={formik.handleBlur} onChangeFunction={formik.handleChange} value={formik.values[`${type}Info`]['addressLine1'] || ''}></Input>
+
+            <Input label="" type="text" name={`${type}Info.addressLine2`} placeholder="addressLine2" onBlurFunction={formik.handleBlur} onChangeFunction={formik.handleChange} value={formik.values[`${type}Info`]['addressLine2'] || ''}></Input>
+
+            <Input helperText={formik.errors[`${type}Info`]?.city && formik.touched[`${type}Info`]?.city ? formik.errors[`${type}Info`]?.city : ''}
+                invalid={formik.touched[`${type}Info`]?.city && !!(formik.errors[`${type}Info`]?.city)} label="" type="text" name={`${type}Info.city`} placeholder="city" onBlurFunction={formik.handleBlur} onChangeFunction={formik.handleChange} value={formik.values[`${type}Info`]['city'] || ''}></Input>
+
             <Select
                 label=""
                 name={`${type}Info.state`}
                 value={formik.values[`${type}Info`]?.state || ''}
                 onBlurFunction={formik.handleBlur}
                 onChangeFunction={formik.handleChange}
-                optionList={stateOptions} />
-            <input type="text" name={`${type}Info.zip`} placeholder="zip" onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values[`${type}Info`]?.zip || ''} />
+                optionList={stateOptions}
+                helperText={formik.errors[`${type}Info`]?.state && formik.touched[`${type}Info`]?.state ? formik.errors[`${type}Info`]?.state : ''}
+                invalid={formik.touched[`${type}Info`]?.state && !!(formik.errors[`${type}Info`]?.state)}
+            />
+            <Input helperText={formik.errors[`${type}Info`]?.zip && formik.touched[`${type}Info`]?.zip ? formik.errors[`${type}Info`]?.zip : ''}
+                invalid={formik.touched[`${type}Info`]?.zip && !!(formik.errors[`${type}Info`]?.zip)} label="" type="text" name={`${type}Info.zip`} placeholder="zip" onBlurFunction={formik.handleBlur} onChangeFunction={formik.handleChange} value={formik.values[`${type}Info`]['zip'] || ''}></Input>
         </fieldset>
     }
 
@@ -311,36 +377,7 @@ export const RightsRequestForm = ({ formOptions, formCopy, staticFormOptions }: 
                             />}</div>
                 }
                 {
-                    showSchoolSelect && <fieldset>
-                        <select name="schoolState" value={formik.values.schoolState} onChange={handleSelectChange} onBlur={formik.handleBlur}>
-                            <option value="" disabled selected>Select your State</option>
-                            {formOptions &&
-                                formOptions.map((option: FormattedFormOption) => {
-                                    return <option value={option.state}>{option.state}</option>
-                                })
-                            }
-                        </select>
-                        {formik.touched.schoolState && formik.errors.schoolState ? <div>{formik.errors.schoolState}</div> : null}
-                        <select name="schoolCity" value={formik.values.schoolCity} onChange={handleSelectChange} onBlur={formik.handleBlur}>
-                            <option value="" disabled selected>Select your City</option>
-                            {
-                                selectedStateData?.cities && <>{selectedStateData.cities?.map((city: FormattedCityOption) => <option value={city.city}>{city.city}</option>)}
-
-                                </>
-                            }
-                            {formik.values.schoolState !== '' && <option value={'other'}>other</option>}
-                        </select>
-                        {formik.touched.schoolCity && formik.errors.schoolCity ? <div>{formik.errors.schoolCity}</div> : null}
-
-                        <select name="schoolMarketingName" value={formik.values.schoolMarketingName} onChange={handleSelectChange} onBlur={formik.handleBlur}>
-                            <option value="" disabled selected>Select your School</option>
-                            {
-                                selectedCityData?.marketingNames && <>{selectedCityData.marketingNames?.map((schoolName: string) => <option value={schoolName}>{schoolName}</option>)}</>
-                            }
-                            {formik.values.schoolCity !== '' && <option value={'other'}>other</option>}
-                        </select>
-                        {formik.touched.schoolMarketingName && formik.errors.schoolMarketingName ? <div>{formik.errors.schoolMarketingName}</div> : null}
-                    </fieldset>
+                    showSchoolSelect && generateSchoolSelect()
                 }
                 {
                     showActions && <>

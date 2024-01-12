@@ -40,10 +40,12 @@ const Select: React.FC<SelectProps> = ({ selectId = uuidv4(), invalid, disabled,
     const [formattedOptionList, setFormattedOptionList] = useState<(OptionProps | OptionGroupProps)[]>(optionList);
     const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         onChangeFunction(e);
-        if (e?.target?.value !== selectedValue) {
-            setSelectedValue(e.target.value);
-        }
+        setSelectedValue(e.target.value);
     };
+
+    useEffect(() => {
+        setSelectedValue(value);
+    }, [value]);
 
     return (
         <div className={`gsl-select ${invalid ? 'gsl-select--invalid' : ''} ${disabled ? 'gsl-select--disabled' : ''}`}>
@@ -59,7 +61,6 @@ const Select: React.FC<SelectProps> = ({ selectId = uuidv4(), invalid, disabled,
                 disabled={disabled}
                 required={required}
                 onBlur={onBlurFunction}>
-                {placeholder && <option value="" disabled selected>{placeholder}</option>}
                 {optionList.length && optionList.map((item: OptionProps | OptionGroupProps) => {
                     if (item.type === "option") {
                         return (
@@ -71,24 +72,6 @@ const Select: React.FC<SelectProps> = ({ selectId = uuidv4(), invalid, disabled,
                             >
                                 {item.label}
                             </option>
-                        );
-                    } else if (item.type === "optionGroup") {
-                        return (
-                            <optgroup
-                                label={item.label}
-                            >
-                                {item.options.map((option: OptionProps) =>
-                                (
-                                    <option
-                                        disabled={option.disabled}
-                                        label={option.label}
-                                        value={option.value}
-                                        selected={option.selected}
-                                    >
-                                        {item.label}
-                                    </option>
-                                ))}
-                            </optgroup>
                         );
                     }
                 })}
