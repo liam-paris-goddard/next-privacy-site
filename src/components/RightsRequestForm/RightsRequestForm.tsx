@@ -7,6 +7,8 @@ import { useFormik } from 'formik';
 import RadioGroup from '../radio/RadioGroup'
 import Select, { OptionProps } from '../Select/select';
 import { Input } from '../Input/input';
+import CheckboxGroup from '../checkbox/CheckboxGroup';
+import Checkbox from '../checkbox/Checkbox';
 
 
 export const RightsRequestForm = ({ formOptions, formCopy, staticFormOptions }: { formOptions: FormattedFormOption[], formCopy: { heading: string, body: string }, staticFormOptions: { relationshipList: string[], stateList: { [key: string]: string } } }) => {
@@ -381,28 +383,33 @@ export const RightsRequestForm = ({ formOptions, formCopy, staticFormOptions }: 
                 }
                 {
                     showActions && <>
-                        <fieldset>
+                        <CheckboxGroup name="selectedActions"
+                            label="Please Select a requested action"
+                            ariaLabelCheckboxGroup="selectedActions"
+                            indeterminate={false}
+                            helperText={formik.errors.selectedActions && formik.touched.selectedActions ? Array.isArray(formik.errors.selectedActions) ? formik.errors.selectedActions[0] : formik.errors.selectedActions : ''}
+                            invalid={formik.touched.selectedActions && !!(formik.errors.selectedActions)}
+                        >
                             {formik.values.schoolState && selectedStateData.availableActions?.map((action: FormattedActionsOption) =>
                                 <>
-
-                                    <label>
-                                        <input type="checkbox" name={`selectedActions`}
-                                            value={formik.values.selectedActions.find(selectedAction => action.name === selectedAction)}
-                                            onBlur={() => formik.handleBlur}
-                                            onChange={(e) => {
-                                                formik.setFieldTouched('selectedActions', true, false);
-                                                if (e.target.checked) {
-                                                    formik.setFieldValue('selectedActions', [...formik.values.selectedActions, action.name]);
-                                                } else {
-                                                    formik.setFieldValue('selectedActions', formik.values.selectedActions.filter(item => item !== action.name));
-                                                }
-                                                formik.validateField('selectedActions');
-
+                                    <Checkbox
+                                        checked={formik.values.selectedActions.includes(action.name)}
+                                        name={`selectedActions`}
+                                        value={formik.values.selectedActions.find(selectedAction => action.name === selectedAction)}
+                                        ariaLabelCheckbox={action.name}
+                                        label={action.name}
+                                        onChangeFunction={(e) => {
+                                            formik.setFieldTouched('selectedActions', true, false);
+                                            if (e.target.checked) {
+                                                formik.setFieldValue('selectedActions', [...formik.values.selectedActions, action.name]);
+                                            } else {
+                                                formik.setFieldValue('selectedActions', formik.values.selectedActions.filter(item => item !== action.name));
                                             }
-                                            }
-                                        /> {action.name}
-                                    </label>
-                                    <div>{
+                                            formik.validateField('selectedActions');
+                                        }}
+                                        onBlurFunction={() => formik.handleBlur}
+                                    ></Checkbox>
+                                    { /*<div>{
                                         formik.values.selectedActions.includes(action.name) && action.name === 'Right to Deletion' && <>
                                             <RadioGroup name="deletionOption"
                                                 label=""
@@ -432,13 +439,51 @@ export const RightsRequestForm = ({ formOptions, formCopy, staticFormOptions }: 
                                                     value={formik.values.partialDeletionDetails}
                                                 />
                                             }</>}
-                                    </div>
+                                        </div> */}
+                                    {<div>{
+                                        formik.values.selectedActions.includes(action.name) && action.name === 'Right to Deletion' && <>
+                                            <RadioGroup name="deletionOption"
+                                                label=""
+                                                helperText={formik.errors.deletionOption && formik.touched.deletionOption ? formik.errors.deletionOption : ''}
+                                                required={formik.values.selectedActions.includes('Right to Deletion')}
+                                                buttons={[
+                                                    {
+                                                        label: action.options[0],
+                                                        value: 'full',
+                                                        checked: formik.values.deletionOption === 'full',
+                                                    },
+                                                    {
+                                                        label: action.options[1],
+                                                        value: 'partial',
+                                                        checked: formik.values.deletionOption === 'partial',
+                                                    },
+                                                ]}
+                                                onChangeFunction={formik.handleChange}
+                                                onBlurFunction={formik.handleBlur}
+                                            />
+
+                                            {
+                                                formik.values.deletionOption === 'partial' &&
+                                                <textarea
+                                                    name="partialDeletionDetails"
+                                                    onChange={formik.handleChange}
+                                                    value={formik.values.partialDeletionDetails}
+                                                />
+                                            }</>}
+                                    </div>}
+
+
                                     {
                                         formik.values.selectedActions.includes(action.name) && action.name !== 'Right to Deletion' && action.options.length >= 1 &&
-                                        <fieldset>
+                                        <CheckboxGroup name="selectedOptions"
+                                            label="Please Select a Right to Access option"
+                                            ariaLabelCheckboxGroup="selectedOptions"
+                                            indeterminate={false}
+                                            helperText={formik.errors.selectedOptions && formik.touched.selectedOptions ? Array.isArray(formik.errors.selectedOptions) ? formik.errors.selectedOptions[0] : formik.errors.selectedOptions : ''}
+                                            invalid={formik.touched.selectedOptions && !!(formik.errors.selectedOptions)}>
                                             {
                                                 action.options.map(option => (<>
-                                                    <input
+                                                    {/*<input
                                                         type="checkbox"
                                                         name="selectedOptions"
                                                         value={option}
@@ -455,21 +500,38 @@ export const RightsRequestForm = ({ formOptions, formCopy, staticFormOptions }: 
                                                         }}
 
                                                     />
-                                                    {option}</>))
+                                                    {option}*/}
+
+                                                    <Checkbox
+                                                        checked={formik.values.selectedOptions.includes(option)}
+                                                        name={`selectedOptions`}
+                                                        value={option}
+                                                        ariaLabelCheckbox={option}
+                                                        label={option}
+                                                        onChangeFunction={(e) => {
+                                                            formik.setFieldTouched('selectedOptions', true, false);
+                                                            if (e.target.checked) {
+                                                                formik.setFieldValue('selectedOptions', [...formik.values.selectedOptions, option]);
+                                                            } else {
+                                                                formik.setFieldValue('selectedOptions', formik.values.selectedOptions.filter(item => item !== option));
+                                                            }
+                                                            formik.validateField('selectedOptions');
+                                                        }}
+                                                    ></Checkbox>
+                                                </>))
                                             }
 
-                                        </fieldset>
+                                        </CheckboxGroup>
                                     }
                                 </>)
                             }
-                        </fieldset>
+                        </CheckboxGroup>
                     </>
                 }
 
                 {displayErrorMessages()}
                 <button type="submit" >Submit</button>
             </form >
-
             <h3>{ticketNumber}</h3>
             {submitState === 'success' && <div>Success</div>}
             {submitState === 'error' && <div>Error</div>}

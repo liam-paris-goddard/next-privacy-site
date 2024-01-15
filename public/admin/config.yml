@@ -31,3 +31,52 @@ collections:
     slug: "{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
     fields: # The fields for each document, usually in front matter
       - { label: "Body", name: "body", widget: "markdown" }
+  - name: "avaliableStates"
+    label: "Avaliable States and Actions"
+    folder: "content/avaliable-states-and-actions"
+    create: true
+    slug: "{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
+    fields: # The fields for each document, usually in front matter
+      - { label: "State", name: "state", widget: "string" }
+      - {
+          label: "Right to Access",
+          name: "right_to_access",
+          widget: "boolean",
+          default: false,
+        }
+      - {
+          label: "Right to Correction",
+          name: "right_to_correction",
+          widget: "boolean",
+          default: false,
+        }
+      - {
+          label: "Right to Deletion",
+          name: "right_to_deletion",
+          widget: "boolean",
+          default: false,
+        }
+      - {
+          label: "Right to opt-out",
+          name: "right_to_opt",
+          widget: "boolean",
+          default: false,
+        }
+      - {
+          label: "Right to limit use",
+          name: "right_to_limit",
+          widget: "boolean",
+          default: false,
+        }
+      - {
+          label: "Right to Data Portability",
+          name: "right_to_portability",
+          widget: "boolean",
+          default: false,
+        }
+      - {
+          label: "Right to appeal",
+          name: "right_to_appeal",
+          widget: "boolean",
+          default: false,
+        }
