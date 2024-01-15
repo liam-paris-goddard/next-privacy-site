@@ -2,6 +2,7 @@ import { generatUuid } from '@/utils/formatUtils';
 import React, { useState, useEffect } from 'react';
 import './Checkbox.scss';
 interface CheckboxProps {
+    className?: string;
     checked?: boolean;
     indeterminate?: boolean;
     disabled?: boolean;
@@ -19,7 +20,7 @@ interface CheckboxProps {
 }
 
 /* Accessibility: rendering the icon *only* when checked, otherwise is always visible in HCM */
-export const renderIcon = (indeterminate, checked) => {
+export const renderIcon = (indeterminate: boolean, checked: boolean) => {
     if (indeterminate) {
         return (
             <span>-</span> //TODO: replace
@@ -33,7 +34,7 @@ export const renderIcon = (indeterminate, checked) => {
     }
 }
 
-export const renderHelperIcon = (helperText, invalid) => {
+export const renderHelperIcon = (helperText: string, invalid: boolean) => {
     if (helperText && !invalid) {
         return (
             <span>i</span>// TODO: replace <gsl-icon-info class='gsl-checkbox-icon'></gsl-icon-info>
@@ -45,6 +46,7 @@ export const renderHelperIcon = (helperText, invalid) => {
 }
 
 const Checkbox: React.FC<CheckboxProps> = ({
+    className = '',
     checked = false,
     indeterminate = false,
     disabled = false,
@@ -80,7 +82,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
     return (
 
         <div
-            className={`gsl-checkbox 
+            className={`${className ? className : ''} gsl-checkbox 
                 ${checked ? 'checked ' : ''}
                 ${indeterminate ? 'indeterminate ' : ''}
                 ${disabled ? 'disabled ' : ''}

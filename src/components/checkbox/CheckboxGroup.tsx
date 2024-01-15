@@ -62,14 +62,15 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
                 status={status}
                 invalid={invalid}
                 value={value}
-                inputId={inputId ? inputId : ''}
                 checked={checked}
                 indeterminate={indeterminate}
                 disabled={disabled}
                 className="gsl-checkbox-group-parent-checkbox"
                 onChangeFunction={onChangeFunction}
                 onBlurFunction={onBlurFunction}
-            /> : <label>{label} {renderHelperIcon(helperText, invalid)} {helperText}}</label>}
+            /> : <label>{label}
+                {renderHelperIcon(helperText, invalid)} {helperText}
+            </label>}
             <fieldset className="gsl-checkbox-group-fieldset">
                 <legend>{ariaLabelCheckboxGroup || label}</legend>
                 {children}
