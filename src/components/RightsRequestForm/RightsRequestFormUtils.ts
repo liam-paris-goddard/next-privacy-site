@@ -1,7 +1,7 @@
 import axios from "axios";
 import * as Yup from 'yup';
 
-export interface FormattedFormOption {
+export interface FormattedSchoolListOption {
     state: string;
     cities: FormattedCityOption[]
     availableActions: FormattedActionsOption[]

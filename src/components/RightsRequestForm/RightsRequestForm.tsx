@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { use, useEffect, useState } from 'react';
-import { SNowTicketResponse, SNowTicketRequest, FormattedFormOption, FormattedCityOption, FormattedActionsOption, SNowTicketVariables, SNowTicketPerson, FormValues, testSubmit, rightsRequestFormValidationSchema, represenativeInfoSchema, submitRequest } from './RightsRequestFormUtils';
+import { SNowTicketResponse, SNowTicketRequest, FormattedSchoolListOption, FormattedCityOption, FormattedActionsOption, SNowTicketVariables, SNowTicketPerson, FormValues, testSubmit, rightsRequestFormValidationSchema, represenativeInfoSchema, submitRequest } from './RightsRequestFormUtils';
 import ReactMarkdown from 'react-markdown'
 import './RightsRequestForm.scss';
 import { useFormik } from 'formik';
@@ -11,9 +11,9 @@ import CheckboxGroup from '../checkbox/CheckboxGroup';
 import Checkbox from '../checkbox/Checkbox';
 
 
-export const RightsRequestForm = ({ formOptions, formCopy, staticFormOptions }: { formOptions: FormattedFormOption[], formCopy: { heading: string, body: string }, staticFormOptions: { relationshipList: string[], stateList: { [key: string]: string } } }) => {
+export const RightsRequestForm = ({ schoolListOptions, formCopy, staticFormOptions }: { schoolListOptions: FormattedSchoolListOption[], formCopy: { heading: string, body: string }, staticFormOptions: { relationshipList: string[], stateList: { [key: string]: string } } }) => {
 
-    const [selectedStateData, setSelectedStateData] = useState<FormattedFormOption>({} as FormattedFormOption)
+    const [selectedStateData, setSelectedStateData] = useState<FormattedSchoolListOption>({} as FormattedSchoolListOption)
     const [schoolSelectStateOptions, setSchoolSelectStateOptions] = useState<OptionProps[]>([])
     const [selectedCityData, setSelectedCityData] = useState<FormattedCityOption>({} as FormattedCityOption)
     const [schoolSelectCityOptions, setSchoolSelectCityOptions] = useState<OptionProps[]>([])
@@ -84,8 +84,8 @@ export const RightsRequestForm = ({ formOptions, formCopy, staticFormOptions }: 
 
     useEffect(() => {
         let tempSchoolStateSelectOptions: OptionProps[] = [{ value: '', label: 'Select your School State', disabled: true, selected: true, type: 'option' }]
-        if (formOptions) {
-            tempSchoolStateSelectOptions = [...tempSchoolStateSelectOptions, ...formOptions.map((option: FormattedFormOption) => ({ value: option.state, label: option.state, type: 'option' }))];
+        if (schoolListOptions) {
+            tempSchoolStateSelectOptions = [...tempSchoolStateSelectOptions, ...schoolListOptions.map((option: FormattedSchoolListOption) => ({ value: option.state, label: option.state, type: 'option' }))];
         }
         setSchoolSelectStateOptions(tempSchoolStateSelectOptions)
     }, [])
@@ -102,7 +102,7 @@ export const RightsRequestForm = ({ formOptions, formCopy, staticFormOptions }: 
     }, [ticketNumber])
 
     useEffect(() => {
-        setSelectedStateData(formOptions.find((option: FormattedFormOption) => option.state === formik.values.schoolState) || {} as FormattedFormOption);
+        setSelectedStateData(schoolListOptions.find((option: FormattedSchoolListOption) => option.state === formik.values.schoolState) || {} as FormattedSchoolListOption);
     }, [formik.values.schoolState]);
 
     useEffect(() => {
