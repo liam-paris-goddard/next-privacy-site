@@ -76,7 +76,6 @@ export const RightsRequestForm = ({ schoolListOptions, formCopy, staticFormOptio
         },
         validationSchema: rightsRequestFormValidationSchema,
         onSubmit: async (values) => {
-            console.warn('submit called')
             const ticketNumber = await submitRequest(values);
             setTicketNumber(ticketNumber)
         },
@@ -103,6 +102,7 @@ export const RightsRequestForm = ({ schoolListOptions, formCopy, staticFormOptio
 
     useEffect(() => {
         setSelectedStateData(schoolListOptions.find((option: FormattedSchoolListOption) => option.state === formik.values.schoolState) || {} as FormattedSchoolListOption);
+        formik.setFieldValue('selectedActions', []);
     }, [formik.values.schoolState]);
 
     useEffect(() => {
@@ -142,6 +142,7 @@ export const RightsRequestForm = ({ schoolListOptions, formCopy, staticFormOptio
         formik.setFieldTouched('selectedActions')
         formik.validateField('selectedActions');
         formik.validateField('selectedOptions');
+
     }, [formik.values.selectedActions])
 
     useEffect(() => {
@@ -379,10 +380,10 @@ export const RightsRequestForm = ({ schoolListOptions, formCopy, staticFormOptio
                             />}</div>
                 }
                 {
-                    showSchoolSelect && generateSchoolSelect()
+                    generateSchoolSelect()
                 }
                 {
-                    showActions && <>
+                    <>
                         <CheckboxGroup name="selectedActions"
                             label="Please Select a requested action"
                             ariaLabelCheckboxGroup="selectedActions"
@@ -406,42 +407,14 @@ export const RightsRequestForm = ({ schoolListOptions, formCopy, staticFormOptio
                                                 formik.setFieldValue('selectedActions', formik.values.selectedActions.filter(item => item !== action.name));
                                             }
                                             formik.validateField('selectedActions');
+                                            if (action.key === 'right_to_access') {
+                                                formik.setFieldValue('selectedOptions', []);
+                                            }
                                         }}
                                         onBlurFunction={() => formik.handleBlur}
                                     ></Checkbox>
-                                    { /*<div>{
-                                        formik.values.selectedActions.includes(action.name) && action.name === 'Right to Deletion' && <>
-                                            <RadioGroup name="deletionOption"
-                                                label=""
-                                                helperText={formik.errors.deletionOption && formik.touched.deletionOption ? formik.errors.deletionOption : ''}
-                                                required={formik.values.selectedActions.includes('Right to Deletion')}
-                                                buttons={[
-                                                    {
-                                                        label: action.options[0],
-                                                        value: 'full',
-                                                        checked: formik.values.deletionOption === 'full',
-                                                    },
-                                                    {
-                                                        label: action.options[1],
-                                                        value: 'partial',
-                                                        checked: formik.values.deletionOption === 'partial',
-                                                    },
-                                                ]}
-                                                onChangeFunction={formik.handleChange}
-                                                onBlurFunction={formik.handleBlur}
-                                            />
-
-                                            {
-                                                formik.values.deletionOption === 'partial' &&
-                                                <textarea
-                                                    name="partialDeletionDetails"
-                                                    onChange={formik.handleChange}
-                                                    value={formik.values.partialDeletionDetails}
-                                                />
-                                            }</>}
-                                        </div> */}
                                     {<div>{
-                                        formik.values.selectedActions.includes(action.name) && action.name === 'Right to Deletion' && <>
+                                        formik.values.selectedActions.includes(action.name) && action.name === 'Right To Deletion' && <>
                                             <RadioGroup name="deletionOption"
                                                 label=""
                                                 helperText={formik.errors.deletionOption && formik.touched.deletionOption ? formik.errors.deletionOption : ''}

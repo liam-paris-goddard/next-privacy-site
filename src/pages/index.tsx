@@ -6,25 +6,15 @@ import { Accordion } from '../components/Accordion/Accordion'
 import '../index.scss'
 import Select from '../components/Select/select'
 import { D365, School } from '../utils/D365';
-import rrfOptions from '../../public/rrfOptions.json'
+import rrfOptions from '../utils/rrfOptions'
 import { RightsRequestForm } from '@/components/RightsRequestForm/RightsRequestForm'
 import { formatSchoolList } from '@/utils/formatUtils'
-import { FormattedFormOption } from '@/components/RightsRequestForm/RightsRequestFormUtils'
+import { FormattedSchoolListOption } from '@/components/RightsRequestForm/RightsRequestFormUtils'
+import { formatHomePageData, formatRRFData } from '@/utils/contentFormat'
+import { generateSchoolList } from '@/utils/schoolList'
 
-const formatLandingSections = (landingMarkDown: string[]) => landingMarkDown.map(filename => {
-    const file = fs.readFileSync(`./content/home-page/${filename}`, 'utf8')
-    const matterData = matter(file)
-
-    return {
-        heading: matterData.data.heading,
-        order: matterData.data.order,
-        children: matterData.content,
-        headingLevel: null
-    }
-}).sort((a, b) => a.order - b.order).map(({ heading, children, order }) => ({ heading, children }))
-
-export default function Home({ sections, formOptions, formCopy,
-    staticFormOptions }: { sections: any[], formOptions: FormattedFormOption[], formCopy: { heading: string, body: string }, staticFormOptions: { relationshipList: string[], stateList: { [key: string]: string } } }) {
+export default function Home({ sections, schoolListOptions, formCopy,
+    staticFormOptions }: { sections: any[], schoolListOptions: FormattedSchoolListOption[], formCopy: { heading: string, body: string }, staticFormOptions: { relationshipList: string[], stateList: { [key: string]: string } } }) {
     return (
         <main className={styles.main}>
             <Accordion defaultOpen sectionList={sections} />
@@ -117,50 +107,31 @@ export default function Home({ sections, formOptions, formCopy,
                 </a>
             </div>
 */}
-            <RightsRequestForm staticFormOptions={staticFormOptions} formCopy={formCopy} formOptions={formOptions}></RightsRequestForm>
+            <RightsRequestForm staticFormOptions={staticFormOptions} formCopy={formCopy} schoolListOptions={schoolListOptions}></RightsRequestForm>
         </main >
     )
 }
 
 export async function getStaticProps() {
 
-    const d365 = new D365(
-        process.env.D365_AUTH_URL,
-        process.env.D365_CLIENT_ID,
-        process.env.D365_CLIENT_SECRET,
-        process.env.D365_BASE_URL
-    );
-
-    await d365.init();
-
-    // Call the getSchools method
-    const schoolList = await d365.getSchools(rrfOptions.AvailableState)
-        .catch(error => {
-            // Handle any errors
-            console.error(error);
-        });
-
-    // List of files in blgos folder
-    const filesInHomePage = fs.readdirSync('./content/home-page')
+    const filesInHomePage = fs.readdirSync('./content/home-page');
+    const stateInfoFiles = fs.readdirSync('./content/avaliable-states-and-actions');
     const formCopyFile = fs.readFileSync('./content/rights-request-form/rights-request-form.md', 'utf8')
 
-    const formCopyMatterData = matter(formCopyFile)
+    const landingPageArr = filesInHomePage.map((fileName) => {
+        return fs.readFileSync(`./content/home-page/${fileName}`, 'utf8');
+    })
 
-    //TODO: put form copy into mark down page and pass to rrform component
-    let formOptions = [] as FormattedFormOption[]
-    if (schoolList) {
-        formOptions = formatSchoolList(schoolList)
-    }
-    const staticFormOptions = {
-        relationshipList: rrfOptions.Relationships,
-        stateList: rrfOptions.StatesAndTerritories,
-    }
+    const stateInfoArr = stateInfoFiles.map((fileName) => fs.readFileSync(`./content/avaliable-states-and-actions/${fileName}`, 'utf8'));
+
+    const schoolListOptions = await generateSchoolList(stateInfoArr);
+    const formContent = formatRRFData(formCopyFile, rrfOptions);
     return {
         props: {
-            sections: formatLandingSections(filesInHomePage),
-            formCopy: { heading: formCopyMatterData.data.heading, body: formCopyMatterData.content },
-            formOptions,
-            staticFormOptions
+            sections: formatHomePageData(landingPageArr),
+            formCopy: formContent.formCopy,
+            staticFormOptions: formContent.staticFormOptions,
+            schoolListOptions
         }
     }
 }

@@ -1,4 +1,4 @@
-{
+const rrfOptions: any = {
     "AvailableState": [
         "California",
         "Colorado",
@@ -64,14 +64,14 @@
         "Other"
     ],
     "ActionOptions": {
-        "Right to Access": [
+        "right_to_access": [
             "I request access to specific pieces of personal information.",
             "I request access to categories of personal information you have collected.",
             "I request access to categories of sources from which my personal information was collected.",
             "I request access to categories of personal information that you have sold or disclosed.",
             "I request access to categories of third parties to whom my personal information was sold or disclosed for a business purpose."
         ],
-        "Right to Deletion": [
+        "right_to_deletion": [
             "FULL DELETION REQUEST - I WANT TO DELETE ALL OF MY PERSONAL INFORMATION.",
             "Partial Deletion Request - I want to delete only the personal information as detailed below."
         ]
@@ -251,3 +251,5 @@
         ]
     }
 }
+
+export default rrfOptions;
