@@ -142,7 +142,7 @@ export const RightsRequestForm = ({ schoolListOptions, formCopy, staticFormOptio
         formik.setFieldTouched('selectedActions')
         formik.validateField('selectedActions');
         formik.validateField('selectedOptions');
-
+        console.warn(formik.values.selectedActions)
     }, [formik.values.selectedActions])
 
     useEffect(() => {
@@ -206,6 +206,7 @@ export const RightsRequestForm = ({ schoolListOptions, formCopy, staticFormOptio
 
     const generateSchoolSelect = () => {
         return <fieldset>
+            <h3 className='heading-3'>Please select a school</h3>
             <Select helperText={formik.errors.schoolState && formik.touched.schoolState ? formik.errors.schoolState : ''} invalid={formik.touched.schoolState && !!(formik.errors.schoolState)} label="" name="schoolState" placeholder='Select a State' value={formik.values.schoolState} onChangeFunction={handleSelectChange} onBlurFunction={formik.handleBlur} optionList={schoolSelectStateOptions} />
             <Select helperText={formik.errors.schoolCity && formik.touched.schoolCity ? formik.errors.schoolCity : ''} invalid={formik.touched.schoolCity && !!(formik.errors.schoolCity)} label="" name="schoolCity" placeholder='Select a City' value={formik.values.schoolCity} onChangeFunction={handleSelectChange} onBlurFunction={formik.handleBlur} optionList={schoolSelectCityOptions} />
             <Select helperText={formik.errors.schoolMarketingName && formik.touched.schoolMarketingName ? formik.errors.schoolMarketingName : ''} invalid={formik.touched.schoolMarketingName && !!(formik.errors.schoolMarketingName)} label="" name="schoolMarketingName" placeholder='Select a School Name' value={formik.values.schoolMarketingName} onChangeFunction={handleSelectChange} onBlurFunction={formik.handleBlur} optionList={schoolSelectMarketingNameOptions} />
@@ -322,6 +323,7 @@ export const RightsRequestForm = ({ schoolListOptions, formCopy, staticFormOptio
 
     return (
         <div className='rights-request-form'>
+            <h2 className='heading-2'>Rights Request Form</h2>
             <div className='markdown-content'><ReactMarkdown>{formCopy.body}</ReactMarkdown></div>
             <form onSubmit={formik.handleSubmit}>
                 <div className='is-request-for-radio-group'>
@@ -377,17 +379,20 @@ export const RightsRequestForm = ({ schoolListOptions, formCopy, staticFormOptio
                             />}</div>
                 }
                 {
-                    generateSchoolSelect()
+                    showSchoolSelect && generateSchoolSelect()
                 }
                 {
-                    <>
+                    showActions && <>
+                        <h3 className='heading-3'>Request Type (check all that apply)</h3>
                         <CheckboxGroup name="selectedActions"
-                            label="Please Select a requested action"
+                            label=""
                             ariaLabelCheckboxGroup="selectedActions"
                             indeterminate={false}
-                            helperText={formik.errors.selectedActions && formik.touched.selectedActions ? Array.isArray(formik.errors.selectedActions) ? formik.errors.selectedActions[0] : formik.errors.selectedActions : ''}
-                            invalid={formik.touched.selectedActions && !!(formik.errors.selectedActions)}
                         >
+                            {/**
+                             *                             helperText={formik.errors.selectedActions && formik.touched.selectedActions ? Array.isArray(formik.errors.selectedActions) ? formik.errors.selectedActions[0] : formik.errors.selectedActions : ''}
+                            invalid={formik.touched.selectedActions && !!(formik.errors.selectedActions)}
+                             */}
                             {formik.values.schoolState && selectedStateData.availableActions?.map((action: FormattedActionsOption) =>
                                 <>
                                     <Checkbox
@@ -410,8 +415,8 @@ export const RightsRequestForm = ({ schoolListOptions, formCopy, staticFormOptio
                                         }}
                                         onBlurFunction={() => formik.handleBlur}
                                     ></Checkbox>
-                                    {<div>{
-                                        formik.values.selectedActions.includes(action.name) && action.name === 'Right To Deletion' && <>
+                                    {<div className='right-to-deletion-section'>{
+                                        formik.values.selectedActions.includes(action.name) && action.key === 'right_to_deletion' && <>
                                             <RadioGroup name="deletionOption"
                                                 label=""
                                                 helperText={formik.errors.deletionOption && formik.touched.deletionOption ? formik.errors.deletionOption : ''}
@@ -443,10 +448,10 @@ export const RightsRequestForm = ({ schoolListOptions, formCopy, staticFormOptio
                                     </div>}
 
 
-                                    {
-                                        formik.values.selectedActions.includes(action.name) && action.name !== 'Right to Deletion' && action.options.length >= 1 &&
+                                    <div className='right-to-access-section'>{
+                                        formik.values.selectedActions.includes(action.name) && action.key == 'right_to_access' && action.options.length >= 1 &&
                                         <CheckboxGroup name="selectedOptions"
-                                            label="Please Select a Right to Access option"
+                                            label=""
                                             ariaLabelCheckboxGroup="selectedOptions"
                                             indeterminate={false}
                                             helperText={formik.errors.selectedOptions && formik.touched.selectedOptions ? Array.isArray(formik.errors.selectedOptions) ? formik.errors.selectedOptions[0] : formik.errors.selectedOptions : ''}
@@ -492,7 +497,7 @@ export const RightsRequestForm = ({ schoolListOptions, formCopy, staticFormOptio
                                             }
 
                                         </CheckboxGroup>
-                                    }
+                                    }</div>
                                 </>)
                             }
                         </CheckboxGroup>
@@ -500,12 +505,8 @@ export const RightsRequestForm = ({ schoolListOptions, formCopy, staticFormOptio
                 }
 
                 {displayErrorMessages()}
-                <button type="submit" >Submit</button>
-            </form >
-            <h3>{ticketNumber}</h3>
-            {submitState === 'success' && <div>Success</div>}
-            {submitState === 'error' && <div>Error</div>}
-            {submitState === 'unset' && <div>unset</div>}
+                {/*<button type="submit" >Submit</button>*/}
+            </form>
         </div >
 
     )

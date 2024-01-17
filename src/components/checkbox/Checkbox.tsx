@@ -1,6 +1,9 @@
 import { generatUuid } from '@/utils/formatUtils';
 import React, { useState, useEffect } from 'react';
 import './Checkbox.scss';
+import { InfoIcon } from '../Icons/InfoIcon';
+import { WarningIcon } from '../Icons/WarningIcon';
+import { CheckboxIcon } from '../Icons/CheckboxIcon';
 interface CheckboxProps {
     className?: string;
     checked?: boolean;
@@ -29,7 +32,7 @@ export const renderIcon = (indeterminate: boolean, checked: boolean) => {
 
     if (checked) {
         return (
-            <span>√</span>//TODO: replace<gsl-icon-checkmark class='gsl-checkbox-icon'></gsl-icon-checkmark>
+            <CheckboxIcon className='gsl-checkbox-icon' />
         );
     }
 }
@@ -37,11 +40,11 @@ export const renderIcon = (indeterminate: boolean, checked: boolean) => {
 export const renderHelperIcon = (helperText: string, invalid: boolean) => {
     if (helperText && !invalid) {
         return (
-            <span>i</span>// TODO: replace <gsl-icon-info class='gsl-checkbox-icon'></gsl-icon-info>
+            <InfoIcon className={'gsl-checkbox-icon'} />
         );
     }
     if (invalid) {
-        return <span>e</span>//TODO: replace <gsl-icon-error class='gsl-checkbox-icon'></gsl-icon-error>
+        return <WarningIcon className='gsl-checkbox-icon' />
     }
 }
 
@@ -99,7 +102,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
                 aria-label={ariaLabelCheckbox}
                 aria-checked={indeterminate ? 'mixed' : false}
                 aria-invalid={status === 'error' || invalid}
-                aria-describedBy={helperTextId}
+                aria-describedby={helperTextId}
                 disabled={disabled}
                 required={required}
                 onChange={handleChange}

@@ -20,7 +20,7 @@ export default function Home({ introContent, sections, schoolListOptions, formCo
         <main className={'main-container'}><div className='markdown-content'>
             {introContent.heading && <h1 className='heading-1'>{introContent.heading}</h1>}
             {introContent.children && <ReactMarkdown>{introContent.children}</ReactMarkdown>}
-            <Accordion defaultOpen sectionList={sections} /></div>
+            <Accordion defaultOpen toggle sectionList={sections} /></div>
             {/*}
             <h1>index baby</h1>
             <div className={styles.description}>
