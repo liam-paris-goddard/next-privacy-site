@@ -102,7 +102,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
                 aria-label={ariaLabelCheckbox}
                 aria-checked={indeterminate ? 'mixed' : false}
                 aria-invalid={status === 'error' || invalid}
-                aria-describedby={helperTextId}
+                aria-describedby={helperTextId || undefined}
                 disabled={disabled}
                 required={required}
                 onChange={handleChange}
