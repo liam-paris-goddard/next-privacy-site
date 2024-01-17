@@ -4,3 +4,46 @@
 @import 'styles/styles/typography';
 //@import 'styles/tokens/consumer_variables';
 //@import 'styles/tokens/consumer_mixins';
+
+
+.main-container {
+    margin: auto;
+    max-width: 800px;
+}
+
+
+
+.markdown-content {
+    h1 {
+        @include heading-1;
+    }
+    
+    h2 {
+        @include heading-2;
+    }
+    
+    h3 {
+        @include heading-3;
+    }
+    
+    h4 {
+        @include heading-4;
+    }
+    
+    h5 {
+        @include heading-5;
+    }
+    
+    h6 {
+        @include heading-6;
+    }
+    
+    p, li {
+        @include body;
+    }
+    
+    a {
+        @include link;
+    }
+    
+}

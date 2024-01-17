@@ -74,7 +74,7 @@ const RadioGroup = ({
             </legend>
             <div className={`gsl-radio-group-container ${inline ? 'inline-position' : ''} `}>
                 {formattedButtons && formattedButtons.map((button) => {
-                    return <RadioButton {...button}></RadioButton>
+                    return <RadioButton key={button.label} {...button}></RadioButton>
                 })}
             </div>
         </fieldset>

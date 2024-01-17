@@ -1,6 +1,48 @@
+@import '../../styles/tokens/mixins.scss';
+
+.rights-request-form {
+    margin: 1rem;
+}
+
 fieldset {
     display:flex;
     flex-direction: column;
-    gap: 1rem;
-    width: 50vw;
+    border: none;
+    padding: 0;
+    margin: 0;
 }
+.required-text {
+    @include body;
+}
+.required {
+    color: var(--color-alert);
+}
+
+.is-request-for-radio-group {
+    .gsl-radio-group-title-label {
+        @include body;
+        color: var(--color-brand);
+        margin-bottom: .5rem;
+        font-weight: bold;
+    }
+}
+
+.personal-info-group {
+    flex-flow: row wrap;
+    .gsl-select,.gsl-input {
+        width: 100%;
+        .gsl-select--input {
+            max-width: 15rem;
+        }
+    }
+
+    .gsl-input {
+        width: 100%;
+        @media (min-width: 800px) {
+            width: 50%;
+        }
+    }
+
+
+}
+

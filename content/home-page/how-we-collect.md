@@ -1,5 +1,5 @@
 ---
-title: How We Collect, Retain, And Share Your Personal Information
+heading: "How We Collect, Retain, And Share Your Personal Information"
 order: 2
 ---
 We process Personal Information from your use of our Website or Services when you:

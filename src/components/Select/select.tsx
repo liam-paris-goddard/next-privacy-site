@@ -32,10 +32,11 @@ export interface SelectProps {
     optionList: (OptionProps | OptionGroupProps)[]
     onBlurFunction: (e: React.FocusEvent<HTMLSelectElement>) => void;
     onChangeFunction: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+    classes?: string;
 }
 
 
-const Select: React.FC<SelectProps> = ({ selectId = uuidv4(), invalid, disabled, hideLabel, label, required, helperText, placeholder, name, optionList = [], onChangeFunction, onBlurFunction, value }) => {
+const Select: React.FC<SelectProps> = ({ selectId = uuidv4(), invalid, disabled, hideLabel, label, required, helperText, placeholder, name, optionList = [], classes, onChangeFunction, onBlurFunction, value }) => {
     const [selectedValue, setSelectedValue] = useState(value);
     const [formattedOptionList, setFormattedOptionList] = useState<(OptionProps | OptionGroupProps)[]>(optionList);
     const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -48,7 +49,7 @@ const Select: React.FC<SelectProps> = ({ selectId = uuidv4(), invalid, disabled,
     }, [value]);
 
     return (
-        <div className={`gsl-select ${invalid ? 'gsl-select--invalid' : ''} ${disabled ? 'gsl-select--disabled' : ''}`}>
+        <div className={`gsl-select ${classes} ${invalid ? 'gsl-select--invalid' : ''} ${disabled ? 'gsl-select--disabled' : ''}`}>
             <label htmlFor={selectId} className={`gsl-select--label ${hideLabel ? 'gsl-select--label-hide' : ''}`} >
                 {invalid && !helperText && <WarningIcon></WarningIcon>} {label} {required ? <span className="gsl-select--required">*</span> : null}
             </label>
@@ -65,10 +66,10 @@ const Select: React.FC<SelectProps> = ({ selectId = uuidv4(), invalid, disabled,
                     if (item.type === "option") {
                         return (
                             <option
+                                key={item.label}
                                 disabled={item.disabled}
                                 label={item.label}
                                 value={item.value}
-                                selected={item.selected}
                             >
                                 {item.label}
                             </option>

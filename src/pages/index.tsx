@@ -8,16 +8,19 @@ import Select from '../components/Select/select'
 import { D365, School } from '../utils/D365';
 import rrfOptions from '../utils/rrfOptions'
 import { RightsRequestForm } from '@/components/RightsRequestForm/RightsRequestForm'
-import { formatSchoolList } from '@/utils/formatUtils'
 import { FormattedSchoolListOption } from '@/components/RightsRequestForm/RightsRequestFormUtils'
 import { formatHomePageData, formatRRFData } from '@/utils/contentFormat'
 import { generateSchoolList } from '@/utils/schoolList'
+import ReactMarkdown from 'react-markdown'
 
-export default function Home({ sections, schoolListOptions, formCopy,
-    staticFormOptions }: { sections: any[], schoolListOptions: FormattedSchoolListOption[], formCopy: { heading: string, body: string }, staticFormOptions: { relationshipList: string[], stateList: { [key: string]: string } } }) {
+export default function Home({ introContent, sections, schoolListOptions, formCopy,
+    staticFormOptions }: { introContent: any, sections: any[], schoolListOptions: FormattedSchoolListOption[], formCopy: { heading: string, body: string }, staticFormOptions: { relationshipList: string[], stateList: { [key: string]: string } } }) {
+
     return (
-        <main className={styles.main}>
-            <Accordion defaultOpen sectionList={sections} />
+        <main className={'main-container'}><div className='markdown-content'>
+            {introContent.heading && <h1 className='heading-1'>{introContent.heading}</h1>}
+            {introContent.children && <ReactMarkdown>{introContent.children}</ReactMarkdown>}
+            <Accordion defaultOpen sectionList={sections} /></div>
             {/*}
             <h1>index baby</h1>
             <div className={styles.description}>
@@ -126,9 +129,12 @@ export async function getStaticProps() {
 
     const schoolListOptions = await generateSchoolList(stateInfoArr);
     const formContent = formatRRFData(formCopyFile, rrfOptions);
+    const formattedSections = formatHomePageData(landingPageArr);
+    const intro = formattedSections.shift();
     return {
         props: {
-            sections: formatHomePageData(landingPageArr),
+            introContent: intro,
+            sections: formattedSections,
             formCopy: formContent.formCopy,
             staticFormOptions: formContent.staticFormOptions,
             schoolListOptions

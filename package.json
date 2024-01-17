@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@goddardsystems/react-component-library": "^0.0.0-beta.10",
+    "@react-input/mask": "^1.0.20",
     "axios": "^1.6.3",
     "formik": "^2.4.5",
     "fs": "^0.0.1-security",
@@ -25,6 +26,8 @@
   "devDependencies": {
     "@types/node": "20.10.5",
     "@types/uuid": "^9.0.7",
+    "eslint": "^8.56.0",
+    "eslint-config-next": "^14.0.4",
     "typescript": "5.3.3"
   }
 }

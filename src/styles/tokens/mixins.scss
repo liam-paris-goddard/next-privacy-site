@@ -59,7 +59,7 @@
 @mixin body {
   font-size: 14px;
   line-height: 20px;
-  color: var(--color-brand);
+  color: var(--color-gray-5);
 
   @include secondary-normal;
 }

@@ -17,7 +17,7 @@ export interface AccordionSectionProps {
 export const AccordionSection: React.FC<AccordionSectionProps> = ({
     heading,
     children,
-    headingLevel = 3,
+    headingLevel = 2,
     defaultOpen = false,
     sectionId = '',
     expanded = false,

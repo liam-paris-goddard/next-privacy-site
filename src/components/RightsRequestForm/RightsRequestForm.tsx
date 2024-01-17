@@ -9,7 +9,7 @@ import Select, { OptionProps } from '../Select/select';
 import { Input } from '../Input/input';
 import CheckboxGroup from '../checkbox/CheckboxGroup';
 import Checkbox from '../checkbox/Checkbox';
-
+import '../../index.scss';
 
 export const RightsRequestForm = ({ schoolListOptions, formCopy, staticFormOptions }: { schoolListOptions: FormattedSchoolListOption[], formCopy: { heading: string, body: string }, staticFormOptions: { relationshipList: string[], stateList: { [key: string]: string } } }) => {
 
@@ -247,8 +247,8 @@ export const RightsRequestForm = ({ schoolListOptions, formCopy, staticFormOptio
                 type: 'option'
             }
         ))]
-        return <fieldset>
-            <h3>{titleText}</h3>
+        return <fieldset className='personal-info-group'>
+            <h3 className="heading-4" style={{ 'width': "100%" }}>{titleText}</h3>
             {type === 'requestor' && (
                 <Select
                     label=""
@@ -321,16 +321,13 @@ export const RightsRequestForm = ({ schoolListOptions, formCopy, staticFormOptio
 
 
     return (
-        <div>
-            <button onClick={testSubmit}>okokok</button>
-            <ReactMarkdown>{formCopy.body}</ReactMarkdown>
+        <div className='rights-request-form'>
+            <div className='markdown-content'><ReactMarkdown>{formCopy.body}</ReactMarkdown></div>
             <form onSubmit={formik.handleSubmit}>
-                <p>Fields marked with a red asterisk (<span className="required">*</span>) are required to submit.</p>
-                <div>
-                    <h3>Are you making this request for yourself or on behalf
-                        of someone else?</h3>
+                <div className='is-request-for-radio-group'>
                     <RadioGroup name="isRequestFor"
-                        label=""
+                        label="Are you making this request for yourself or on behalf
+                        of someone else?"
                         helperText={formik.errors.isRequestFor && formik.touched.isRequestFor ? formik.errors.isRequestFor : ''}
                         inline={true}
                         required={true}
@@ -351,11 +348,11 @@ export const RightsRequestForm = ({ schoolListOptions, formCopy, staticFormOptio
                     />
                 </div>
                 {
-                    formik.values.isRequestFor && <div><fieldset>
+                    formik.values.isRequestFor && <div className='personal-info-group'>
                         {generatePersonalInfoForm('requestor')}
 
                         {formik.values.isRequestFor !== 'self' && generatePersonalInfoForm('representative')}
-                    </fieldset>
+
                         {
 
                             <RadioGroup name="deliveryType"

@@ -8,7 +8,6 @@ import Select from '../components/Select/select'
 import { D365, School } from '../utils/D365';
 import rrfOptions from '../utils/rrfOptions'
 import { RightsRequestForm } from '@/components/RightsRequestForm/RightsRequestForm'
-import { formatSchoolList } from '@/utils/formatUtils'
 import { FormattedSchoolListOption } from '@/components/RightsRequestForm/RightsRequestFormUtils'
 import { generateSchoolList } from '@/utils/schoolList'
 import { formatRRFData } from '@/utils/contentFormat'
