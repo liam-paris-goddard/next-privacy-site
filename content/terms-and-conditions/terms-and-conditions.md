@@ -1,10 +1,6 @@
 ---
 heading: Terms and Conditions
 ---
-i am updating the content
-
-
-
  Please read the following Terms and Conditions (the “Terms”) carefully before using any website of Goddard Franchisor, LLC (“GFL”, “our” or “we”), including, but not limited to, goddarschool.com and goddardschoolfranchise.com, as well as any online features, services and/or programs offered by GFL and/or its affiliates, including but not limited to Goddard Systems, LLC, the manager of The Goddard School ® franchise system where these Terms are posted (collectively, the “Website”).
 
 GFL is the franchisor for The Goddard School franchise system relating to the establishment and operation of pre-school early learning centers throughout the United States (each a “School”). Under the terms of GFL’s franchise agreement, GFL provides certain authorizations, licenses and other rights to third party franchisees (each an “Authorized Franchisee”). Authorized Franchisees own and operate their own Schools under the quality assurance and other guidelines established by GFL and/or its affiliates but each School is otherwise independent of GFL and its affiliates’ control. Neither GFL nor its affiliates are engaged in the delivery of education or instructional services of any type, nor are they a licensed education institution in any jurisdiction and do not actually operate any School. GFL is not responsible for the operation of any School or for the conduct of its Authorized Franchisees, including any Internet sites that they may operate (whether or not linked to a Website, as defined below) and their collection and use of personal information. However, as a convenience to our Authorized Franchisees, we host the web pages maintained by Authorized Franchisees on the Website. These Terms also apply to all web pages maintained by Authorized Franchisees on the Website.
