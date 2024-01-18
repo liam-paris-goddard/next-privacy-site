@@ -27,8 +27,8 @@ export default function RightsRequestFormPage({ schoolListOptions, formCopy,
 }
 
 export async function getStaticProps() {
-    const stateInfoFiles = fs.readdirSync('./content/avaliable-states-and-actions');
-    const formCopyFile = fs.readFileSync('./content/rights-request-form/rights-request-form.md', 'utf8')
+    const stateInfoFiles = fs.readdirSync('./content/avaliable-states-and-actions') || []
+    const formCopyFile = fs.readFileSync('./content/rights-request-form/rights-request-form.md', 'utf8') || '';
 
     const stateInfoArr = stateInfoFiles.map((fileName) => fs.readFileSync(`./content/avaliable-states-and-actions/${fileName}`, 'utf8'));
 
@@ -36,8 +36,8 @@ export async function getStaticProps() {
     const formContent = formatRRFData(formCopyFile, rrfOptions);
     return {
         props: {
-            formCopy: formContent.formCopy,
-            staticFormOptions: formContent.staticFormOptions,
+            formCopy: formContent?.formCopy,
+            staticFormOptions: formContent?.staticFormOptions,
             schoolListOptions
         }
     }

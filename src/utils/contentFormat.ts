@@ -1,7 +1,9 @@
 import matter from "gray-matter"
 
 export function formatRRFData(formCopyData: string, rrfStaticOptions: any) {
-
+    if (!formCopyData) {
+        return null
+    }
     const formCopyMatterData = matter(formCopyData)
     const staticFormOptions = {
         relationshipList: rrfStaticOptions.Relationships,
