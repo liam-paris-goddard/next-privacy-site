@@ -52,8 +52,8 @@ export async function getStaticProps() {
         props: {
             introContent: intro,
             sections: formattedSections,
-            formCopy: formContent.formCopy,
-            staticFormOptions: formContent.staticFormOptions,
+            formCopy: formContent?.formCopy,
+            staticFormOptions: formContent?.staticFormOptions,
             schoolListOptions
         }
     }

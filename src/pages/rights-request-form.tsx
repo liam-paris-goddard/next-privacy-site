@@ -36,8 +36,8 @@ export async function getStaticProps() {
     const formContent = formatRRFData(formCopyFile, rrfOptions);
     return {
         props: {
-            formCopy: formContent.formCopy,
-            staticFormOptions: formContent.staticFormOptions,
+            formCopy: formContent?.formCopy,
+            staticFormOptions: formContent?.staticFormOptions,
             schoolListOptions
         }
     }
