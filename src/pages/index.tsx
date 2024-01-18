@@ -36,7 +36,7 @@ export async function getStaticProps() {
 
     const filesInHomePage = fs.readdirSync('./content/home-page');
     const stateInfoFiles = fs.readdirSync('./content/avaliable-states-and-actions');
-    const formCopyFile = fs.readFileSync('./content/rights-request-form/rights-request-form.md', 'utf8')
+    const formCopyFile = fs.readFileSync('./content/xrights-request-form/rights-request-form.md', 'utf8')
 
     const landingPageArr = filesInHomePage.map((fileName) => {
         return fs.readFileSync(`./content/home-page/${fileName}`, 'utf8');
