@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { AccordionSection, AccordionSectionProps } from './AccordionSection'
 import './Accordion.scss'
 import { v4 as uuidv4 } from 'uuid';
@@ -13,6 +13,7 @@ export interface AccordionProps {
 
 export const Accordion: React.FC<AccordionProps> = ({ headingLevel = 3, toggle = false, iconPosition = 'right', sectionList, defaultOpen }) => {
     const [formattedSectionList, setFormattedSectionList] = useState<AccordionSectionProps[]>([]);
+    const sectionRefs = useRef((new Array(sectionList.length)).fill(React.createRef<HTMLDivElement>()));
 
     const accordionSectionToggledHandler = (id: string) => {
         setFormattedSectionList(prevFormattedSectionList => {
@@ -51,7 +52,12 @@ export const Accordion: React.FC<AccordionProps> = ({ headingLevel = 3, toggle =
     }, [])
 
     useEffect(() => {
-    }, [formattedSectionList])
+        formattedSectionList.forEach((section, index) => {
+            if (toggle && section.expanded && sectionRefs.current[index]) {
+                sectionRefs.current[index].current?.scrollIntoView();
+            }
+        });
+    }, [formattedSectionList]);
 
 
     const formatAccordionSections = (sections: AccordionSectionProps[]) => sections.map((section: AccordionSectionProps) => {
@@ -70,7 +76,8 @@ export const Accordion: React.FC<AccordionProps> = ({ headingLevel = 3, toggle =
 
     return (
         <div className='gsl-accordion'>
-            {formattedSectionList.map((section) => <AccordionSection key={section.sectionId} {...section}>{section.children}</AccordionSection>)}
+
+            {formattedSectionList.map((section, index) => <div ref={sectionRefs.current[index]} key={section.sectionId}><AccordionSection key={section.sectionId} {...section}>{section.children}</AccordionSection></div>)}
         </div>
     );
 };

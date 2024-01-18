@@ -1,6 +1,10 @@
 .gsl-accordion-section {
     display: block;
-    border-bottom: 1px solid var(--color-brand);
+
+    border: 2px solid transparent;
+    background-image: url('../../styles/assets/icons/border.svg');
+    background-repeat: repeat-x;
+    background-size: contain;
 }
   
 .gsl-accordion-section-heading-button {
