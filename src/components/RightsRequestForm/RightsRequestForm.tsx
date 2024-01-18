@@ -252,7 +252,7 @@ export const RightsRequestForm = ({ schoolListOptions, staticFormOptions }: { sc
             <h3 className="heading-4" style={{ 'width': "100%" }}>{titleText}</h3>
             {type === 'requestor' && (
                 <Select
-
+                    label="Relationship to Goddard"
                     name="selectedRelationship"
                     onBlurFunction={formik.handleBlur}
                     value={formik.values.selectedRelationship}
@@ -283,6 +283,7 @@ export const RightsRequestForm = ({ schoolListOptions, staticFormOptions }: { sc
                 invalid={formik.touched[`${type}Info`]?.city && !!(formik.errors[`${type}Info`]?.city)} type="text" name={`${type}Info.city`} label="City" onBlurFunction={formik.handleBlur} onChangeFunction={formik.handleChange} value={formik.values[`${type}Info`]['city'] || ''}></Input>
 
             <Select
+                label="State"
                 name={`${type}Info.state`}
                 value={formik.values[`${type}Info`]?.state || ''}
                 onBlurFunction={formik.handleBlur}

@@ -11,12 +11,17 @@ import { RightsRequestForm } from '@/components/RightsRequestForm/RightsRequestF
 import { FormattedSchoolListOption } from '@/components/RightsRequestForm/RightsRequestFormUtils'
 import { generateSchoolList } from '@/utils/schoolList'
 import { formatRRFData } from '@/utils/contentFormat'
+import ReactMarkdown from 'react-markdown'
 
 export default function RightsRequestFormPage({ schoolListOptions, formCopy,
     staticFormOptions }: { schoolListOptions: FormattedSchoolListOption[], formCopy: { heading: string, body: string }, staticFormOptions: { relationshipList: string[], stateList: { [key: string]: string } } }) {
     return (
         <main className={styles.main}>
-            <RightsRequestForm staticFormOptions={staticFormOptions} formCopy={formCopy} schoolListOptions={schoolListOptions}></RightsRequestForm>
+            <div className="rights-request-form-container">
+                <h2 className='heading-2'>Rights Request Form</h2>
+                <div className='markdown-content'><ReactMarkdown>{formCopy.body}</ReactMarkdown></div>
+                <RightsRequestForm staticFormOptions={staticFormOptions} schoolListOptions={schoolListOptions}></RightsRequestForm>
+            </div>
         </main >
     )
 }
