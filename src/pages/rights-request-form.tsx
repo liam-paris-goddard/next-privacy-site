@@ -28,7 +28,7 @@ export default function RightsRequestFormPage({ schoolListOptions, formCopy,
 
 export async function getStaticProps() {
     const stateInfoFiles = fs.readdirSync('./content/avaliable-states-and-actions');
-    const formCopyFile = fs.readFileSync('./content/xrights-request-form/rights-request-form.md', 'utf8')
+    const formCopyFile = fs.readFileSync('./content/rights-request-form/rights-request-form.md', 'utf8')
 
     const stateInfoArr = stateInfoFiles.map((fileName) => fs.readFileSync(`./content/avaliable-states-and-actions/${fileName}`, 'utf8'));
 
