@@ -3,10 +3,11 @@ import styles from '../app/page.module.css'
 import fs from 'fs'
 import matter from 'gray-matter'
 import ReactMarkdown from 'react-markdown'
-
+import '../index.scss'
 export default function TermsAndConditions({ termsContent }: any) {
     return (
-        <main className={styles.main}>
+        <main className={'main-container'}>
+            <h1 className='heading-1'>Terms And Conditions</h1>
             <div className={'markdown-content'}>
                 <ReactMarkdown>{termsContent}</ReactMarkdown>
             </div>

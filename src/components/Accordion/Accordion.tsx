@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { AccordionSection, AccordionSectionProps } from './AccordionSection'
 import './Accordion.scss'
 import { v4 as uuidv4 } from 'uuid';
@@ -49,12 +49,13 @@ export const Accordion: React.FC<AccordionProps> = ({ headingLevel = 3, toggle =
             const x = formatAccordionSections(sectionList);
             setFormattedSectionList(x);
         }
-    }, [])
+    }, []);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
+        console.warn(formattedSectionList)
         formattedSectionList.forEach((section, index) => {
             if (toggle && section.expanded && sectionRefs.current[index]) {
-                sectionRefs.current[index].current?.scrollIntoView();
+                sectionRefs.current[index].current?.scrollTo({ block: 'start' })
             }
         });
     }, [formattedSectionList]);
@@ -76,7 +77,6 @@ export const Accordion: React.FC<AccordionProps> = ({ headingLevel = 3, toggle =
 
     return (
         <div className='gsl-accordion'>
-
             {formattedSectionList.map((section, index) => <div ref={sectionRefs.current[index]} key={section.sectionId}><AccordionSection key={section.sectionId} {...section}>{section.children}</AccordionSection></div>)}
         </div>
     );
