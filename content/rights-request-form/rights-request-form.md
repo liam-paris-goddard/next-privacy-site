@@ -1,5 +1,5 @@
 ---
-heading: rights-request-form
+heading: Rights Request Form
 ---
 Residents of California, Virginia, and Colorado have certain rights under the California Privacy Rights Act (CPRA), Virginia Consumer Data Protection Act (CPDA), and the Colorado Privacy Act (CPA), respectively.
 
