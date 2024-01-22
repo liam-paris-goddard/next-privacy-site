@@ -55,7 +55,7 @@ export const rightsRequestFormValidationSchema = Yup.object({
     selectedActions: Yup.array().of(Yup.string()).min(1, 'At least one action is required'),
     selectedOptions: Yup.array().of(Yup.string()).when('selectedActions', (selectedActions, schema) => {
         const flattenedSelectedActions = [].concat(...selectedActions) as string[];
-        return flattenedSelectedActions.includes('Right to Access') ? schema.min(1, 'At least one option is required for right to access') : schema;
+        return flattenedSelectedActions.includes('Right To Access') ? schema.min(1, 'At least one option is required for right to access') : schema;
     }),
     deletionOption: Yup.string().oneOf(['full', 'partial']).when('selectedActions', (selectedActions, schema) => (selectedActions.includes('Right to Deletion') ? schema.required('an option is required for right to deletion') : schema)),
     partialDeletionDetails: Yup.string(),

@@ -119,7 +119,6 @@ export const RightsRequestForm = ({ schoolListOptions, staticFormOptions }: { sc
 
     useEffect(() => {
         setSelectedCityData(selectedStateData?.cities?.find((option: FormattedCityOption) => option.city === formik.values.schoolCity) || {} as FormattedCityOption)
-        console.warn(formik.values.schoolCity)
     }, [formik.values.schoolCity]);
 
     useEffect(() => {
@@ -336,11 +335,13 @@ export const RightsRequestForm = ({ schoolListOptions, staticFormOptions }: { sc
                             label: 'Myself',
                             value: 'self',
                             checked: formik.values.isRequestFor === 'self',
+                            inputId: 'rrf-request-for-self'
                         },
                         {
                             label: 'Someone Else',
                             value: 'other',
                             checked: formik.values.isRequestFor === 'other',
+                            inputId: 'rrf-request-for-other'
                         },
                     ]}
                     onChangeFunction={formik.handleChange}
@@ -365,11 +366,13 @@ export const RightsRequestForm = ({ schoolListOptions, staticFormOptions }: { sc
                                     label: 'Email',
                                     value: 'email',
                                     checked: formik.values.deliveryType === 'email',
+                                    inputId: 'rrf-delivery-type-email'
                                 },
                                 {
                                     label: 'Mail',
                                     value: 'mail',
                                     checked: formik.values.deliveryType === 'mail',
+                                    inputId: 'rrf-delivery-type-mail'
                                 },
                             ]}
                             onChangeFunction={formik.handleChange}
@@ -389,10 +392,6 @@ export const RightsRequestForm = ({ schoolListOptions, staticFormOptions }: { sc
                         invalid={formik.touched.selectedActions && !!(formik.errors.selectedActions)}
                         helperText={formik.errors.selectedActions && formik.touched.selectedActions ? Array.isArray(formik.errors.selectedActions) ? formik.errors.selectedActions[0] : formik.errors.selectedActions : ''}
                     >
-                        {/**
-                             *                             helperText={formik.errors.selectedActions && formik.touched.selectedActions ? Array.isArray(formik.errors.selectedActions) ? formik.errors.selectedActions[0] : formik.errors.selectedActions : ''}
-                            invalid={formik.touched.selectedActions && !!(formik.errors.selectedActions)}
-                             */}
                         {formik.values.schoolState && selectedStateData.availableActions?.map((action: FormattedActionsOption) =>
                             <>
                                 <Checkbox
@@ -426,11 +425,13 @@ export const RightsRequestForm = ({ schoolListOptions, staticFormOptions }: { sc
                                                     label: action.options[0],
                                                     value: 'full',
                                                     checked: formik.values.deletionOption === 'full',
+                                                    inputId: 'rrf-deletion-option-full'
                                                 },
                                                 {
                                                     label: action.options[1],
                                                     value: 'partial',
                                                     checked: formik.values.deletionOption === 'partial',
+                                                    inputId: 'rrf-deletion-option-partial'
                                                 },
                                             ]}
                                             onChangeFunction={formik.handleChange}
@@ -459,25 +460,6 @@ export const RightsRequestForm = ({ schoolListOptions, staticFormOptions }: { sc
                                         invalid={formik.touched.selectedOptions && !!(formik.errors.selectedOptions)}>
                                         {
                                             action.options.map(option => (<>
-                                                {/*<input
-                                                        type="checkbox"
-                                                        name="selectedOptions"
-                                                        value={option}
-                                                        checked={formik.values.selectedOptions.includes(option)}
-                                                        onBlur={formik.handleBlur}
-                                                        onChange={(e) => {
-                                                            formik.setFieldTouched('selectedOptions', true, false);
-                                                            if (e.target.checked) {
-                                                                formik.setFieldValue('selectedOptions', [...formik.values.selectedOptions, option]);
-                                                            } else {
-                                                                formik.setFieldValue('selectedOptions', formik.values.selectedOptions.filter(item => item !== option));
-                                                            }
-                                                            formik.validateField('selectedOptions');
-                                                        }}
-
-                                                    />
-                                                    {option}*/}
-
                                                 <Checkbox
                                                     checked={formik.values.selectedOptions.includes(option)}
                                                     name={`selectedOptions`}
