@@ -51,13 +51,14 @@ export const Accordion: React.FC<AccordionProps> = ({ headingLevel = 3, toggle =
         }
     }, []);
 
-    useLayoutEffect(() => {
-        console.warn(formattedSectionList)
-        formattedSectionList.forEach((section, index) => {
-            if (toggle && section.expanded && sectionRefs.current[index]) {
-                sectionRefs.current[index].current?.scrollTo({ block: 'start' })
-            }
-        });
+    useEffect(() => {
+        if (typeof window !== 'undefined') { // Check if window is defined (i.e., if we're on the client side)
+            formattedSectionList.forEach((section, index) => {
+                if (toggle && section.expanded && sectionRefs.current[index]) {
+                    sectionRefs.current[index].current?.scrollTo({ block: 'start' })
+                }
+            });
+        }
     }, [formattedSectionList]);
 
 

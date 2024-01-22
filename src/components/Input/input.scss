@@ -5,12 +5,15 @@
   .gsl-input-label {
     display: block;
     color: var(--color-brand);
-    font-weight: bold;
+    font-weight: normal;
     margin-bottom: 5px;
   }
   
   .gsl-input {
     &.gsl-input-error {
+      .gsl-input-label {
+        color: var(--color-alert);
+      }
       .gsl-input-field-container {
         border-color: var(--color-alert);
         color: var(--color-alert);
@@ -24,8 +27,13 @@
   .gsl-input-help-text-container {
     color: var(--color-brand);
     font-size: .75rem;
-    margin-top: 5px;
-    margin-left: 5px;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    svg {
+      transform: scale(.5);
+      padding-top: .25rem;
+    }
   }
   
   .gsl-input--required {
@@ -76,7 +84,7 @@
   }
   
   .gsl-input-field-container {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     border-radius: 15px;
     color: var(--color-brand);

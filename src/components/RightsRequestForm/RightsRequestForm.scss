@@ -28,13 +28,13 @@ fieldset {
     }
 }
 
+
+
 .personal-info-group {
     flex-flow: row wrap;
     .gsl-select,.gsl-input {
         width: 100%;
-        .gsl-select--input {
-            max-width: 15rem;
-        }
+
     }
 
     .gsl-input {
@@ -49,6 +49,5 @@ fieldset {
 
 .right-to-access-section, 
 .right-to-deletion-section {
-
     margin-left: 2rem;
 }

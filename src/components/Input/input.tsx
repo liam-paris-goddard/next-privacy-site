@@ -3,6 +3,8 @@ import { use, useEffect, useState } from "react";
 import { HidePasswordIcon } from "../Icons/HidePasswordIcon";
 import { ShowPasswordIcon } from "../Icons/ShowPasswordIcon";
 import './input.scss';
+import { WarningIcon } from "../Icons/WarningIcon";
+import { InfoIcon } from "../Icons/InfoIcon";
 export interface InputProps {
     type: 'text' | 'password' | 'email' | 'file' | 'hidden' | 'number' | 'tel' | 'url';
     invalid?: boolean;
@@ -131,7 +133,7 @@ export const Input: React.FC<InputProps> = ({
                 </div>
             </div>
             {helperText && <div className='gsl-input-help-text-container'>
-                {helperText}
+                {invalid ? <WarningIcon /> : <InfoIcon />}{helperText}
             </div>}
         </div>
     );

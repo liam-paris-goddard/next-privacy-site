@@ -52,9 +52,9 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
     }, [checked, disabled, selectText, unselectText]);
 
     return (
-        <div className="checkbox-group">
+        <div className={`checkbox-group ${invalid ? 'gsl-checkbox-group-parent-checkbox-invalid' : ''}`}>
             {/*  ref={groupNode} todo */}
-            {parentControl ? <Checkbox
+            {parentControl && <Checkbox
                 name={name}
                 label={label}
                 ariaLabelCheckbox={`${ariaLabelCheckboxGroup || label} - ${actionText}`}
@@ -65,12 +65,14 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
                 checked={checked}
                 indeterminate={indeterminate}
                 disabled={disabled}
-                className="gsl-checkbox-group-parent-checkbox"
+                className={`gsl-checkbox-group-parent-checkbox ${invalid ? 'gsl-checkbox-group-parent-checkbox-invalid' : ''}`}
                 onChangeFunction={onChangeFunction}
                 onBlurFunction={onBlurFunction}
-            /> : <label>{label}
+            />}
+            {!parentControl && label && <label className='gsl-checkbox-group-label'>{label}</label>}
+            {helperText && <div className="gsl-checkbox-group-helper-text">
                 {renderHelperIcon(helperText, invalid)} {helperText}
-            </label>}
+            </div>}
             <fieldset className="gsl-checkbox-group-fieldset">
                 <legend>{ariaLabelCheckboxGroup || label}</legend>
                 {children}

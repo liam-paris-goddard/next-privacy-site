@@ -160,8 +160,8 @@
 .gsl-checkbox.checked .gsl-checkbox-container:hover
 /* :host([indeterminate]) .gsl-checkbox-checkbox, */
 .gsl-checkbox-checkbox {
-  background: #044691; //TODO: darker brand
-  border-color: #044691; //TODO: darker brand
+  background: #044691; 
+  border-color: #044691; 
   color: var(--color-icon-checked-active);
 }
 
@@ -192,8 +192,8 @@
 .gsl-checkbox.checked .gsl-checkbox-container:hover .gsl-checkbox-checkbox,
 /* :host([indeterminate]) .gsl-checkbox-container:hover .gsl-checkbox-checkbox, */
 .gsl-checkbox.indeterminate .gsl-checkbox-container:hover .gsl-checkbox-checkbox {
-  background: #044691; //TODO: darker brand //
-  border-color: #044691; //TODO: darker brand
+  background: #044691;  //
+  border-color: #044691; 
 }
 
 /* active states */
@@ -271,7 +271,7 @@ scale-icon-alert-error {
 }
 
 .gsl-checkbox.checked.error .gsl-checkbox-container:hover .gsl-checkbox-checkbox {
-  background-color: #044691; //TODO: darker brand
+  background-color: #044691; 
   box-shadow: inset 0 0 0 .125rem
     var(--color-alert-darker);
 }

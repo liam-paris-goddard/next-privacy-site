@@ -69,6 +69,7 @@ const RadioGroup = ({
             <legend className="gsl-radio-group-title">
                 <label className={`gsl-radio-group-title-label ${!label ? 'hide-label' : ''} `} aria-label={label ? label : name}>
                     {!helperText && invalid && <InfoIcon />}{label && label}
+                    {required ? <span className="gsl-radio-group--required">*</span> : null}
                 </label>
                 {renderAdditionalInfo()}
             </legend>

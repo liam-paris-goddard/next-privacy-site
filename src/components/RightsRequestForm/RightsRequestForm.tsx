@@ -207,9 +207,9 @@ export const RightsRequestForm = ({ schoolListOptions, staticFormOptions }: { sc
     const generateSchoolSelect = () => {
         return <fieldset>
             <h3 className='heading-3'>Please select a school</h3>
-            <Select helperText={formik.errors.schoolState && formik.touched.schoolState ? formik.errors.schoolState : ''} invalid={formik.touched.schoolState && !!(formik.errors.schoolState)} label="" name="schoolState" placeholder='Select a State' value={formik.values.schoolState} onChangeFunction={handleSelectChange} onBlurFunction={formik.handleBlur} optionList={schoolSelectStateOptions} />
-            <Select helperText={formik.errors.schoolCity && formik.touched.schoolCity ? formik.errors.schoolCity : ''} invalid={formik.touched.schoolCity && !!(formik.errors.schoolCity)} label="" name="schoolCity" placeholder='Select a City' value={formik.values.schoolCity} onChangeFunction={handleSelectChange} onBlurFunction={formik.handleBlur} optionList={schoolSelectCityOptions} />
-            <Select helperText={formik.errors.schoolMarketingName && formik.touched.schoolMarketingName ? formik.errors.schoolMarketingName : ''} invalid={formik.touched.schoolMarketingName && !!(formik.errors.schoolMarketingName)} label="" name="schoolMarketingName" placeholder='Select a School Name' value={formik.values.schoolMarketingName} onChangeFunction={handleSelectChange} onBlurFunction={formik.handleBlur} optionList={schoolSelectMarketingNameOptions} />
+            <Select helperText={formik.errors.schoolState && formik.touched.schoolState ? formik.errors.schoolState : ''} invalid={formik.touched.schoolState && !!(formik.errors.schoolState)} label="School State" name="schoolState" required={true} placeholder='Select a State' value={formik.values.schoolState} onChangeFunction={handleSelectChange} onBlurFunction={formik.handleBlur} optionList={schoolSelectStateOptions} />
+            <Select helperText={formik.errors.schoolCity && formik.touched.schoolCity ? formik.errors.schoolCity : ''} invalid={formik.touched.schoolCity && !!(formik.errors.schoolCity)} label="School City" name="schoolCity" placeholder='Select a City' required={true} value={formik.values.schoolCity} onChangeFunction={handleSelectChange} onBlurFunction={formik.handleBlur} optionList={schoolSelectCityOptions} />
+            <Select helperText={formik.errors.schoolMarketingName && formik.touched.schoolMarketingName ? formik.errors.schoolMarketingName : ''} invalid={formik.touched.schoolMarketingName && !!(formik.errors.schoolMarketingName)} label="School Name" required={true} name="schoolMarketingName" placeholder='Select a School Name' value={formik.values.schoolMarketingName} onChangeFunction={handleSelectChange} onBlurFunction={formik.handleBlur} optionList={schoolSelectMarketingNameOptions} />
         </fieldset>
 
 
@@ -251,7 +251,7 @@ export const RightsRequestForm = ({ schoolListOptions, staticFormOptions }: { sc
         return <fieldset className='personal-info-group'>
             <h3 className="heading-4" style={{ 'width': "100%" }}>{titleText}</h3>
             {type === 'requestor' && (
-                <Select
+                <Select required={true}
                     label="Relationship to Goddard"
                     name="selectedRelationship"
                     onBlurFunction={formik.handleBlur}
@@ -262,27 +262,27 @@ export const RightsRequestForm = ({ schoolListOptions, staticFormOptions }: { sc
                     invalid={formik.touched.selectedRelationship && !!(formik.errors.selectedRelationship)}
                 />
             )}
-            <Input helperText={formik.errors[`${type}Info`]?.firstName && formik.touched[`${type}Info`]?.firstName ? formik.errors[`${type}Info`]?.firstName : ''}
+            <Input required={true} helperText={formik.errors[`${type}Info`]?.firstName && formik.touched[`${type}Info`]?.firstName ? formik.errors[`${type}Info`]?.firstName : ''}
                 invalid={formik.touched[`${type}Info`]?.firstName && !!(formik.errors[`${type}Info`]?.firstName)} type="text" name={`${type}Info.firstName`} label="First Name" onBlurFunction={formik.handleBlur} onChangeFunction={formik.handleChange} value={formik.values[`${type}Info`]['firstName'] || ''}></Input>
 
-            <Input helperText={formik.errors[`${type}Info`]?.lastName && formik.touched[`${type}Info`]?.lastName ? formik.errors[`${type}Info`]?.lastName : ''}
+            <Input required={true} helperText={formik.errors[`${type}Info`]?.lastName && formik.touched[`${type}Info`]?.lastName ? formik.errors[`${type}Info`]?.lastName : ''}
                 invalid={formik.touched[`${type}Info`]?.lastName && !!(formik.errors[`${type}Info`]?.lastName)} type="text" name={`${type}Info.lastName`} label="Last Name" onBlurFunction={formik.handleBlur} onChangeFunction={formik.handleChange} value={formik.values[`${type}Info`]['lastName'] || ''}></Input>
 
-            <Input helperText={formik.errors[`${type}Info`]?.phone && formik.touched[`${type}Info`]?.phone ? formik.errors[`${type}Info`]?.phone : ''}
+            <Input required={true} helperText={formik.errors[`${type}Info`]?.phone && formik.touched[`${type}Info`]?.phone ? formik.errors[`${type}Info`]?.phone : ''}
                 invalid={formik.touched[`${type}Info`]?.phone && !!(formik.errors[`${type}Info`]?.phone)} type="tel" name={`${type}Info.phone`} label="Phone" onBlurFunction={formik.handleBlur} onChangeFunction={formik.handleChange} value={formik.values[`${type}Info`]['phone'] || ''}></Input>
 
-            <Input helperText={formik.errors[`${type}Info`]?.email && formik.touched[`${type}Info`]?.email ? formik.errors[`${type}Info`]?.email : ''}
+            <Input required={true} helperText={formik.errors[`${type}Info`]?.email && formik.touched[`${type}Info`]?.email ? formik.errors[`${type}Info`]?.email : ''}
                 invalid={formik.touched[`${type}Info`]?.email && !!(formik.errors[`${type}Info`]?.email)} type="email" name={`${type}Info.email`} label="Email" onBlurFunction={formik.handleBlur} onChangeFunction={formik.handleChange} value={formik.values[`${type}Info`]['email'] || ''}></Input>
 
-            <Input helperText={formik.errors[`${type}Info`]?.addressLine1 && formik.touched[`${type}Info`]?.addressLine1 ? formik.errors[`${type}Info`]?.addressLine1 : ''}
+            <Input required={true} helperText={formik.errors[`${type}Info`]?.addressLine1 && formik.touched[`${type}Info`]?.addressLine1 ? formik.errors[`${type}Info`]?.addressLine1 : ''}
                 invalid={formik.touched[`${type}Info`]?.addressLine1 && !!(formik.errors[`${type}Info`]?.addressLine1)} type="text" name={`${type}Info.addressLine1`} label="Address Line" onBlurFunction={formik.handleBlur} onChangeFunction={formik.handleChange} value={formik.values[`${type}Info`]['addressLine1'] || ''}></Input>
 
             <Input type="text" name={`${type}Info.addressLine2`} label="Address Line 2" onBlurFunction={formik.handleBlur} onChangeFunction={formik.handleChange} value={formik.values[`${type}Info`]['addressLine2'] || ''}></Input>
 
-            <Input helperText={formik.errors[`${type}Info`]?.city && formik.touched[`${type}Info`]?.city ? formik.errors[`${type}Info`]?.city : ''}
+            <Input required={true} helperText={formik.errors[`${type}Info`]?.city && formik.touched[`${type}Info`]?.city ? formik.errors[`${type}Info`]?.city : ''}
                 invalid={formik.touched[`${type}Info`]?.city && !!(formik.errors[`${type}Info`]?.city)} type="text" name={`${type}Info.city`} label="City" onBlurFunction={formik.handleBlur} onChangeFunction={formik.handleChange} value={formik.values[`${type}Info`]['city'] || ''}></Input>
 
-            <Select
+            <Select required={true}
                 label="State"
                 name={`${type}Info.state`}
                 value={formik.values[`${type}Info`]?.state || ''}
@@ -292,7 +292,7 @@ export const RightsRequestForm = ({ schoolListOptions, staticFormOptions }: { sc
                 helperText={formik.errors[`${type}Info`]?.state && formik.touched[`${type}Info`]?.state ? formik.errors[`${type}Info`]?.state : ''}
                 invalid={formik.touched[`${type}Info`]?.state && !!(formik.errors[`${type}Info`]?.state)}
             />
-            <Input helperText={formik.errors[`${type}Info`]?.zip && formik.touched[`${type}Info`]?.zip ? formik.errors[`${type}Info`]?.zip : ''}
+            <Input required={true} helperText={formik.errors[`${type}Info`]?.zip && formik.touched[`${type}Info`]?.zip ? formik.errors[`${type}Info`]?.zip : ''}
                 invalid={formik.touched[`${type}Info`]?.zip && !!(formik.errors[`${type}Info`]?.zip)} type="text" name={`${type}Info.zip`} label="Zip" onBlurFunction={formik.handleBlur} onChangeFunction={formik.handleChange} value={formik.values[`${type}Info`]['zip'] || ''}></Input>
         </fieldset>
     }
@@ -356,7 +356,7 @@ export const RightsRequestForm = ({ schoolListOptions, staticFormOptions }: { sc
                     {
 
                         <RadioGroup name="deliveryType"
-                            label=""
+                            label="Delivery Method"
                             helperText={formik.errors.deliveryType && formik.touched.deliveryType ? formik.errors.deliveryType : ''}
                             inline={true}
                             required={true}
@@ -381,11 +381,13 @@ export const RightsRequestForm = ({ schoolListOptions, staticFormOptions }: { sc
             }
             {
                 showActions && <>
-                    <h3 className='heading-3'>Request Type (check all that apply)</h3>
+                    <h3 className='heading-3' style={{ marginBottom: '.25rem' }}>Request Type (check all that apply)</h3>
                     <CheckboxGroup name="selectedActions"
                         label=""
                         ariaLabelCheckboxGroup="selectedActions"
                         indeterminate={false}
+                        invalid={formik.touched.selectedActions && !!(formik.errors.selectedActions)}
+                        helperText={formik.errors.selectedActions && formik.touched.selectedActions ? Array.isArray(formik.errors.selectedActions) ? formik.errors.selectedActions[0] : formik.errors.selectedActions : ''}
                     >
                         {/**
                              *                             helperText={formik.errors.selectedActions && formik.touched.selectedActions ? Array.isArray(formik.errors.selectedActions) ? formik.errors.selectedActions[0] : formik.errors.selectedActions : ''}
@@ -448,10 +450,11 @@ export const RightsRequestForm = ({ schoolListOptions, staticFormOptions }: { sc
 
                                 <div className='right-to-access-section'>{
                                     formik.values.selectedActions.includes(action.name) && action.key == 'right_to_access' && action.options.length >= 1 &&
-                                    <CheckboxGroup name="selectedOptions"
+                                    <CheckboxGroup
+                                        name="selectedOptions"
+                                        ariaLabelCheckboxGroup='selectedOptions'
+
                                         label=""
-                                        ariaLabelCheckboxGroup="selectedOptions"
-                                        indeterminate={false}
                                         helperText={formik.errors.selectedOptions && formik.touched.selectedOptions ? Array.isArray(formik.errors.selectedOptions) ? formik.errors.selectedOptions[0] : formik.errors.selectedOptions : ''}
                                         invalid={formik.touched.selectedOptions && !!(formik.errors.selectedOptions)}>
                                         {

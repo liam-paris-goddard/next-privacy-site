@@ -33,3 +33,31 @@
     margin-top: .75rem;
   }
   
+  .gsl-input-help-text-container {
+    color: var(--color-brand);
+    font-size: .75rem;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    svg {
+      transform: scale(.5);
+      padding-top: .25rem;
+    }
+  }
+
+.gsl-checkbox-group-parent-checkbox-invalid {
+  .gsl-checkbox-group-helper-text {
+    color: var(--color-alert);
+  }
+}
+.gsl-checkbox-group-helper-text {
+  color: var(--color-brand);
+  font-size: .75rem;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  svg {
+    transform: scale(.5);
+    padding-top: .25rem;
+  }
+}
