@@ -70,7 +70,7 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
                 onBlurFunction={onBlurFunction}
             />}
             {!parentControl && label && <label className='gsl-checkbox-group-label'>{label}</label>}
-            {helperText && <div className="gsl-checkbox-group-helper-text">
+            {helperText && <div className="gsl-component-help-text-container">
                 {renderHelperIcon(helperText, invalid)} {helperText}
             </div>}
             <fieldset className="gsl-checkbox-group-fieldset">

@@ -77,8 +77,10 @@ const Select: React.FC<SelectProps> = ({ selectId = uuidv4(), invalid, disabled,
                     }
                 })}
             </select>
-            {invalid && helperText && <p className="gsl-select--helper-text gsl-select--invalid-text"> <WarningIcon></WarningIcon>{helperText}</p>}
-            {!invalid && helperText && <p className="gsl-select--helper-text"><InfoIcon></InfoIcon>{helperText}</p>}
+            {helperText && <div className='gsl-component-help-text-container'>
+                {invalid ? <WarningIcon></WarningIcon> : <InfoIcon></InfoIcon>}
+                <span>{helperText}</span>
+            </div>}
         </div>
     );
 };

@@ -8,8 +8,8 @@
 	display: flex;
 	padding-left: .75rem;
 	position: relative;
-	flex-wrap: wrap;
-	align-items: center;
+	flex-wrap: nowrap;
+	align-items: flex-start;
 	width: fit-content;
 	margin-bottom: .5rem;
 
@@ -28,10 +28,12 @@
 		cursor: pointer;
 		line-height: 1.4;
 		padding-left: .5rem;
+		flex: 1 1 auto; // This allows the label to grow and shrink as needed
+		word-wrap: break-word; 
 	}
 
 	input {
-		width: 1.25rem;
+		min-width: 1.25rem;
 		height: 1.25rem;
 		transition: all var(--transition-duration)
 			var(--transition-easing-standard);
@@ -41,6 +43,8 @@
 		border: .1rem solid var(--color-brand);
 		margin: 0;
 		cursor: pointer;
+		flex: 0 0 auto;
+
 
 		&:focus {
 			outline: 2px solid var(--color-active);

@@ -30,6 +30,12 @@
     }
   }
   
+
+  .gsl-select--invalid {
+    .gsl-component-help-text-container {
+      color: var(--color-alert);
+    }
+  }
   .gsl-select--input {
     cursor:pointer;
     width: auto;

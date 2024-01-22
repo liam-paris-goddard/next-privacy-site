@@ -229,7 +229,7 @@ scale-icon-alert-error {
 /* error states */
 
 /* :host(.error) .gsl-checkbox-helper-text, */
-.gsl-checkbox.error .gsl-checkbox-helper-text {
+.gsl-checkbox.error .gsl-component-help-text-container {
   color: var(--color-alert);
 }
 

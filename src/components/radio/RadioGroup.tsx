@@ -54,7 +54,7 @@ const RadioGroup = ({
                 <div
                     role="text"
                     id={`gsl-radio-group-helper-text-${internalId}`}
-                    className={`gsl-radio-group-helper-text ${invalid ? 'gsl-radio-group-helper-text-error' : ''}`}
+                    className={`gsl-component-help-text-container ${invalid ? 'gsl-component-help-text-container-error' : ''}`}
                     aria-label={helperText}
                 >
                     {invalid ? (<WarningIcon />) : (<InfoIcon />)}

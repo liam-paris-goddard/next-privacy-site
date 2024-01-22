@@ -132,7 +132,7 @@ export const Input: React.FC<InputProps> = ({
                     <slot></slot>
                 </div>
             </div>
-            {helperText && <div className='gsl-input-help-text-container'>
+            {helperText && <div className='gsl-component-help-text-container'>
                 {invalid ? <WarningIcon /> : <InfoIcon />}{helperText}
             </div>}
         </div>

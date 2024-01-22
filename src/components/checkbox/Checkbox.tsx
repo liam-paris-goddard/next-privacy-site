@@ -112,7 +112,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
                 <div className='gsl-checkbox-checkbox'>{renderIcon(indeterminate, checked)}</div>
                 <div className='gsl-checkbox-label'>{label}</div>
             </label>
-            {renderHelperIcon(helperText, invalid)} {helperText && <span id={helperTextId ? helperTextId : ''}>{helperText}</span>}
+            <div className='gsl-component-help-text-container'>{renderHelperIcon(helperText, invalid)} {helperText && <span id={helperTextId ? helperTextId : ''}>{helperText}</span>}</div>
         </div >
     );
 }

@@ -50,4 +50,10 @@ fieldset {
 .right-to-access-section, 
 .right-to-deletion-section {
     margin-left: 2rem;
+    display: flex;
+    flex-direction: column;
+    textarea {
+        margin: 1rem;
+        margin-top: 0;
+    }
 }

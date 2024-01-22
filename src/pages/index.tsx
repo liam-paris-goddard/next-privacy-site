@@ -12,23 +12,26 @@ import { FormattedSchoolListOption } from '@/components/RightsRequestForm/Rights
 import { formatHomePageData, formatRRFData } from '@/utils/contentFormat'
 import { generateSchoolList } from '@/utils/schoolList'
 import ReactMarkdown from 'react-markdown'
+import { CustomLayout } from '@/components/CustomLayout/CustomLayout'
 
 export default function Home({ introContent, sections, schoolListOptions, formCopy,
     staticFormOptions }: { introContent: any, sections: any[], schoolListOptions: FormattedSchoolListOption[], formCopy: { heading: string, body: string }, staticFormOptions: { relationshipList: string[], stateList: { [key: string]: string } } }) {
 
     return (
-        <main className={'main-container'}>
-            <div className='markdown-content'>
-                {introContent.heading && <h1 className='heading-1'>{introContent.heading}</h1>}
-                {introContent.children && <ReactMarkdown>{introContent.children}</ReactMarkdown>}
-                <Accordion toggle sectionList={sections} />
-            </div>
-            <div className="rights-request-form-container">
-                <h2 className='heading-2'>Rights Request Form</h2>
-                <div className='markdown-content'><ReactMarkdown>{formCopy.body}</ReactMarkdown></div>
-                <RightsRequestForm staticFormOptions={staticFormOptions} schoolListOptions={schoolListOptions}></RightsRequestForm>
-            </div>
-        </main>
+        <CustomLayout>
+            <main className={'main-container'}>
+                <div className='markdown-content'>
+                    {introContent.heading && <h1 className='heading-1'>{introContent.heading}</h1>}
+                    {introContent.children && <ReactMarkdown>{introContent.children}</ReactMarkdown>}
+                    <Accordion toggle sectionList={sections} />
+                </div>
+                <div className="rights-request-form-container">
+                    <h2 className='heading-2'>Rights Request Form</h2>
+                    <div className='markdown-content'><ReactMarkdown>{formCopy.body}</ReactMarkdown></div>
+                    <RightsRequestForm staticFormOptions={staticFormOptions} schoolListOptions={schoolListOptions}></RightsRequestForm>
+                </div>
+            </main>
+        </CustomLayout>
     )
 }
 

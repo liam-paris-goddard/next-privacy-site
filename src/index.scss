@@ -47,3 +47,15 @@
     }
     
 }
+
+.gsl-component-help-text-container {
+    color: var(--color-brand);
+    font-size: .75rem;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: .5rem 0;
+    svg {
+      margin-right: 5px;
+    }
+  }
