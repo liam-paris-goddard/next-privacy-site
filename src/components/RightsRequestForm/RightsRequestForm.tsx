@@ -138,16 +138,11 @@ export const RightsRequestForm = ({ schoolListOptions, staticFormOptions }: { sc
     }, [schoolSelectMarketingNameOptions])
 
     useEffect(() => {
-        formik.setFieldTouched('selectedActions')
-        formik.validateField('selectedActions');
-        formik.validateField('selectedOptions');
-        console.warn(formik.values.selectedActions)
+        if (formik.values.selectedActions.includes('Right To Access')) {
+            formik.setFieldValue('selectedOptions', []);
+            formik.setTouched({ selectedOptions: false });
+        }
     }, [formik.values.selectedActions])
-
-    useEffect(() => {
-        formik.setFieldTouched('selectedOptions')
-        formik.validateField('selectedOptions');
-    }, [formik.values.selectedOptions])
 
     useEffect(() => {
         setShowSchoolSelect(handleShowSchoolSelect())
@@ -401,16 +396,13 @@ export const RightsRequestForm = ({ schoolListOptions, staticFormOptions }: { sc
                                     ariaLabelCheckbox={action.name}
                                     label={action.name}
                                     onChangeFunction={(e) => {
-                                        formik.setFieldTouched('selectedActions', true, false);
+                                        formik.setFieldTouched('selectedActions');
                                         if (e.target.checked) {
                                             formik.setFieldValue('selectedActions', [...formik.values.selectedActions, action.name]);
                                         } else {
                                             formik.setFieldValue('selectedActions', formik.values.selectedActions.filter(item => item !== action.name));
                                         }
                                         formik.validateField('selectedActions');
-                                        if (action.key === 'right_to_access') {
-                                            formik.setFieldValue('selectedOptions', []);
-                                        }
                                     }}
                                     onBlurFunction={() => formik.handleBlur}
                                 ></Checkbox>
@@ -454,7 +446,6 @@ export const RightsRequestForm = ({ schoolListOptions, staticFormOptions }: { sc
                                     <CheckboxGroup
                                         name="selectedOptions"
                                         ariaLabelCheckboxGroup='selectedOptions'
-
                                         label=""
                                         helperText={formik.errors.selectedOptions && formik.touched.selectedOptions ? Array.isArray(formik.errors.selectedOptions) ? formik.errors.selectedOptions[0] : formik.errors.selectedOptions : ''}
                                         invalid={formik.touched.selectedOptions && !!(formik.errors.selectedOptions)}>
