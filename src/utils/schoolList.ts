@@ -1,7 +1,7 @@
 import { FormattedActionsOption, FormattedSchoolListOption } from "@/components/RightsRequestForm/RightsRequestFormUtils";
 import { D365, School } from "./D365";
 import matter from "gray-matter";
-import rrfOptions from './rrfOptions';
+import rrfOptions from './rrfOptions.json';
 
 export async function generateSchoolList(stateListData: string[]) {
     const stateListFrontMatter = stateListData.map(state => matter(state));

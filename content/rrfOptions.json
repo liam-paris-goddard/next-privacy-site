@@ -1,4 +1,4 @@
-const rrfOptions: any = {
+{
     "AvailableState": [
         "California",
         "Colorado",
@@ -251,5 +251,3 @@ const rrfOptions: any = {
         ]
     }
 }
-
-export default rrfOptions;

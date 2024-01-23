@@ -147,6 +147,7 @@ export const RightsRequestForm = ({ schoolListOptions, staticFormOptions }: { sc
     useEffect(() => {
         setShowSchoolSelect(handleShowSchoolSelect())
         setShowActions(handleShowActions())
+
     }, [formik.values, formik.errors, formik.touched]);
 
     const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -199,7 +200,7 @@ export const RightsRequestForm = ({ schoolListOptions, staticFormOptions }: { sc
 
 
     const generateSchoolSelect = () => {
-        return <fieldset>
+        return <fieldset className='school-select-field'>
             <h3 className='heading-3'>Please select a school</h3>
             <Select helperText={formik.errors.schoolState && formik.touched.schoolState ? formik.errors.schoolState : ''} invalid={formik.touched.schoolState && !!(formik.errors.schoolState)} label="School State" name="schoolState" required={true} placeholder='Select a State' value={formik.values.schoolState} onChangeFunction={handleSelectChange} onBlurFunction={formik.handleBlur} optionList={schoolSelectStateOptions} />
             <Select helperText={formik.errors.schoolCity && formik.touched.schoolCity ? formik.errors.schoolCity : ''} invalid={formik.touched.schoolCity && !!(formik.errors.schoolCity)} label="School City" name="schoolCity" placeholder='Select a City' required={true} value={formik.values.schoolCity} onChangeFunction={handleSelectChange} onBlurFunction={formik.handleBlur} optionList={schoolSelectCityOptions} />
@@ -277,6 +278,7 @@ export const RightsRequestForm = ({ schoolListOptions, staticFormOptions }: { sc
                 invalid={formik.touched[`${type}Info`]?.city && !!(formik.errors[`${type}Info`]?.city)} type="text" name={`${type}Info.city`} label="City" onBlurFunction={formik.handleBlur} onChangeFunction={formik.handleChange} value={formik.values[`${type}Info`]['city'] || ''}></Input>
 
             <Select required={true}
+                classes='state-select'
                 label="State"
                 name={`${type}Info.state`}
                 value={formik.values[`${type}Info`]?.state || ''}
@@ -349,7 +351,7 @@ export const RightsRequestForm = ({ schoolListOptions, staticFormOptions }: { sc
 
                     {formik.values.isRequestFor !== 'self' && generatePersonalInfoForm('representative')}
 
-                    {
+                    <div className='delivery-type-radio-group'>{
 
                         <RadioGroup name="deliveryType"
                             label="Delivery Method"
@@ -372,16 +374,16 @@ export const RightsRequestForm = ({ schoolListOptions, staticFormOptions }: { sc
                             ]}
                             onChangeFunction={formik.handleChange}
                             onBlurFunction={formik.handleBlur}
-                        />}</div>
+                        />}</div></div>
             }
             {
-                showSchoolSelect && generateSchoolSelect()
+                !showSchoolSelect && generateSchoolSelect()
             }
             {
-                showActions && <>
-                    <h3 className='heading-3' style={{ marginBottom: '.25rem' }}>Request Type (check all that apply)</h3>
+                showActions && <div className='request-action-field'>
                     <CheckboxGroup name="selectedActions"
-                        label=""
+                        classes='request-action-checkbox-group'
+                        label="Request Type (check all that apply)"
                         ariaLabelCheckboxGroup="selectedActions"
                         indeterminate={false}
                         invalid={formik.touched.selectedActions && !!(formik.errors.selectedActions)}
@@ -475,11 +477,11 @@ export const RightsRequestForm = ({ schoolListOptions, staticFormOptions }: { sc
                             </>)
                         }
                     </CheckboxGroup>
-                </>
+                </div>
             }
 
             {displayErrorMessages()}
-            {/*<button type="submit" >Submit</button>*/}
+            <button className='rrf-submit-button' type="submit" disabled={!!Object.keys(formik.errors).length && !!Object.keys(formik.touched).length}>Submit Request</button>
         </form>
     )
 

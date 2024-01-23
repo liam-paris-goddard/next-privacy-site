@@ -4,27 +4,33 @@ trigger:
 pool:
   vmImage: "ubuntu-latest"
 
+variables:
+  TS_NODE_COMPILER_OPTIONS: '{"module": "commonjs"}'
+
 steps:
   - task: NodeTool@0
     inputs:
-      versionSpec: "^18"
+      versionSpec: "18.17.1"
     displayName: "Install Node.js"
 
   - script: |
       npm install
-      npm run build
-    displayName: "npm install and build"
+    displayName: "Install dependencies"
 
-  - task: ArchiveFiles@2
-    inputs:
-      rootFolderOrFile: "$(Build.Repository.LocalPath)"
-      includeRootFolder: true
-      archiveType: "zip"
-      archiveFile: "$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip"
-      replaceExistingArchive: true
+  - script: |
+      npx ts-node build/createStatesList.ts
+    displayName: "fetch and format list of schools based on state list"
+
+  - script: |
+      npx ts-node build/formatContentFiles.ts
+    displayName: "format content markdown files"
+
+  - script: |
+      npm run build
+    displayName: "Build Static Site"
 
   - task: PublishBuildArtifacts@1
     inputs:
-      PathtoPublish: "$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip"
-      ArtifactName: "drop"
+      pathtoPublish: "out"
+      artifactName: "Website"
       publishLocation: "Container"

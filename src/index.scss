@@ -59,3 +59,39 @@
       margin-right: 5px;
     }
   }
+
+  .gsl-form-label {
+    display: block;
+    color: var(--color-brand);
+    font-weight: normal;
+    margin-bottom: 5px;
+  }
+
+
+.rrf-submit-button {
+    margin-top: 2rem;
+    background: var(--color-brand);
+    border: none;
+    outline: none;
+    border-radius: 15px;
+    padding: .5rem 1rem;
+    font-family: var(--noto-sans);
+    color: var(--color-white);
+    font-weight: bold;
+    font-size: 19px;
+    width: 100%;
+
+    transition: all 200ms cubic-bezier(0.4,0,0.6,1);
+    &:focus, &:hover {
+        background: var(--color-active);
+    }
+    &:disabled {
+        background: var(--color-white);
+        color: var(--color-gray-5);
+        border: 1px solid var(--color-gray-5);
+    }
+
+    @media (min-width: 800px) { 
+        width: inherit;
+    }
+}

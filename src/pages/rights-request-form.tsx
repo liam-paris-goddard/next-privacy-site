@@ -6,7 +6,7 @@ import { Accordion } from '../components/Accordion/Accordion'
 import '../index.scss'
 import Select from '../components/Select/select'
 import { D365, School } from '../utils/D365';
-import rrfOptions from '../utils/rrfOptions'
+import rrfOptions from '../utils/rrfOptions.json'
 import { RightsRequestForm } from '@/components/RightsRequestForm/RightsRequestForm'
 import { FormattedSchoolListOption } from '@/components/RightsRequestForm/RightsRequestFormUtils'
 import { generateSchoolList } from '@/utils/schoolList'
