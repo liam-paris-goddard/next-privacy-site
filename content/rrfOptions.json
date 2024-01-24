@@ -249,5 +249,14 @@
         "WY": [
             "Wyoming"
         ]
+    },
+    "ActionTitleKey": {
+        "right_to_access": "Right To Access",
+        "right_to_correction": "Right To Correction",
+        "right_to_deletion": "Right To Deletion",
+        "right_to_opt": "Right to opt-out (sale, share, targeted ads, profiling)",
+        "right_to_limit": "Right To Limit Use",
+        "right_to_portability": "Right To Data Portability",
+        "right_to_appeal": "Right To Appeal"
     }
 }

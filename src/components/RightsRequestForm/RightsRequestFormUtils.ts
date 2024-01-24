@@ -8,7 +8,7 @@ export interface FormattedSchoolListOption {
 };
 
 export interface FormattedActionsOption {
-    key: string,
+    key: string;
     name: string,
     options: string[]
 }

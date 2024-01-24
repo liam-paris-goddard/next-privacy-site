@@ -18,7 +18,12 @@ steps:
     displayName: "Install dependencies"
 
   - script: |
-      npx ts-node build/createStatesList.ts
+      rm -rf ./formatted-content/*
+      rm -rf ./out/*
+    displayName: "Clean up old files"
+
+  - script: |
+      npx ts-node build/createSchoolList.ts
     displayName: "fetch and format list of schools based on state list"
 
   - script: |

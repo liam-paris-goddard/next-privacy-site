@@ -6,12 +6,15 @@ import { Accordion } from '../components/Accordion/Accordion'
 import '../index.scss'
 import Select from '../components/Select/select'
 import { D365, School } from '../utils/D365';
-import rrfOptions from '../utils/rrfOptions.json'
 import { RightsRequestForm } from '@/components/RightsRequestForm/RightsRequestForm'
 import { FormattedSchoolListOption } from '@/components/RightsRequestForm/RightsRequestFormUtils'
-import { generateSchoolList } from '@/utils/schoolList'
+//import { generateSchoolList } from '@/utils/schoolList'
 import { formatRRFData } from '@/utils/contentFormat'
 import ReactMarkdown from 'react-markdown'
+import * as rrfContentFile from '../../formatted-content/rights-request-form.json';
+import * as schoolListFile from '../../formatted-content/school-list.json';
+const rrfContentData: any = rrfContentFile;
+const schoolListData: any = schoolListFile;
 
 export default function RightsRequestFormPage({ schoolListOptions, formCopy,
     staticFormOptions }: { schoolListOptions: FormattedSchoolListOption[], formCopy: { heading: string, body: string }, staticFormOptions: { relationshipList: string[], stateList: { [key: string]: string } } }) {
@@ -27,18 +30,18 @@ export default function RightsRequestFormPage({ schoolListOptions, formCopy,
 }
 
 export async function getStaticProps() {
-    const stateInfoFiles = fs.readdirSync('./content/avaliable-states-and-actions');
+    /*const stateInfoFiles = fs.readdirSync('./content/avaliable-states-and-actions');
     const formCopyFile = fs.readFileSync('./content/rights-request-form/rights-request-form.md', 'utf8')
 
     const stateInfoArr = stateInfoFiles.map((fileName) => fs.readFileSync(`./content/avaliable-states-and-actions/${fileName}`, 'utf8'));
 
     const schoolListOptions = await generateSchoolList(stateInfoArr);
-    const formContent = formatRRFData(formCopyFile, rrfOptions);
+    const formContent = formatRRFData(formCopyFile, rrfOptions);*/
     return {
         props: {
-            formCopy: formContent?.formCopy,
-            staticFormOptions: formContent?.staticFormOptions,
-            schoolListOptions
+            formCopy: rrfContentData?.formCopy,
+            staticFormOptions: rrfContentData?.staticFormOptions,
+            schoolListOptions: schoolListData
         }
     }
 }

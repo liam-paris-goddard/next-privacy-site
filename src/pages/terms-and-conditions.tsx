@@ -4,6 +4,9 @@ import fs from 'fs'
 import matter from 'gray-matter'
 import ReactMarkdown from 'react-markdown'
 import '../index.scss'
+import * as termsContentFile from '../../formatted-content/terms-and-conditions.json';
+const termsContentData: any = termsContentFile;
+
 export default function TermsAndConditions({ termsContent }: any) {
     return (
         <main className={'main-container'}>
@@ -17,13 +20,13 @@ export default function TermsAndConditions({ termsContent }: any) {
 
 export async function getStaticProps() {
     // List of files in blgos folder
-    const termsFile = fs.readFileSync('./content/terms-and-conditions/terms-and-conditions.md', 'utf8')
+    //const termsFile = fs.readFileSync('./content/terms-and-conditions/terms-and-conditions.md', 'utf8')
 
-    const termsContent = matter(termsFile).content
+    //    const termsContent = matter(termsFile).content
 
     return {
         props: {
-            termsContent
+            termsContent: termsContentData.content
         }
     }
 
