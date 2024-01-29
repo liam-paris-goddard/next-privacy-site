@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React, { use, useEffect, useState } from 'react';
-import { SNowTicketResponse, SNowTicketRequest, FormattedSchoolListOption, FormattedCityOption, FormattedActionsOption, SNowTicketVariables, SNowTicketPerson, FormValues, testSubmit, rightsRequestFormValidationSchema, represenativeInfoSchema, submitRequest } from './RightsRequestFormUtils';
-import ReactMarkdown from 'react-markdown'
+import { FormattedSchoolListOption, FormattedCityOption, FormattedActionsOption, SNowTicketVariables, SNowTicketPerson, FormValues, testSubmit, rightsRequestFormValidationSchema, represenativeInfoSchema, submitRequest, StaticFormData } from './RightsRequestFormUtils';
 import './RightsRequestForm.scss';
 import { useFormik } from 'formik';
 import RadioGroup from '../radio/RadioGroup'
@@ -11,7 +10,7 @@ import CheckboxGroup from '../checkbox/CheckboxGroup';
 import Checkbox from '../checkbox/Checkbox';
 import '../../index.scss';
 
-export const RightsRequestForm = ({ schoolListOptions, staticFormOptions }: { schoolListOptions: FormattedSchoolListOption[], staticFormOptions: { relationshipList: string[], stateList: { [key: string]: string } } }) => {
+export const RightsRequestForm = ({ schoolListOptions, staticFormOptions }: { schoolListOptions: FormattedSchoolListOption[], staticFormOptions: StaticFormData }): React.JSX.Element => {
 
     const [selectedStateData, setSelectedStateData] = useState<FormattedSchoolListOption>({} as FormattedSchoolListOption)
     const [schoolSelectStateOptions, setSchoolSelectStateOptions] = useState<OptionProps[]>([])
@@ -60,6 +59,9 @@ export const RightsRequestForm = ({ schoolListOptions, staticFormOptions }: { sc
         },
         validate: (values: FormValues) => {
             const errors: { [key: string]: any } = {}
+            if (!values.selectedActions || values.selectedActions.length === 0) {
+                errors.selectedActions = 'At least one Action is Required'
+            }
             if (values.isRequestFor === 'other') {
                 try {
                     represenativeInfoSchema.validateSync(values.representativeInfo, { abortEarly: false });
@@ -101,6 +103,10 @@ export const RightsRequestForm = ({ schoolListOptions, staticFormOptions }: { sc
     }, [ticketNumber])
 
     useEffect(() => {
+        formik.validateField('selectedActions');
+    }, [formik.values.selectedActions]);
+
+    useEffect(() => {
         setSelectedStateData(schoolListOptions.find((option: FormattedSchoolListOption) => option.state === formik.values.schoolState) || {} as FormattedSchoolListOption);
         formik.setFieldValue('selectedActions', []);
     }, [formik.values.schoolState]);
@@ -136,13 +142,6 @@ export const RightsRequestForm = ({ schoolListOptions, staticFormOptions }: { sc
 
     useEffect(() => {
     }, [schoolSelectMarketingNameOptions])
-
-    useEffect(() => {
-        if (formik.values.selectedActions.includes('Right To Access')) {
-            formik.setFieldValue('selectedOptions', []);
-            formik.setTouched({ selectedOptions: false });
-        }
-    }, [formik.values.selectedActions])
 
     useEffect(() => {
         setShowSchoolSelect(handleShowSchoolSelect())
@@ -318,7 +317,6 @@ export const RightsRequestForm = ({ schoolListOptions, staticFormOptions }: { sc
 
 
     return (
-
         <form className="rights-request-form" onSubmit={formik.handleSubmit}>
             <div className='is-request-for-radio-group'>
                 <RadioGroup name="isRequestFor"
@@ -398,13 +396,15 @@ export const RightsRequestForm = ({ schoolListOptions, staticFormOptions }: { sc
                                     ariaLabelCheckbox={action.name}
                                     label={action.name}
                                     onChangeFunction={(e) => {
-                                        formik.setFieldTouched('selectedActions');
+                                        formik.setFieldTouched('selectedActions', true);
+                                        if (action.name === 'Right To Access') {
+                                            formik.setFieldValue('selectedOptions', []);
+                                        }
                                         if (e.target.checked) {
                                             formik.setFieldValue('selectedActions', [...formik.values.selectedActions, action.name]);
                                         } else {
                                             formik.setFieldValue('selectedActions', formik.values.selectedActions.filter(item => item !== action.name));
                                         }
-                                        formik.validateField('selectedActions');
                                     }}
                                     onBlurFunction={() => formik.handleBlur}
                                 ></Checkbox>

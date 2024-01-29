@@ -121,6 +121,11 @@ export interface SNowTicketRequest {
     variables: SNowTicketVariables;
 }
 
+export interface StaticFormData {
+    relationshipList: string[];
+    stateList: { [key: string]: string; };
+}
+
 export interface SNowTicketVariables {
     school_state?: string;
     school_city?: string;
@@ -165,7 +170,7 @@ export interface SNowTicketVariables {
 export interface SNowTicketResponse {
     Error: Error;
     Status?: string;
-    Result: SNowTicketResult;
+    result: SNowTicketResult;
 }
 
 export interface SNowTicketError {
@@ -186,9 +191,9 @@ export interface SNowTicketResult {
 export async function testSubmit() {
     const testReq = { "sysparm_quantity": "1", "variables": { "school_state": "California", "school_city": "Carlsbad", "school": "Carlsbad", "right_to_access": "false", "access_of_personal_information": "false", "access_of_categories_collected": "false", "access_of_sources_collected": "false", "access_of_categories_disclosed": "false", "access_of_categories_third_parties": "false", "right_to_correction": "false", "right_to_deletion": "false", "request_type": "Access", "information_to_be_deleted": "test", "information_deleted": "", "right_to_opt_out": "false", "right_to_limit_use": "false", "right_to_data_portability": "false", "right_to_appeal": "false", "yourself_or_someone": "Yourself", "external_record": "false", "rf_first_name": "test", "rf_last_name": "test", "rf_phone": "test", "rf_email": "test@test.com", "rf_address_one": "test", "rf_address_two": "test", "rf_city": "test", "rf_state": "test", "rf_zip": "test", "ar_first_name": "test", "ar_last_name": "test", "ar_phone": "test", "ar_email": "test@test.com", "ar_address_one": "test", "ar_address_two": "test", "ar_city": "test", "ar_state": "NJ", "ar_zip": "test", "request_delivered": "Email" } }
     try {
-        const response = await axios.post<SNowTicketResponse>('/api/CreateSNowTicketRoute', testReq);
+        const response = await axios.post<SNowTicketResponse>(`http://localhost:7071/api/CreateSnowTicket`, testReq); //(`${process.env.SERVERLESS_URL}/api/CreateSnowTicket`, testReq);
 
-        return response.data.Result.request_number || '-1'
+        return response.data.result.request_number || '-1'
     } catch (error) {
         console.error(error);
         return '-1';
@@ -270,13 +275,12 @@ export async function submitRequest(formValues: FormValues): Promise<string> {
         variables: variables
     };
 
-    console.warn(req);
 
     // API call to ServiceNow (SNow)
     try {
-        const response = await axios.post<SNowTicketResponse>('/api/CreateSNowTicketRoute', req);
+        const response = await axios.post<SNowTicketResponse>(`${process.env.SERVERLESS_URL}/api/CreateSnowTicket`, req);
 
-        return response.data.Result.request_number || '-1'
+        return response.data.result.request_number || '-1'
     } catch (error) {
         console.error(error);
         return '-1';
