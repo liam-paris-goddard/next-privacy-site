@@ -1,4 +1,4 @@
-import { FooterLegalLink } from "../footer";
+import { FooterLegalLink } from "../../../types/layoutTypes";
 
 export const LegalLinks = ({ copyright, legalLinksList }: { copyright: string; legalLinksList: FooterLegalLink[] }) => (
   <ul className="gsi-footer__legal">

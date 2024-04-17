@@ -5,14 +5,16 @@
   "scripts": {
     "dev": "next dev",
     "build": "sh ./build/local-build.sh",
-    "start": "next start",
+    "start": "npm run build && next start",
     "lint": "next lint",
-    "export": "next build && next export"
+    "export": "next build && next export",
+    "cleaning": "node test.js"
   },
   "dependencies": {
     "@goddardsystems/react-component-library": "^0.0.0-beta.10",
     "@react-input/mask": "^1.0.20",
     "axios": "^1.6.3",
+    "css": "^3.0.0",
     "dotenv": "^16.4.1",
     "formik": "^2.4.5",
     "fs": "^0.0.1-security",

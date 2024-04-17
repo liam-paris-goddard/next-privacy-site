@@ -1,4 +1,5 @@
-import { FooterSocialIcon } from "../footer";
+import { FooterSocialIcon } from "@/types/layoutTypes";
+
 
 export const SocialIconList = ({ socialIconsTitle, socialIconList }: { socialIconsTitle: string; socialIconList: FooterSocialIcon[] }) => (
   <>

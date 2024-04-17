@@ -1,82 +1,53 @@
+import { FooterProps, HeaderProps } from "@/types/layoutTypes";
 import { Footer } from "../footer/footer";
+import { Header, HeaderItem } from "../header/header";
 
-export const CustomLayout: React.FC<any> = ({ children }: { children: React.ReactNode }) => {
-    const footerCopyright = "© 2024 Goddard Franchisor LLC";
-    const footerLegalLinksList = [{
-        targetUrl: 'privacy.goddardsystems.com',
-        newTab: true,
-        linkText: 'Privacy Policy'
-    }, {
-        targetUrl: 'privacy.goddardsystems.com/home/TermsAndConditions',
-        newTab: true,
-        linkText: 'Terms & Conditions'
-    }, {
-        targetUrl: 'privacy.goddardsystems.com/#OneTrustToggle',
-        newTab: true,
-        linkText: 'Cookie Management'
-    }, {
-        targetUrl: 'https://privacy.goddardsystems.com/Form',
-        newTab: true,
-        linkText: 'Do Not Sell or Share My Personal Information'
+export const CustomLayout: React.FC<any> = ({ footerContent, headerContent, children }: { footerContent: FooterProps, headerContent: HeaderProps, children: React.ReactNode }) => {
+    //TODO: create function to format headerContent
+    //TODO: pass through on each page component
+
+    const headerItems: HeaderItem[] = [{
+        title: 'Privacy Policy',
+        isActive: true,
+        link: '/',
+        target: '_self',
+    },
+    {
+        title: 'Rights Request Form',
+        isActive: false,
+        link: '/rights-request-form',
+        target: '_self',
+    },
+    {
+        title: 'Terms & Conditions',
+        isActive: false,
+        link: '/terms-and-conditions',
+        target: '_self',
+    },
+    {
+        title: 'Real link 1',
+        isActive: false,
+        link: '/terms-and-conditions',
+        target: '_self',
+    },
+    {
+        title: 'Real link 2',
+        isActive: false,
+        link: '/terms-and-conditions',
+        target: '_self',
+    },
+    {
+        title: 'real link 3',
+        isActive: false,
+        link: '/terms-and-conditions',
+        target: '_self',
     }]
 
-
-
-    const footerTitle = ""; //TODO
-    const footerImageReference = ''//TODO
-    const footerLogoAltText = ''//TODO
-    const footerLinks = [{
-        newTab: true,
-        link: '/test',
-        linkText: 'About Us',
-        targetUrl: '/test'
-    }, {
-        newTab: true,
-        link: '/test',
-        linkText: 'School Locations',
-        targetUrl: '/test'
-    }, {
-        newTab: true,
-        link: '/test',
-        linkText: 'FAQs',
-        targetUrl: '/test'
-    }]//TODO
-    const footerSocialIconsTitle = 'CONNECT WITH US!'//TODO
-    const footerSocialIconList = [{
-        isEnabled: true,
-        targetUrl: '/social-test',
-        newTab: true,
-        imageReference: '/',
-        linkText: '/social-test'
-    }, {
-        isEnabled: true,
-        targetUrl: '/social-test',
-        newTab: true,
-        imageReference: '/',
-        linkText: '/social-test'
-    }, {
-        isEnabled: true,
-        targetUrl: '/social-test-2',
-        newTab: true,
-        imageReference: '/',
-        linkText: '/social-test-3'
-    }]//TODO
-    const footerTopIconText = ''//TODO
     return (
-        <><header>
-            header
-        </header>
+        <>
+            <Header {...headerContent}></Header>
             {children}
-            <Footer
-                footerTitle={footerTitle}
-                copyright={footerCopyright}
-                imageReference={footerImageReference}
-                logoAltText={footerLogoAltText}
-                links={footerLinks}
-                socialIconsTitle={footerSocialIconsTitle}
-                socialIconList={footerSocialIconList}
-                legalLinksList={footerLegalLinksList}
-                footerTopIconText={footerTopIconText}></Footer>
+            <Footer {...footerContent}></Footer>
         </>
     )
 };

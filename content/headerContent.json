@@ -1,0 +1,24 @@
+{
+    "showMegaNav": "false",
+    "inputHeaderItems": [
+        {
+            "title": "string",
+            "refId?": "string",
+            "isActive": "boolean",
+            "link": "string",
+            "target": "string",
+            "thumbnailImage?": {
+                "src": "string",
+                "alt": "string"
+            },
+            "navIcon?": "string",
+            "megaNavImage?": "string",
+            "megaNavImageAlt?": "string",
+            "megaNavDesc?": "string",
+            "megaNavLinkUrl?": "string",
+            "megaNavLinkText?": "string",
+            "megaNavExpanded?": "boolean",
+            "children?": []
+        }
+    ]
+}

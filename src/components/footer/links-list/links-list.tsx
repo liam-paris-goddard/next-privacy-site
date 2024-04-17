@@ -1,4 +1,4 @@
-import { FooterLink } from "../footer";
+import { FooterLink } from "../../../types/layoutTypes";
 
 export const LinkList = ({ links }: { links: FooterLink[] }) => (
   <ul className="row gsi-footer__links">

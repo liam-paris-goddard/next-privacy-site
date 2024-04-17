@@ -7,13 +7,16 @@ import { CustomLayout } from '@/components/CustomLayout/CustomLayout'
 import homePageContentData from '../../formatted-content/home-page.json';
 import rrfContentData from '../../formatted-content/rights-request-form.json';
 import schoolListData from '../../formatted-content/school-list.json';
+import footerContent from '../../formatted-content/footerContent.json';
+import headerContent from '../../formatted-content/headerContent.json';
 
 
 export default function Home() {
     const { intro, sections } = homePageContentData;
     const { formCopy, staticFormOptions } = rrfContentData;
+    const formattedHeaderContent = formatHeaderContent(headerContent);
     return (
-        <CustomLayout>
+        <CustomLayout footerContent={footerContent} headerContent={formattedHeaderContent}>
             <main className={'main-container'}>
                 <div className='markdown-content'>
                     {intro.heading && <h1 className='heading-1'>{intro.heading}</h1>}

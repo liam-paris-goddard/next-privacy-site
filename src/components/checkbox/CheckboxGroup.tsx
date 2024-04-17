@@ -55,7 +55,7 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
 
     return (
         <div className={`checkbox-group ${invalid ? 'gsl-checkbox-group-parent-checkbox-invalid' : ''} ${classes}`}>
-            {/*  ref={groupNode} todo */}
+            {/*  ref={groupNode} //todo */}
             {parentControl && <Checkbox
                 name={name}
                 label={label}

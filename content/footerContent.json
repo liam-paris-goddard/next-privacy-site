@@ -1,0 +1,31 @@
+{
+    "imageReference": "",
+    "logoAltText": "GSL Logo",
+    "links": [
+        {
+            "newTab": "boolean",
+            "link": "string",
+            "linkText": "string",
+            "targetUrl": "string"
+        }
+    ],
+    "socialIconsTitle": "CONNECT WITH US!",
+    "socialIconList": [ 
+        {
+            "isEnabled": "boolean",
+            "targetUrl": "string",
+            "newTab": "boolean",
+            "imageReference": "string",
+            "linkText": "string"
+        }
+    ],
+    "copyright": "© 2024 Goddard Franchisor LLC",
+    "legalLinksList": [
+        {
+            "targetUrl": "string",
+            "newTab": "boolean",
+            "linkText": "string"
+        }
+    ],
+    "footerTopIconText": ""
+}
