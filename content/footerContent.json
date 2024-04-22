@@ -90,7 +90,8 @@
             "linkText": "Terms & Conditions"
         },
         {
-            "targetUrl": "#OneTrustToggle",
+            "id": "cookiePref",
+            "targetUrl": "",
             "newTab": "false",
             "linkText": "Cookie Management"
         },

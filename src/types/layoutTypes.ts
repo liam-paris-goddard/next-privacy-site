@@ -14,6 +14,7 @@ export interface FooterSocialIcon {
 }
 
 export interface FooterLegalLink {
+    id?: string;
     targetUrl: string;
     newTab: boolean
     linkText: string;

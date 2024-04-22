@@ -16,19 +16,6 @@ export const Footer = ({
   legalLinksList,
   footerTopIconText }: FooterProps) => {
 
-  useEffect(() => {
-    const oneTrustToggle = document.querySelector('a[href="#OneTrustToggle"]');
-    if (oneTrustToggle) {
-      oneTrustToggle.addEventListener('click', (e) => handleOneTrustClick(e));
-    }
-  }, []);
-
-
-  const handleOneTrustClick = (e: Event) => {
-    e.preventDefault();
-    //OneTrust.ToggleInfoDisplay();
-  }
-
 
   return (<div className="experiencefragment aem-GridColumn aem-GridColumn--default--12">
     <div id="experiencefragment-8d053c257a" className="cmp-experiencefragment cmp-experiencefragment--footer">
