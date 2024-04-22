@@ -4,61 +4,51 @@
     "links": [
         {
             "newTab": "true",
-            "link": "/about",
             "linkText": "About Us",
-            "targetUrl": "/about"
+            "targetUrl": "https://www.goddardschool.com/about"
         },
         {
             "newTab": "true",
-            "link": "https://recruiting.ultipro.com/GOD1001GOSY/JobBoard/d9bcba70-21be-405b-a68e-7fb1d8cb196c",
             "linkText": "Careers at GSL",
             "targetUrl": "https://recruiting.ultipro.com/GOD1001GOSY/JobBoard/d9bcba70-21be-405b-a68e-7fb1d8cb196c"
         },
         {
             "newTab": "true",
-            "link": "/news",
             "linkText": "News",
-            "targetUrl": "/news"
+            "targetUrl": "https://www.goddardschool.com/news"
         },
         {
             "newTab": "true",
-            "link": "/locations",
             "linkText": "School Locations",
-            "targetUrl": "/locations"
+            "targetUrl": "https://www.goddardschool.com/locations"
         },
         {
             "newTab": "true",
-            "link": "/executive-leadership",
             "linkText": "Goddard Leadership",
-            "targetUrl": "/executive-leadership"
+            "targetUrl": "https://www.goddardschool.com/executive-leadership"
         },
         {
             "newTab": "true",
-            "link": "https://familyconnect.goddardschool.com/Login.aspx",
             "linkText": "Family Connect",
             "targetUrl": "https://familyconnect.goddardschool.com/Login.aspx"
         },
         {
             "newTab": "true",
-            "link": "/frequently-asked-questions",
             "linkText": "FAQs",
-            "targetUrl": "/frequently-asked-questions"
+            "targetUrl": "https://www.goddardschool.com/frequently-asked-questions"
         },
         {
             "newTab": "true",
-            "link": "/contact",
             "linkText": "Contact Us",
-            "targetUrl": "/contact"
+            "targetUrl": "https://www.goddardschool.com/contact"
         },
         {
             "newTab": "true",
-            "link": "/sitemap",
             "linkText": "Site Map",
-            "targetUrl": "/sitemap"
+            "targetUrl": "https://www.goddardschool.com/sitemap"
         },
         {
             "newTab": "true",
-            "link": "http://www.goddardschoolfranchise.com",
             "linkText": "Franchising",
             "targetUrl": "http://www.goddardschoolfranchise.com"
         }
