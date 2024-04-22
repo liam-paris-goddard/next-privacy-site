@@ -14,7 +14,7 @@ import headerContent from '../../formatted-content/headerContent.json';
 export default function Home() {
     const { intro, sections } = homePageContentData;
     const { formCopy, staticFormOptions } = rrfContentData;
-    const formattedHeaderContent = formatHeaderContent(headerContent);
+    const formattedHeaderContent = headerContent;
     return (
         <CustomLayout footerContent={footerContent} headerContent={formattedHeaderContent}>
             <main className={'main-container'}>

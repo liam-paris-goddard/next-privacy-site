@@ -56,7 +56,7 @@ export const Footer = ({
                       <img className="img-fluid gsi-footer__logo" src={imageReference} alt={logoAltText} />
                     </div>
                     <div className="col-12 col-lg-6">
-                      {!!(links && links.length === 0) && (
+                      {(links && links.length !== 0) && (
                         <LinkList links={links} />
                       )}
                     </div>

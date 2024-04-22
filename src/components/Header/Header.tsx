@@ -67,11 +67,11 @@ export const Header = ({
   }, []);
 
 
-  const toggleDesktopDropdown = (e, showState: 'show' | 'hide') => {
+  const toggleDesktopDropdown = (e: React.MouseEvent, showState: 'show' | 'hide') => {
     setTimeout(() => {
       if (window.innerWidth < navBreakpoint) return
       const tempHeaderItems = [...headerItems];
-      const selectedHeaderItem = tempHeaderItems.find(item => item.refId === e.target.id);
+      const selectedHeaderItem = tempHeaderItems.find(item => item.refId === (e.target as HTMLElement).id);
       if (selectedHeaderItem) {
         if (showState === 'hide') {
           selectedHeaderItem.megaNavExpanded = false;
@@ -91,8 +91,9 @@ export const Header = ({
   // a function that runs e.stopPropogation() if there is a click inside of .nav-item.dropdown > .dropdown-menu
 
 
-  const handleResize = (e) => {
-    if (e?.target?.innerWidth >= navBreakpoint && mobileNav === 'open') {
+  const handleResize = (e: UIEvent) => {
+    const target = e.target as Window & typeof globalThis;
+    if (target.innerWidth >= navBreakpoint && mobileNav === 'open') {
       setMobileNav('close');
     }
   }
