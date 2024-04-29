@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from 'react';
 import './header.scss';
 import { generatUuid } from '@/utils/formatUtils';
+import { NavItem } from './nav-item/NavItem';
 
 
 //TODO: mobile nav will not close
@@ -23,18 +24,17 @@ export interface HeaderItem {
   megaNavLinkUrl?: string;
   megaNavLinkText?: string;
   megaNavExpanded?: boolean;
+  showMegaNav?: boolean;
   children?: HeaderItem[];
 }
 
 export interface HeaderProps {
-  showMegaNav: boolean;
   inputHeaderItems: HeaderItem[];
 }
 
 
 
 export const Header = ({
-  showMegaNav = false,
   inputHeaderItems = [],
 }: HeaderProps) => {
 
@@ -58,6 +58,7 @@ export const Header = ({
   }, [navSearchOpen])
 
   useEffect(() => {
+    console.warn(mobileNav)
     setHeaderItems(headerItems.map(
       (item: HeaderItem, index: number) => ({
         ...item,
@@ -65,31 +66,6 @@ export const Header = ({
       })
     ));
   }, []);
-
-
-  const toggleDesktopDropdown = (e: React.MouseEvent, showState: 'show' | 'hide') => {
-    setTimeout(() => {
-      if (window.innerWidth < navBreakpoint) return
-      const tempHeaderItems = [...headerItems];
-      const selectedHeaderItem = tempHeaderItems.find(item => item.refId === (e.target as HTMLElement).id);
-      if (selectedHeaderItem) {
-        if (showState === 'hide') {
-          selectedHeaderItem.megaNavExpanded = false;
-        } else {
-          selectedHeaderItem.megaNavExpanded = true;
-        }
-        if (e.type === 'mouseover') {
-          const button = document.getElementById(`navDropdown-${selectedHeaderItem.refId}`);
-          button?.blur()
-        }
-        setHeaderItems(tempHeaderItems);
-      }
-    }, 100 * 1000)
-  }
-
-
-  // a function that runs e.stopPropogation() if there is a click inside of .nav-item.dropdown > .dropdown-menu
-
 
   const handleResize = (e: UIEvent) => {
     const target = e.target as Window & typeof globalThis;
@@ -119,97 +95,19 @@ export const Header = ({
               aria-controls="gsiNavbarCollapse"
               aria-expanded="false"
               aria-label="Toggle navigation"
-              onClick={() => setMobileNav(!mobileNav ? 'close' : 'open')}>
+              onClick={() => {
+
+                console.warn(mobileNav);
+                setMobileNav(mobileNav !== 'close' ? 'close' : 'open')
+              }}>
             </button>
 
             <div className='gsi-navbar-collapse' id="gsiNavbarCollapse">
               {headerItems && <ul className="navbar-nav ml-auto">
                 {headerItems.map((level1, index) => {
-                  if (level1.title) {
+                  if (level1.title && level1.link) {
                     return (
-                      <li key={level1.title} id={level1.refId}
-                        onMouseOver={(e) => toggleDesktopDropdown(e, 'show')} onMouseOut={(e) => toggleDesktopDropdown(e, 'hide')}
-                        className={`nav-item${showMegaNav ? ' dropdown gsi-mega-dropdown' : ''} ${level1.isActive ? ' nav-item--is_active' : ''}`}>
-                        <a href={level1.link} className="nav-link" target={`${level1.target}`}>
-                          {level1.thumbnailImage && <img
-                            className="nav-link-icon"
-                            src={`${level1.thumbnailImage.src}`}
-                            alt={`${level1.thumbnailImage.alt}`} />}
-                          {level1.navIcon && <img
-                            className="nav-link-icon"
-                            src={IconArrowRightDarkBlue}
-                            alt="${level1.page.title @ context='attribute'}" />}
-                          <span>{level1.title}</span>
-                          {showMegaNav && <><button type="button"
-                            id={`navDropdown-${level1.refId}`}
-                            className={`gsi-mega-dropdown-toggle`}
-                            data-toggle="dropdown"
-                            aria-haspopup="true"
-                            aria-expanded={level1.megaNavExpanded}>
-                            <span className="sr-only">Toggle dropdown menu</span></button>
-
-                            {level1.megaNavExpanded && <div onClick={(e) => e.stopPropagation()} className="dropdown-menu gsi-mega-dropdown-menu"
-                              aria-labelledby={`navDropdown-${index}`}>
-                              <div className="container-xxl gsi-menu-teaser-container">
-                                <div className="row">
-                                  <div className="gsi-menu-teaser col">
-                                    <div className="card">
-                                      <img className="card-img-top"
-                                        src={level1.megaNavImage}
-                                        alt={level1.megaNavImageAlt} />
-                                      <div className="card-body">
-                                        <p>{level1.megaNavDesc}</p>
-                                        <a href={level1.megaNavLinkUrl}
-                                          className="gsi-link--cta gsi-link--white">
-                                          {level1.megaNavLinkText && <div dangerouslySetInnerHTML={{ __html: level1.megaNavLinkText }}></div>}
-                                        </a>
-                                      </div>
-                                      <div className="gsi-menu-links col">
-                                        <div className="row">
-                                          {level1.children && level1.children.map((level2) => (
-                                            <div key={level2.title} className="col">
-                                              <div className="gsi-menu-link-level2-header">{level2.title}</div>
-                                              {level2.children && level2.children.map((level3) => (
-                                                <a key={level3.title} className="dropdown-item"
-                                                  href={level3.link}
-                                                  target={level3.target}>
-                                                  {level3.thumbnailImage?.src ? (
-                                                    <img
-                                                      className="gsi-menu-link-level3-image"
-                                                      src={level3.thumbnailImage.src}
-                                                      alt={level3.thumbnailImage.alt} />) :
-                                                    (<img
-                                                      className="gsi-menu-link-level3-image"
-                                                      src={IconArrowRightDarkBlue}
-                                                      alt={level3.title} />)}
-                                                  <span> {level3.title}</span>
-                                                </a>
-                                              ))}
-                                            </div>
-                                          ))}
-                                        </div>
-                                      </div>
-                                    </div>
-                                    {
-                                      buttonText &&
-                                      (<li className="nav-item gsi-nav-item-locator">
-                                        <button id="gsiSchoolLocatorBtn"
-                                          className="btn gsi-btn-nav-locator js-toggle-nav-search">
-                                          <img className="gsi-btn__icon"
-                                            alt="find a school button"
-                                            src={IconLocationMarkerWhite}
-                                            aria-hidden="true" />
-                                          <span className="gsi-btn__text">{buttonText}</span>
-                                        </button>
-                                      </li>)
-                                    }
-                                  </div>
-                                </div>
-                              </div>
-                            </div>}
-                          </>}
-                        </a>
-                      </li>
+                      <NavItem headerItem={level1}></NavItem>
                     )
                   }
                 })}

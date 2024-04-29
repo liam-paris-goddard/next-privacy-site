@@ -9,16 +9,18 @@ import rrfContentData from '../../formatted-content/rights-request-form.json';
 import schoolListData from '../../formatted-content/school-list.json';
 import footerContent from '../../formatted-content/footerContent.json';
 import headerContent from '../../formatted-content/headerContent.json';
+import { addSectionsToHeader } from '@/utils/formatUtils'
 
 
 export default function Home() {
     const { intro, sections } = homePageContentData;
     const { formCopy, staticFormOptions } = rrfContentData;
-    const formattedHeaderContent = headerContent;
+
+    const formattedHeaderContent = addSectionsToHeader(headerContent, sections);
     return (
-        <CustomLayout footerContent={footerContent} headerContent={formattedHeaderContent}>
+        <CustomLayout footerContent={footerContent} headerContent={formattedHeaderContent} sections={sections}>
             <main className={'main-container'}>
-                <div className='markdown-content'>
+                <div className='markdown-content' id="intro">
                     {intro.heading && <h1 className='heading-1'>{intro.heading}</h1>}
                     {intro.children && <ReactMarkdown>{intro.children}</ReactMarkdown>}
                     <Accordion toggle sectionList={sections} />
