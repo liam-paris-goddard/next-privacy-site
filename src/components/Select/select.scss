@@ -13,10 +13,7 @@
     }
   }
   
-  .gsl-select--label {
-    margin-bottom: .5rem;
-    font-weight: normal;
-  
+  .gsl-form-label {
     &.gsl-select--label-hide {
       display: none;
     }
@@ -41,7 +38,7 @@
     width: auto;
     font-size: 1rem;
     line-height: 1;
-    border-radius: 0.8rem;
+    border-radius: 15px;
     height: 2.125rem;
     background: var(--down-arrow-svg-select) no-repeat right white;
     appearance: none;

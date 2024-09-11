@@ -2,6 +2,7 @@ import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { AccordionSection, AccordionSectionProps } from './AccordionSection'
 import './Accordion.scss'
 import { v4 as uuidv4 } from 'uuid';
+import { formatSectionId } from '@/utils/formatUtils';
 
 export interface AccordionProps {
     headingLevel?: 1 | 2 | 3 | 4 | 5 | 6;
@@ -64,7 +65,7 @@ export const Accordion: React.FC<AccordionProps> = ({ headingLevel = 3, toggle =
 
     const formatAccordionSections = (sections: AccordionSectionProps[]) => sections.map((section: AccordionSectionProps) => {
         const childHeadingLevel = section.headingLevel || headingLevel;
-        const childSectionId = section.sectionId || uuidv4();
+        const childSectionId = formatSectionId(section);
         const childExpanded = section.defaultOpen || defaultOpen || false
         return {
             ...section,
@@ -77,8 +78,8 @@ export const Accordion: React.FC<AccordionProps> = ({ headingLevel = 3, toggle =
     })
 
     return (
-        <div className='gsl-accordion'>
-            {formattedSectionList.map((section, index) => <div ref={sectionRefs.current[index]} key={section.sectionId}><AccordionSection key={section.sectionId} {...section}>{section.children}</AccordionSection></div>)}
+        <div className='gsl-accordion' >
+            {formattedSectionList.map((section, index) => <div ref={sectionRefs.current[index]} key={section.sectionId} id={section.sectionId}><AccordionSection key={section.sectionId} {...section}>{section.children}</AccordionSection></div>)}
         </div>
     );
 };

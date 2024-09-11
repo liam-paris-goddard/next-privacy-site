@@ -50,7 +50,7 @@ const Select: React.FC<SelectProps> = ({ selectId = uuidv4(), invalid, disabled,
 
     return (
         <div className={`gsl-select ${classes} ${invalid ? 'gsl-select--invalid' : ''} ${disabled ? 'gsl-select--disabled' : ''}`}>
-            <label htmlFor={selectId} className={`gsl-select--label ${hideLabel ? 'gsl-select--label-hide' : ''}`} >
+            <label htmlFor={selectId} className={`gsl-form-label ${hideLabel ? 'gsl-select--label-hide' : ''}`} >
                 {invalid && !helperText && <WarningIcon></WarningIcon>} {label} {required ? <span className="gsl-select--required">*</span> : null}
             </label>
             <select className='gsl-select--input'

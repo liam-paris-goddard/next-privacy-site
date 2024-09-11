@@ -57,3 +57,18 @@
 	font-style: normal;
 	font-display: swap;
 }
+
+@font-face{
+  font-display:block;
+  font-family:wknd-icon-font;
+  font-style:normal;
+  font-weight:400;
+  src:url('./assets/fonts/wknd-icon-font.ttf') format("truetype"),url('./assets/fonts/wknd-icon-font.woff') format("woff"),url('./assets/fonts/wknd-icon-font.svg') format("svg")
+}
+@font-face{
+    font-display:block;
+    font-family:wknd-icon-font;
+    font-style:normal;
+    font-weight:400;
+    src:url('./assets/fonts/wknd-icon-font.ttf') format("truetype"),url('./assets/fonts/wknd-icon-font.woff') format("woff"),url('./assets/fonts/wknd-icon-font.svg') format("svg")
+}

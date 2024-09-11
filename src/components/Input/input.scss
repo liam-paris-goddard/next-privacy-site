@@ -2,16 +2,9 @@
     display: block;
   }
   
-  .gsl-input-label {
-    display: block;
-    color: var(--color-brand);
-    font-weight: normal;
-    margin-bottom: 5px;
-  }
-  
   .gsl-input {
     &.gsl-input-error {
-      .gsl-input-label {
+      .gsl-form-label {
         color: var(--color-alert);
       }
       .gsl-input-field-container {
@@ -33,6 +26,7 @@
     font-size: .75rem;
     border-radius: 15px;
     padding: .5rem;
+    flex: 1 1 auto;
     &:focus {
       outline: none;
     }

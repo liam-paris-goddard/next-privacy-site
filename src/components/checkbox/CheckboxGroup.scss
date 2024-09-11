@@ -46,7 +46,7 @@
   }
 
 .gsl-checkbox-group-parent-checkbox-invalid {
-  .gsl-component-help-text-container {
+  .gsl-component-help-text-container, .gsl-field-label {
     color: var(--color-alert);
   }
 }
@@ -61,3 +61,5 @@
     padding-top: .25rem;
   }
 }
+
+

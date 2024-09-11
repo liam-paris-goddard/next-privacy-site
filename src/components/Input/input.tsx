@@ -100,7 +100,7 @@ export const Input: React.FC<InputProps> = ({
 
     return (
         <div className={`gsl-input ${invalid ? 'gsl-input-error' : ''}`}>
-            <label className='gsl-input-label' htmlFor={inputId}> {label}
+            <label className='gsl-form-label' htmlFor={inputId}> {label}
                 {required ? <span className="gsl-input--required">*</span> : null}
             </label>
             <div className='gsl-input-field-container'>

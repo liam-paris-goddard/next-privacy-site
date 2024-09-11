@@ -19,6 +19,7 @@ interface CheckboxGroupProps {
     onBlurFunction?: (event: React.FocusEvent<HTMLInputElement>) => void;
     children: React.ReactNode;
     parentControl?: boolean;
+    classes?: string;
 }
 
 const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
@@ -38,7 +39,8 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
     onChangeFunction,
     onBlurFunction,
     children,
-    parentControl = false
+    parentControl = false,
+    classes = ''
 }) => {
     const [actionText, setActionText] = useState('');
     const groupNode = useRef<HTMLInputElement>(null);
@@ -52,8 +54,8 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
     }, [checked, disabled, selectText, unselectText]);
 
     return (
-        <div className={`checkbox-group ${invalid ? 'gsl-checkbox-group-parent-checkbox-invalid' : ''}`}>
-            {/*  ref={groupNode} todo */}
+        <div className={`checkbox-group ${invalid ? 'gsl-checkbox-group-parent-checkbox-invalid' : ''} ${classes}`}>
+            {/*  ref={groupNode} //todo */}
             {parentControl && <Checkbox
                 name={name}
                 label={label}
@@ -69,7 +71,7 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
                 onChangeFunction={onChangeFunction}
                 onBlurFunction={onBlurFunction}
             />}
-            {!parentControl && label && <label className='gsl-checkbox-group-label'>{label}</label>}
+            {!parentControl && label && <label className='gsl-field-label'>{label}</label>}
             {helperText && <div className="gsl-component-help-text-container">
                 {renderHelperIcon(helperText, invalid)} {helperText}
             </div>}

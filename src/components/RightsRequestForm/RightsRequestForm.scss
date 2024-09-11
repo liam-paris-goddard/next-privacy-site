@@ -32,19 +32,7 @@ fieldset {
 
 .personal-info-group {
     flex-flow: row wrap;
-    .gsl-select,.gsl-input {
-        width: 100%;
-
-    }
-
-    .gsl-input {
-        width: 100%;
-        @media (min-width: 800px) {
-            width: 50%;
-        }
-    }
-
-
+    gap: 1rem;
 }
 
 .right-to-access-section, 
@@ -54,6 +42,43 @@ fieldset {
     flex-direction: column;
     textarea {
         margin: 1rem;
-        margin-top: 0;
+        margin-top: .25rem;
+    }
+}
+
+.delivery-type-radio-group {
+    margin-top: 2rem;
+}
+
+.school-select-field {
+    .gsl-select:nth-of-type(n+2) {
+        margin-top: 1.5rem;
+    }
+}
+
+.request-action-field {
+    margin-top: 2rem;
+}
+
+.gsl-select, .gsl-input {
+    width: 100%;
+
+}
+
+@media (min-width: 800px) {
+    .gsl-select {
+        width: 60%;
+    }
+    .gsl-input {
+        width: 40%;
+    }
+    .state-select {
+        width: 30%;
+    }
+}
+
+.request-action-checkbox-group {
+    .gsl-field-label {
+        @include heading-3;
     }
 }

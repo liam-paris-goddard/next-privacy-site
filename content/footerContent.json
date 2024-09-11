@@ -1,0 +1,105 @@
+{
+    "imageReference": "/assets/icons/GoddardLogo_White-Web.png",
+    "logoAltText": "GSL Logo",
+    "links": [
+        {
+            "newTab": "true",
+            "linkText": "About Us",
+            "targetUrl": "https://www.goddardschool.com/about"
+        },
+        {
+            "newTab": "true",
+            "linkText": "Careers at GSL",
+            "targetUrl": "https://recruiting.ultipro.com/GOD1001GOSY/JobBoard/d9bcba70-21be-405b-a68e-7fb1d8cb196c"
+        },
+        {
+            "newTab": "true",
+            "linkText": "News",
+            "targetUrl": "https://www.goddardschool.com/news"
+        },
+        {
+            "newTab": "true",
+            "linkText": "School Locations",
+            "targetUrl": "https://www.goddardschool.com/locations"
+        },
+        {
+            "newTab": "true",
+            "linkText": "Goddard Leadership",
+            "targetUrl": "https://www.goddardschool.com/executive-leadership"
+        },
+        {
+            "newTab": "true",
+            "linkText": "Family Connect",
+            "targetUrl": "https://familyconnect.goddardschool.com/Login.aspx"
+        },
+        {
+            "newTab": "true",
+            "linkText": "FAQs",
+            "targetUrl": "https://www.goddardschool.com/frequently-asked-questions"
+        },
+        {
+            "newTab": "true",
+            "linkText": "Contact Us",
+            "targetUrl": "https://www.goddardschool.com/contact"
+        },
+        {
+            "newTab": "true",
+            "linkText": "Site Map",
+            "targetUrl": "https://www.goddardschool.com/sitemap"
+        },
+        {
+            "newTab": "true",
+            "linkText": "Franchising",
+            "targetUrl": "http://www.goddardschoolfranchise.com"
+        }
+    ],
+    "socialIconsTitle": "CONNECT WITH US!",
+    "socialIconList": [
+        {
+            "isEnabled": "true",
+            "targetUrl": "https://www.facebook.com/goddardschool",
+            "newTab": "true",
+            "imageReference": "/assets/icons/social-media-icon-facebook.svg",
+            "linkText": ""
+        },
+        {
+            "isEnabled": "true",
+            "targetUrl": "https://www.instagram.com/goddard_school/",
+            "newTab": "true",
+            "imageReference": "/assets/icons/social-media-icon-instagram.svg",
+            "linkText": ""
+        },
+        {
+            "isEnabled": "true",
+            "targetUrl": "https://www.youtube.com/user/goddardschool",
+            "newTab": "true",
+            "imageReference": "/assets/icons/social-media-icon-youtube.svg",
+            "linkText": ""
+        }
+    ],
+    "copyright": "© 2024 Goddard Franchisor LLC",
+    "legalLinksList": [
+        {
+            "targetUrl": "/",
+            "newTab": "false",
+            "linkText": "Privacy Policy"
+        },
+        {
+            "targetUrl": "/terms-and-conditions",
+            "newTab": "false",
+            "linkText": "Terms & Conditions"
+        },
+        {
+            "id": "cookiePref",
+            "targetUrl": "",
+            "newTab": "false",
+            "linkText": "Cookie Management"
+        },
+        {
+            "targetUrl": "/rights-request-form",
+            "newTab": "false",
+            "linkText": "Do Not Sell or Share My Personal Information"
+        }
+    ],
+    "footerTopIconText": ""
+}

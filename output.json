@@ -1,0 +1,62 @@
+{
+  "map-right_to_access-true-right_to_correction-true-right_to_deletion-true-right_to_opt-true-right_to_limit-false-right_to_portability-true-right_to_appeal-true-state-colorado": {
+    "state": "Colorado",
+    "right_to_access": true,
+    "right_to_correction": true,
+    "right_to_deletion": true,
+    "right_to_opt": true,
+    "right_to_limit": false,
+    "right_to_portability": true,
+    "right_to_appeal": true,
+    "preview": "",
+    "basename": "map-right_to_access-true-right_to_correction-true-right_to_deletion-true-right_to_opt-true-right_to_limit-false-right_to_portability-true-right_to_appeal-true-state-colorado"
+  },
+  "map-right_to_access-true-right_to_correction-true-right_to_deletion-true-right_to_opt-true-right_to_limit-false-right_to_portability-true-right_to_appeal-true-state-connecticut": {
+    "state": "Connecticut",
+    "right_to_access": true,
+    "right_to_correction": true,
+    "right_to_deletion": true,
+    "right_to_opt": true,
+    "right_to_limit": false,
+    "right_to_portability": true,
+    "right_to_appeal": true,
+    "preview": "",
+    "basename": "map-right_to_access-true-right_to_correction-true-right_to_deletion-true-right_to_opt-true-right_to_limit-false-right_to_portability-true-right_to_appeal-true-state-connecticut"
+  },
+  "map-right_to_access-true-right_to_correction-true-right_to_deletion-true-right_to_opt-true-right_to_limit-false-right_to_portability-true-right_to_appeal-true-state-virginia": {
+    "state": "Virginia",
+    "right_to_access": true,
+    "right_to_correction": true,
+    "right_to_deletion": true,
+    "right_to_opt": true,
+    "right_to_limit": false,
+    "right_to_portability": true,
+    "right_to_appeal": true,
+    "preview": "",
+    "basename": "map-right_to_access-true-right_to_correction-true-right_to_deletion-true-right_to_opt-true-right_to_limit-false-right_to_portability-true-right_to_appeal-true-state-virginia"
+  },
+  "map-right_to_access-true-right_to_correction-true-right_to_deletion-true-right_to_opt-true-right_to_limit-true-right_to_portability-true-right_to_appeal-false-state-california": {
+    "state": "California",
+    "right_to_access": true,
+    "right_to_correction": true,
+    "right_to_deletion": true,
+    "right_to_opt": true,
+    "right_to_limit": true,
+    "right_to_portability": true,
+    "right_to_appeal": false,
+    "preview": "",
+    "basename": "map-right_to_access-true-right_to_correction-true-right_to_deletion-true-right_to_opt-true-right_to_limit-true-right_to_portability-true-right_to_appeal-false-state-california"
+  },
+  "utah": {
+    "state": "Utah",
+    "right_to_access": true,
+    "right_to_correction": false,
+    "right_to_deletion": true,
+    "right_to_opt": true,
+    "right_to_limit": false,
+    "right_to_portability": true,
+    "right_to_appeal": true,
+    "preview": "",
+    "basename": "utah"
+  }
+}

@@ -9,9 +9,8 @@ class MyDocument extends Document {
           {/* Netlify Widget */}
           <script async src="https://identity.netlify.com/v1/netlify-identity-widget.js" />
           <script async src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript" charSet="UTF-8" data-domain-script="bc3778e9-b551-49ea-a0d5-73ec623344eb-test" ></script>
-          <script async id="oneTrustWrapperCall" type="text/javascript">
-            function OptanonWrapper() { }
-          </script>
+
+
         </Head>
         <body>
           <Main />
@@ -28,7 +27,19 @@ class MyDocument extends Document {
                 });
               }
           `}} />
+          <script async id="oneTrustWrapperCall" type="text/javascript" dangerouslySetInnerHTML={{
+            __html: `
+                      function OptanonWrapper() { }
+                      const privacyCenterButtons = document.querySelectorAll('#cookiePref')
+                      privacyCenterButtons.forEach(function(button) {
+                          button.addEventListener("click", function(e) {
+                              e.preventDefault();
+                              OneTrust.ToggleInfoDisplay()
+                          })
+                      })
+          `}}></script>
         </body>
+
       </Html>
     )
   }

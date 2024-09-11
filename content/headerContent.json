@@ -1,0 +1,56 @@
+{
+    "showMegaNav": true,
+    "inputHeaderItems": [
+        {
+            "title": "Privacy Policy",
+            "isActive": true,
+            "link": "/#intro",
+            "target": "_self",
+            "showMegaNav": true,
+            "megaNavExpanded": true,
+            "children": []
+        },
+        {
+            "title": "Rights Request Form",
+            "isActive": false,
+            "link": "/rights-request-form",
+            "target": "_self"
+        },
+        {
+            "title": "Terms & Conditions",
+            "isActive": false,
+            "link": "/terms-and-conditions",
+            "target": "_self"
+        },
+        {
+            "title": "The Goddard Difference",
+            "isActive": false,
+            "link": "https://www.goddardschool.com/the-goddard-difference",
+            "target": "_blank"
+        },
+        {
+            "title": "Teachers",
+            "isActive": false,
+            "link": "https://www.goddardschool.com/teachers-and-philosophy",
+            "target": "_blank"
+        },
+        {
+            "title": "Family Feedback",
+            "isActive": false,
+            "link": "https://www.goddardschool.com/family-feedback",
+            "target": "_blank"
+        },
+        {
+            "title": "Parent Community",
+            "isActive": false,
+            "link": "https://www.goddardschool.com/parent-community",
+            "target": "_blank"
+        },
+        {
+            "title": "Blog",
+            "isActive": false,
+            "link": "https://www.goddardschool.com/blog",
+            "target": "_blank"
+        }
+    ]
+}
